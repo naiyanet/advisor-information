@@ -1,8 +1,8 @@
 angular.module('behavior', []);
-angular.module('behavior').controller('behaviorController', function (UserService,$scope, $http) {
+angular.module('behavior').controller('behaviorController', function (UserService, $scope, $http) {
 
     $scope.behavior = {};
-     $scope.account = {};
+    $scope.account = {};
     $scope.studentShow = UserService.user.student;
     $scope.keyword = "";
     $scope.currentPage = 0;
@@ -10,8 +10,17 @@ angular.module('behavior').controller('behaviorController', function (UserServic
     var totalParent = 0;
     var totalPage = 0;
 
+    $scope.BehaviorPageAddShows = function () {
+        if ($scope.account.dtype == 'Teacher') {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    getAccountLogin();
     $scope.saveBehavior = function () {
-        $scope.behavior.teacher = $scope.account; 
+        $scope.behavior.teacher = $scope.account;
         $http.post('/savebehavior', $scope.behavior).success(function (data) {
             getSuccess();
             getBehavior();
@@ -21,8 +30,8 @@ angular.module('behavior').controller('behaviorController', function (UserServic
             getError();
         });
     };
-    
-      getAccountLogin();
+
+
     function getAccountLogin() {
         $http.get('/startpageuser').success(function (data) {
             $scope.account = data;
@@ -32,7 +41,7 @@ angular.module('behavior').controller('behaviorController', function (UserServic
 
     $scope.editBehavior = function (u) {
         $scope.behavior = u;
-     };
+    };
 
 
     $scope.clear = function () {
@@ -59,31 +68,40 @@ angular.module('behavior').controller('behaviorController', function (UserServic
         $http.get('/getbehavior').success(function (data) {
             $scope.behaviorshow = data;
         });
-    };
+    }
+    ;
 
     function getSuccess() {
         alert('Save Success');
     }
-    
+
     function getError() {
         alert('Error');
     }
-    
-    
-     $('.datepicker-custom').datepicker({
-        changeYear:true,
-        yearRange:'-100:+100',
+
+
+    $('.datepicker-custom').datepicker({
+        changeYear: true,
+        yearRange: '-100:+100',
         dateFormat: 'yy-mm-dd'
     });
+
+    $scope.behaviorSearch = function () {
+        $http.post('/searchStudentInBehavior', $scope.keyword).success(function (data) {
+            $scope.behaviorshow = data;
+        });
+    };
+    
+    
     
     
     getStudent();
     $scope.student = {};
     function getStudent() {
         $http.post('/getstudent', 'Student').success(function (data) {
-            console.log(data + '...............'+data.totalElements);
+            console.log(data + '...............' + data.totalElements);
             $scope.student = data;
-       }).error(function (data) {
+        }).error(function (data) {
 
         });
     }
@@ -176,21 +194,22 @@ angular.module('behavior').controller('behaviorController', function (UserServic
             $('#pre-page').removeClass('disabled');
         }
     };
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-     $scope.dowloads = function(be){
+
+
+
+
+
+
+
+
+
+
+
+    $scope.dowloads = function (be) {
         location.href = '/getfilebehavior/' + be.fileUpload.id;
-        
+
     };
-    
+
     $scope.file;
     $scope.saveFileBehavior = function () {
         var fd = new FormData();
@@ -199,16 +218,16 @@ angular.module('behavior').controller('behaviorController', function (UserServic
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined}
         }).success(function (data) {
-            console.log(data+'fileeeeeeeeeeeeee');
+            console.log(data + 'fileeeeeeeeeeeeee');
             $scope.behavior.fileUpload = data;
         });
     };
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
 });
 
 

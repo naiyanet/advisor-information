@@ -109,22 +109,12 @@ angular.module('advise').controller('adviseController', function (UserService, $
 
 
     $scope.adviseSearch = function () {
-        $http.post('/categoryadvise/search', $scope.keyword).success(function (data) {
-            $scope.advise = data;
-
+        $http.post('/searchStudentInAdvise', $scope.keyword).success(function (data) {
+            $scope.adviseshow = data;
         });
     };
-
-//    getTeacher();
-//    $scope.teacher = {};
-//    function getTeacher() {
-//        $http.post('/teacher', 'Teacher').success(function (data) {
-//            $scope.teacher = data;
-//        }).error(function (data) {
-//
-//        });
-//    }
-//    ;
+    
+    
 
     getStudent();
     $scope.student = {};
@@ -229,7 +219,8 @@ angular.module('advise').controller('adviseController', function (UserService, $
     $scope.clickParent = function () {
         $('#complete-student-advise').openModal();
     };
-
+    
+    
 
     $scope.dowloads = function (advises) {
         location.href = '/getfileadvise/' + advises.fileUpload.id;

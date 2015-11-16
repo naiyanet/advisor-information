@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package th.co.geniustree.intenship.advisor.controller;
 
 import java.io.ByteArrayInputStream;
@@ -23,6 +19,7 @@ import org.springframework.web.multipart.MultipartRequest;
 import th.co.geniustree.intenship.advisor.model.Advise;
 import th.co.geniustree.intenship.advisor.model.FileUpload;
 import th.co.geniustree.intenship.advisor.repo.AdviseRepo;
+import th.co.geniustree.intenship.advisor.service.AdviseSearchService;
 
 /**
  *
@@ -32,7 +29,8 @@ import th.co.geniustree.intenship.advisor.repo.AdviseRepo;
 public class AdviseController {
     @Autowired
     private AdviseRepo adviseRepo;
-    
+    @Autowired
+    private AdviseSearchService adviseSearchService;
     @RequestMapping(value = "/getadvisee",method = RequestMethod.GET)
     public Page<Advise> getAdvise(Pageable pageable){
         return adviseRepo.findAll(pageable);
@@ -65,5 +63,10 @@ public class AdviseController {
                 .header("Content-Disposition", "attachment; filename=\"" + fileUpload.getName() + "\"")
                 .body(new InputStreamResource(new ByteArrayInputStream(fileUpload.getContent())));
         return body;
+    }
+    
+    @RequestMapping(value = "/searchStudentInAdvise",method = RequestMethod.POST)
+    public Page<Advise> searchStudent(@RequestBody String keyword,Pageable pageable){
+        return adviseSearchService.searchNameStudentAdvise(keyword, pageable);
     }
 }

@@ -11,8 +11,8 @@ INSERT INTO ACCOUNT(ID,NAME,EMAIL,MOBILE,ADDRESS,PASSWORD,DTYPE,ENABLE)
 INSERT INTO ACCOUNT(ID,NAME,EMAIL,MOBILE,ADDRESS,PASSWORD,DTYPE,ENABLE) 
         values(ACCOUNT_SEQ.nextVal,'นายพูนศักดิ์ วงศ์สวัสดิ์','pskw@rmutk.ac.th','022879639','bangkok','1234','Teacher',1);
 
-INSERT INTO ACCOUNT(ID,NAME,EMAIL,MOBILE,ADDRESS,PASSWORD,DTYPE,ENABLE) 
-        values(ACCOUNT_SEQ.nextVal,'นางสาวปรียาภรณ์ มัชฌิกะ','preeyaporn.m@rmutk.ac.th','022879639','bangkok','1234','Teacher',1);
+INSERT INTO ACCOUNT(ID,NAME,EMAIL,MOBILE,ADDRESS,PASSWORD,DTYPE,ENABLE,STATUS) 
+        values(ACCOUNT_SEQ.nextVal,'นางสาวปรียาภรณ์ มัชฌิกะ','preeyaporn.m@rmutk.ac.th','022879639','bangkok','1234','Teacher',1,'admin');
 
 
 

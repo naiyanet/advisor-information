@@ -1,39 +1,61 @@
-var app = angular.module('app', ['ngRoute', 'home', 'add_user','admin_add_information',
-                                 'advise', 'appointment', 'behavior', 'course', 
-                                 'course_add', 'course_subject_1', 'course_subject_2', 'course_subject_3', 
-                                 'course_subject_4', 'parent', 'teacher','student',
-                                 'studentshow','teachershow','parentshow',
-                                 'timetable', 'checklist-model']);
-        
+var app = angular.module('app', [   'ngRoute', 'home', 'add_user', 'admin_add_information',
+                                    'advise', 'appointment', 'behavior', 'course',
+                                    'course_add', 'course_subject_1', 'course_subject_2', 
+                                    'course_subject_3','course_subject_4', 'course_subject_1_term2',
+                                    'course_subject_2_term2','course_subject_3_term2','course_subject_4_term2',
+                                    'parent', 'teacher', 'student','studentshow', 'teachershow', 
+                                    'parentshow','timetable', 'checklist-model']);
+
 var app = angular.module('app');
 
-app.controller('appController', function (UserService , $scope, $http) {
-    
+app.controller('appController', function (UserService, $scope, $http) {
+
     $scope.account = {};
     getAccountLogin();
-    function getAccountLogin (){
-        $http.get('/startpageuser').success(function (data){
+    function getAccountLogin() {
+        $http.get('/startpageuser').success(function (data) {
             $scope.account = data;
         });
     }
-    
-    $scope.settingProfile = function (){
+
+    $scope.settingProfile = function () {
         UserService.user = $scope.account;
-        if($scope.account.dtype == 'Teacher'){
-            location.href='#/teacher_show';
+        if ($scope.account.dtype == 'Teacher') {
+            location.href = '#/teacher_show';
         }
-        if($scope.account.dtype == 'Student'){
-            location.href='#/student_show';
+        if ($scope.account.dtype == 'Student') {
+            location.href = '#/student_show';
         }
-        if($scope.account.dtype == 'Parent'){
-            location.href='#/parent_show';
+        if ($scope.account.dtype == 'Parent') {
+            location.href = '#/parent_show';
         }
     };
+
+    $scope.AdminLogin = function () {
+        if ($scope.account.status == 'admin') {
+            return true;
+        }
+        else {
+            return false;
+        }
+    };
+
+    $scope.Adviseshows = function () {
+        if ($scope.account.dtype == 'Teacher' || $scope.account.dtype == 'Student') {
+            return  true;
+        } else {
+            return false;
+        }
+    };
+    
+//    function getAccount(){
+//        if($scope.account == )
+//    };
 });
 
 app.config(function ($routeProvider) {
-    
-    $routeProvider 
+
+    $routeProvider
             .when('/home', {
                 controller: 'homeController',
                 templateUrl: 'home.html'
@@ -126,6 +148,22 @@ app.config(function ($routeProvider) {
                 controller: 'course_subject_4Controller',
                 templateUrl: 'course_subject_4.html'
             })
+            .when('/course_subject_1_termtwo', {
+                controller: 'course_subject_1_term2Controller',
+                templateUrl: 'course_subject_1.html'
+            })
+            .when('/course_subject_2_termtwo', {
+                controller: 'course_subject_2_term2Controller',
+                templateUrl: 'course_subject_2.html'
+            })
+            .when('/course_subject_3_termtwo', {
+                controller: 'course_subject_3_term2Controller',
+                templateUrl: 'course_subject_3.html'
+            })
+            .when('/course_subject_4_termtwo', {
+                controller: 'course_subject_4_term2Controller',
+                templateUrl: 'course_subject_4.html'
+            })
             .when('/parent_show', {
                 controller: 'parentshowController',
                 templateUrl: 'parent_show.html'
@@ -152,15 +190,15 @@ app.config(function ($routeProvider) {
 });
 
 
-app.factory('UserService',function(){
+app.factory('UserService', function () {
     return {
-        user:{}
+        user: {}
     };
 });
 
-app.factory('AdviseService',function(){
+app.factory('AdviseService', function () {
     return {
-        adviseservice:{}
+        adviseservice: {}
     };
 });
 

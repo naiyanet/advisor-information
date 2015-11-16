@@ -9,9 +9,9 @@
         </ul>
     </div>
     <br> <br>
-    <div class="row" ng-app="course_subject_3" ng-controller="course_subject_3Controller">
+    <div class="row">
          <br>
-        <div class="col-md-6">
+        <div class="col-md-6" ng-app="course_subject_3" ng-controller="course_subject_3Controller">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title" style="color: #006400">ภาคเรียนที่ 1 </h3>
@@ -41,7 +41,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+         <div class="col-md-6" ng-app="course_subject_3_term2" ng-controller="course_subject_3_term2Controller">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title" style="color: #006400">ภาคเรียนที่ 2 </h3>
@@ -59,10 +59,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="course in courseSubjectClassThreeshow.content">             
-                                        <td width="20%">{{course.subjectCode}}</td>
-                                        <td width="40%">{{course.subjectName}}</td>
-                                        <td width="40%">{{course.credit}}</td>
+                                    <tr ng-repeat="courses in courseSubjectClassThreeTermTwoshow.content">             
+                                        <td width="20%">{{courses.subjectCode}}</td>
+                                        <td width="40%">{{courses.subjectName}}</td>
+                                        <td width="40%">{{courses.credit}}</td>
                                     </tr>
                                 </tbody>
                             </table>

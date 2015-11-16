@@ -1,5 +1,5 @@
 <br>
-<div class="col-md-10">
+<div class="col-md-12">
     <ul class="nav nav-pills">
         <li><a href="#/admin_add_information">เพิ่มข่าวประชาสัมพันธ์</a></li>  
         <li><a href="#/courseAdd">เพิ่มวิชาในหลักสูตร</a></li>
@@ -17,7 +17,7 @@
         </li>
     </ul>
 </div>
-<div class="col-md-10">
+<div class="col-md-12">
     <ul class="nav nav-pills">
         <li class="active"><a href="#/course_subject_1">ชั้นปีที่ 1</a></li>
         <li><a href="#/course_subject_2">ชั้นปีที่ 2</a></li>
@@ -25,59 +25,122 @@
         <li><a href="#/course_subject_4">ชั้นปีที่ 4</a></li>
     </ul>
     <br>
-    <div class="panel panel-success">
-        <div class="panel-heading">
-            <h3 class="panel-title">แผนการเรียน</h3>
-        </div>
-        <div class="panel-body">
-            <form class="form-horizontal" role="form">
-                <div class="form-group">
-                    <label for="text" class="col-lg-2 control-label">รหัสวิชา</label>
-                    <div class="col-lg-10">
-                        <input type="text" class="form-control" ng-model="CourseSubjectClassOne.subjectCode">
-                    </div>
+    <div class="col-md-12"> 
+        <div class="col-md-6" ng-app="course_subject_1" ng-controller="course_subject_1Controller">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">แผนการเรียน ภาคเรียนที่ 1</h3>
                 </div>
-                <div class="form-group">
-                    <label for="text" class="col-lg-2 control-label">รายวิชา</label>
-                    <div class="col-lg-10">
-                        <input type="text" class="form-control" ng-model="CourseSubjectClassOne.subjectName">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="text" class="col-lg-2 control-label">หน่วยกิต</label>
-                    <div class="col-lg-10">
-                        <input type="text" class="form-control" ng-model="CourseSubjectClassOne.credit">
-                    </div>
-                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="text" class="col-lg-2 control-label">รหัสวิชา</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" ng-model="CourseSubjectClassOne.subjectCode">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="text" class="col-lg-2 control-label">รายวิชา</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" ng-model="CourseSubjectClassOne.subjectName">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="text" class="col-lg-2 control-label">หน่วยกิต</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" ng-model="CourseSubjectClassOne.credit">
+                            </div>
+                        </div>
 
-                <div class="form-group">
-                    <div class="col-lg-10 col-lg-offset-2">
-                        <button type="submit" class="btn btn-primary" ng-click="saveCourseSubjectClassOne()">Save</button>
-                        <a href="#/course_subject"><button class="btn btn-danger">Cancel</button></a>
-                    </div>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button type="submit" class="btn btn-primary" ng-click="saveCourseSubjectClassOne()">Save</button>
+                                <a href="#/course_subject"><button class="btn btn-danger">Cancel</button></a>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
+        </div>
+        <div class="col-md-6" ng-app="course_subject_1_term2" ng-controller="course_subject_1_term2Controller">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">แผนการเรียน ภาคเรียนที่ 2</h3>
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label for="text" class="col-lg-2 control-label">รหัสวิชา</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" ng-model="CourseSubjectClassOneTermTwo.subjectCode">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="text" class="col-lg-2 control-label">รายวิชา</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" ng-model="CourseSubjectClassOneTermTwo.subjectName">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="text" class="col-lg-2 control-label">หน่วยกิต</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" ng-model="CourseSubjectClassOneTermTwo.credit">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-lg-10 col-lg-offset-2">
+                                <button type="submit" class="btn btn-primary" ng-click="saveCourseSubjectClassOneTermTwo()">Save</button>
+                                <a href="#/course_subject"><button class="btn btn-danger">Cancel</button></a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 
 
-    <table class="table table-striped table-hover ">
-        <thead>
-            <tr>
-                <th>รหัสวิชา</th>
-                <th>รายวิชา</th>
-                <th>หน่วยกิต</th>
-                <th>Delete</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="course in courseSubjectClassOneshow.content">             
-                <td>{{course.subjectCode}}</td>
-                <td>{{course.subjectName}}</td>
-                <td>{{course.credit}}</td>
-                <td><span class="mdi-action-delete" ng-click="deleteClassOne(course)"> </span></td>
-            </tr>
-        </tbody>
-    </table>
-
+    <div class="col-md-12">
+        <div class="col-md-6"  ng-app="course_subject_1" ng-controller="course_subject_1Controller">
+            <table class="table table-striped table-hover ">
+                <thead>
+                    <tr>
+                        <th>รหัสวิชา</th>
+                        <th>รายวิชา</th>
+                        <th>หน่วยกิต</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="course in courseSubjectClassOneshow.content">             
+                        <td>{{course.subjectCode}}</td>
+                        <td>{{course.subjectName}}</td>
+                        <td>{{course.credit}}</td>
+                        <td><span class="mdi-action-delete" ng-click="deleteClassOne(course)"> </span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6"  ng-app="course_subject_1_term2" ng-controller="course_subject_1_term2Controller">
+            <table class="table table-striped table-hover ">
+                <thead>
+                    <tr>
+                        <th>รหัสวิชา</th>
+                        <th>รายวิชา</th>
+                        <th>หน่วยกิต</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="courses in courseSubjectClassOneTermTwoshow.content">             
+                        <td>{{courses.subjectCode}}</td>
+                        <td>{{courses.subjectName}}</td>
+                        <td>{{courses.credit}}</td>
+                        <td><span class="mdi-action-delete" ng-click="deleteClassOneTermTwo(courses)"> </span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
