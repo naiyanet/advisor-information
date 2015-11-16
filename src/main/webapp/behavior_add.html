@@ -1,0 +1,181 @@
+
+<div class="col-md-11">
+    <br>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="list-group-item-heading">เพิ่มความประพฤติ</h4>
+        </div>
+        <div class="panel-body">
+            <div class="list-group-item-text">
+                <form class="form-horizontal">
+                    <fieldset>
+                        <div class="form-group">
+                                <label class="col-lg-2 control-label"> นักศึกษา</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" ng-model="studentShow.name" data-toggle="modal" data-target="#complete-student">
+                                </div>
+
+                                <div id="complete-student" class="modal fade" tabindex="-1">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                <h4 class="modal-title">เลือกนักศึกษา</h4>
+                                            </div>
+                                            <br>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Search</label>
+                                                        <div class="col-md-5">
+                                                            <input type="student" class="form-control" placeholder="Enter Student" ng-model="keyword">
+                                                        </div>
+
+                                                        <div class="col-md-2">
+                                                            <button class="btn btn-info" style="margin-top: -5px" ng-click="studentSearch()">Search</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <table class="table table-striped table-hover ">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>ชื่อ</th>
+                                                                <th>อีเมล์</th>
+                                                                <th>เลือก</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="st in student.content">
+                                                                <td>{{st.name}}</td>
+                                                                <td>{{st.email}}</td>
+                                                                <td><a ng-click="selectStudent(st)" data-dismiss="modal">เลือก</a></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="right">
+                                                        <ul class="pagination pagination-sm">
+                                                            <li id="first-page"><a ng-click="firstPage()">&Lt;</a></li>
+                                                            <li id="pre-page" ><a ng-click="prePage()">&lt;</a></li>
+                                                            <li><a>{{currentPage + 1}}</a></li>
+                                                            <li id="next-page"><a ng-click="nextPage()">&gt;</a></li>
+                                                            <li id="final-page"><a ng-click="finalPage()">&gg;</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-danger" data-dismiss="modal">Exit</button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>     
+                        </div>
+                        
+                        
+                        
+                        
+                        
+                        <div class="form-group">
+                            <label for="text" class="col-lg-2 control-label">วันที่</label>
+                            <div class="col-lg-10">
+                                <input class="datepicker-custom form-control" type="text" ng-model="behavior.dates">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="text" class="col-lg-2 control-label">ชื่อเรื่อง</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" ng-model="behavior.title">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="text" class="col-lg-2 control-label">รายละเอียดความประพฤติ</label>
+                            <div class="col-lg-10">
+                                <input type="text" class="form-control" ng-model="behavior.detail"> 
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputFile" class="col-lg-2 control-label">File</label>
+                            <div class="col-lg-10">
+                                <input type="file" class="form-control" file-model="file" custom-on-change ="saveFileBehavior">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <center>
+                                <button class="btn btn-success" ng-click="saveBehavior()">Save</button>
+                                <a href="#/behavior"><button class="btn btn-danger">Cancle</button></a>
+                            </center>
+                        </div>
+                    </fieldset>
+                </form>
+            </div> 
+        </div>
+    </div>
+
+
+
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">ความประพฤติ</h3>
+        </div>
+        <div class="panel-body">
+            <table class="table table-striped table-hover ">
+                <thead>
+                    <tr>
+                        <th>ชื่อนักศึกษา</th>
+                        <th>วันที่</th>
+                        <th>ชื่อเรื่อง</th>
+                        <th>รายละเอียดความประพฤติ</th>
+                        <th>File</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="beha in behaviorshow.content">
+                        <td>{{beha.student.name}}</td>
+                        <td>{{beha.dates}}</td>
+                        <td>{{beha.title}}</td>
+                        <td>
+                            <h5 data-toggle="modal" data-target="#complete-dialog" class="form-group" id="setting-text">ดูรายละเอียด</h5>
+                            <div id="complete-dialog" class="modal fade form-group" tabindex="-1"> 
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header form-group">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                            <h4 class="modal-title">รายละเอียดรายงานความประพฤติ</h4>
+                                            <br>
+                                        </div>
+                                        <div class="modal-body form-group">
+                                            <div class="col-md-10 ">
+                                                <div style="word-wrap: break-word ; width: 100%">{{beha.detail}}</div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer form-group">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>{{beha.fileUpload.name}}</td>
+                        <td>
+                            <button ng-click="editBehavior(beha)">
+                                <span class="mdi-editor-mode-edit"></span>
+                            </button>
+                        </td>
+                        <td>
+                            <button ng-click="deleteBehavior(beha)">
+                                <span class="mdi-action-delete"></span>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div> 

@@ -1,0 +1,87 @@
+<br>
+<div class="col-md-8" ng-app="admin_add_information" ng-controller="admin_add_informationController" >
+
+
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <span class="mdi-action-home">
+                <h3 class="panel-title">ประชาสัมพันธ์</h3>
+            </span>
+        </div>
+        <div class="panel-body">
+
+            <ul class="nav nav-pills"  style="margin-left: 100px">
+                <li><a href="http://reg.rmutk.ac.th/registrar/home.asp">ระบบลงทะเบียนเรียน</a></li>
+                <li><a href="http://md.rmutk.ac.th/">ระบบ E-Learning</a></li>
+                <li><a href="http://mis.rmutk.ac.th/">ระบบประเมินผลการสอน</a></li>
+            </ul>
+
+
+            <div class="panel panel-default" ng-repeat="news in informationshow.content">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{news.title}}</h3>
+                </div>
+                <div class="panel-body">
+                    <p style="font-size: small">{{news.startTime}}</p>
+                    <p style="font-size: small">{{news.pageBrief}}</p>
+                    <p style="font-size: small">{{news.file}}</p>
+                    <p>
+                    <h5 data-toggle="modal" data-target="#complete-dialog" class="form-group" id="setting-text">ดูรายละเอียด</h5>
+                    <div id="complete-dialog" class="modal fade form-group" tabindex="-1"> 
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header form-group">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h4 class="modal-title">รายละเอียดการให้คำปรึกษา</h4>
+                                    <br>
+                                </div>
+                                <div class="modal-body form-group">
+                                    <div class="col-md-10 ">
+                                        <div style="word-wrap: break-word ; width: 100%">{{news.description}}</div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer form-group">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </p>
+                    <p style="font-size: small"><a href="{{news.linkWeb}}">{{news.linkWeb}}</a></p>
+                    <p>
+                        <button ng-click="dowloads(news)">
+                            <span class="mdi-file-file-download"></span>
+                        </button>
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="datepicker-custom form-control" style="height: 250px">
+    </div>
+</div>
+
+
+
+
+
+<div id="complete-dialog" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="modal-title">ไม่มี! ที่คุณค้นหา</h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-dismiss="modal">ตกลง</button>
+
+            </div>
+        </div>
+    </div>
+
+</div>

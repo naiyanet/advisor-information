@@ -1,0 +1,195 @@
+<br>
+<div class="col-md-11">
+    <ul class="nav nav-pills">
+        <li><a href="#/admin_add_information">เพิ่มข่าวประชาสัมพันธ์</a></li> 
+        <li><a href="#/courseAdd">เพิ่มวิชาในหลักสูตร</a></li>
+        <li><a href="#/course_subject_1">เพิ่มแผนการเรียน</a></li>
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown">
+                ผู้ใช้งานระบบ <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#/teacher">เพิ่มอาจารย์</a></li>
+                <li  class="active"><a href="#/student">เพิ่มนักศึกษา</a></li>
+                <li><a href="#/parent">เพิ่มผู้ปกครอง</a></li>
+                <li><a href="#/user_show">ข้อมูลผู้ใช้งานระบบ</a></li>
+
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div class="col-md-10">
+    <br>
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title">student :</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <div class="icon-preview">
+                                    <label class="col-md-3 control-label "> ชื่อผู้ใช้งาน :</label>
+
+                                    <div class="col-md-2">
+                                        <input type="username" class="form-control" placeholder="Enter name"ng-model="student.name">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label"> รหัสผ่าน :</label>
+                                <div class="col-md-5">
+                                    <input type="password" ng-change="checkPassword()" class="form-control" placeholder="Enter password"ng-model="student.password">
+                                </div>
+                            </div>
+                            <div class="form-group"> <i id="confirm" class=""></i>
+                                <label class="col-md-3 control-label"> ยืนยันรหัสผ่าน :</label>
+                                <div class="col-md-5">
+                                    <input ng-change="checkPassword()" type="password" class="form-control" placeholder="Confirm password" ng-model="password">
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label"> อีเมล์ :</label>
+                                <div class="col-md-5">
+                                    <input type="email" class="form-control" placeholder="Enter email"ng-model="student.email">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label"> อาจารย์ที่ปรึกษา :</label>
+                                    <div class="col-md-5">
+                                        <input type="text" class="form-control" placeholder="Enter name Teacher" ng-model="teacherShow.name" data-toggle="modal" data-target="#complete-teachet">
+                                    </div>
+                                    <div id="complete-teachet" class="modal fade" tabindex="-1">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                    <h4 class="modal-title">เลือกอาจารย์ที่ปรึกษา</h4>
+                                                </div>
+                                                <br>
+                                                <div class="modal-body">
+                                                    <div class="col-md-5">
+                                                        <input type="teacher" class="form-control" placeholder="Enter Teacher" ng-model="keyword">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <table class="table table-striped table-hover ">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>ชื่อ</th>
+                                                                    <th>เลือก</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr ng-repeat="tea in teacher.content">
+                                                                    <td>{{tea.name}}</td>
+                                                                    <td><a ng-click="selectTeacher(tea)" data-dismiss="modal">เลือก</a></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button class="btn btn-danger" data-dismiss="modal">Exit</button>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label"> ผู้ปกครอง :</label>
+
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control" placeholder="Enter name Parent" ng-model="parentShow.name" data-toggle="modal" data-target="#complete-parent">
+                                </div>
+
+                                <div id="complete-parent" class="modal fade" tabindex="-1">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                <h4 class="modal-title">เลือกผู้ปกครอง</h4>
+                                            </div>
+                                            <br>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <label class="col-md-3 control-label">Search</label>
+                                                        <div class="col-md-5">
+                                                            <input type="parent" class="form-control" placeholder="Enter Parent" ng-model="keyword">
+                                                        </div>
+
+                                                        <div class="col-md-2">
+                                                            <button class="btn btn-info" style="margin-top: -5px" ng-click="parentSearch()">Search</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <table class="table table-striped table-hover ">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>ชื่อ</th>
+                                                                <th>อีเมล์</th>
+                                                                <th>เลือก</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="par in parent.content">
+                                                                <td>{{par.name}}</td>
+                                                                <td>{{par.email}}</td>
+                                                                <td><a ng-click="selectParent(par)" data-dismiss="modal">เลือก</a></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="right">
+                                                        <ul class="pagination pagination-sm">
+                                                            <li id="first-page"><a ng-click="firstPage()">&Lt;</a></li>
+                                                            <li id="pre-page" ><a ng-click="prePage()">&lt;</a></li>
+                                                            <li><a>{{currentPage + 1}}</a></li>
+                                                            <li id="next-page"><a ng-click="nextPage()">&gt;</a></li>
+                                                            <li id="final-page"><a ng-click="finalPage()">&gg;</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-danger" data-dismiss="modal">Exit</button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label"></label>
+                                <div class="col-md-3">
+
+                                    <input value="Save" type="submit" class="btn btn-success"   ng-click="saveStudent()">
+                                    <input value="Clear" type="submit" class="btn btn-info" ng-click="clearUser()">
+                                </div>
+                            </div>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+        <div class="progress progress-striped">
+            <div class="progress-bar progress-bar-success" style="width: 100%"></div>
+        </div>
+    </div>
+
+
+</div>
+
+

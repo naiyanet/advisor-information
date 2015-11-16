@@ -1,0 +1,128 @@
+
+<br>
+<div class="col-md-11">
+    <ul class="nav nav-pills">
+        <li class="active"><a href="#/admin_add_information">เพิ่มข่าวประชาสัมพันธ์</a></li>   
+        <li><a href="#/courseAdd">เพิ่มวิชาในหลักสูตร</a></li>
+        <li><a href="#/course_subject_1">เพิ่มแผนการเรียน</a></li>
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown">
+                ผู้ใช้งานระบบ <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="#/teacher">เพิ่มอาจารย์</a></li>
+                <li><a href="#/student">เพิ่มนักศึกษา</a></li>
+                <li ><a href="#/parent">เพิ่มผู้ปกครอง</a></li>
+                <li><a href="#/user_show">ข้อมูลผู้ใช้งานระบบ</a></li>               
+            </ul>
+        </li>
+    </ul>
+</div>
+<br>
+<br>
+
+<div class="col-md-10">
+    <br>
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title">เพิ่มข่าวประชาสัมพันธ์</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="text" class="col-lg-2 control-label">วันเดือนปี</label>
+                <div class="col-lg-10">
+
+
+                    <input class="datepicker-custom form-control" type="text" ng-model="information.startTime">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="text" class="col-lg-2 control-label">หมดเวลาแสดง</label>
+                <div class="col-lg-10">
+
+                    <input class="datepicker-custom form-control"  type="text" ng-model="information.endTime">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputFile" class="col-lg-2 control-label">File</label>
+                <div class="col-lg-10">
+                    <input type="file" class="form-control" file-model="file" custom-on-change ="saveFile">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="text" class="col-lg-2 control-label">ชื่อเรื่อง</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" ng-model="information.title">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="text" class="col-lg-2 control-label">เนื้อหาย่อ</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" ng-model="information.pageBrief">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="textArea" class="col-lg-2 control-label">รายละเอียด</label>
+                <div class="col-lg-10">
+                    <textarea class="form-control" rows="3" id="textArea" ng-model="information.description"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="text" class="col-lg-2 control-label">Link web</label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" ng-model="information.linkWeb">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-10 col-lg-offset-2">
+                    <button class="btn btn-primary" ng-click="saveInfor()">Save</button>
+                    <a href="#/admin_add_User"><button class="btn btn-danger">Cancel</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title">ข่าวประชาสัมพันธ์</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <table class="table table-striped table-hover ">
+                    <thead>
+                        <tr>    
+                            <th>วันที่ลงข่าว</th>
+                            <th>ชื่อเรื่อง</th>
+                            <th>file</th>
+                            <th>เนื้อหาย่อ</th>
+                            <th>รายละเอียด</th>
+                            <th>link web</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="infor in informationshow.content">                      
+                            <td>{{infor.startTime}}</td>
+                            <td>{{infor.title}}</td>                         
+                            <td>{{infor.fileUpload.name}}</td>
+                            <td>{{infor.pageBrief}}</td>
+                            <td>{{infor.description}}</td>
+                            <td>{{infor.linkWeb}}</td>
+                            <td>
+                                <button ng-click="editInformation(infor)">
+                                    <span class="mdi-editor-mode-edit"></span>
+                                </button>
+                            </td>
+                            <td>
+                                <button ng-click="deleteInformation(infor)">
+                                    <span class="mdi-action-delete"></span>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div> 
+</div>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html ng-app="app">
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Project Advisor</title>
+        <link rel="stylesheet" href="../material/bootstrap-3.3.5-dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../material/dist/css/material.min.css">
+        <link rel="stylesheet" href="../material/dist/css/material-fullpalette.min.css">
+        <link rel="stylesheet" href="../material/dist/css/ripples.min.css">
+        <link rel="stylesheet" href="../material/dist/css/roboto.min.css">
+        <link rel="stylesheet" href="css/custom.css">
+        <script src="material/jquery-2.1.4.min.js"></script>
+        <link rel="stylesheet" href="jquery-ui-1.11.4.custom/jquery-ui-1.11.4.custom/jquery-ui.min.css">
+        <link rel="stylesheet" href="jquery-ui-1.11.4.custom/jquery-ui-1.11.4.custom/jquery-ui.structure.min.css">
+        <link rel="stylesheet" href="jquery-ui-1.11.4.custom/jquery-ui-1.11.4.custom/jquery-ui.theme.min.css">
+        <script src="jquery-ui-1.11.4.custom/jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
+
+        <script src="js/angular.min.js"></script>
+        <script src="js/angular-router.js"></script>
+        <script src="js/app.js"></script>
+        <script src="js/home.js"></script>
+        <script src="js/app/add_user.js"></script>
+        <script src="js/app/admin_add_information.js"></script>
+        <script src="js/app/advise.js"></script>
+        <script src="js/app/appointment.js"></script>
+        <script src="js/app/behavior.js"></script>
+        <script src="js/app/course.js"></script>
+        <script src="js/app/course_add.js"></script>
+        <script src="js/app/course_subject_1.js"></script>
+        <script src="js/app/course_subject_2.js"></script>
+        <script src="js/app/course_subject_3.js"></script>
+        <script src="js/app/course_subject_4.js"></script>
+        <script src="js/app/parent.js"></script>
+        <script src="js/app/student.js"></script>
+        <script src="js/app/teacher.js"></script>
+        <script src="js/app/parent_show.js"></script>
+        <script src="js/app/teacher_show.js"></script>
+        <script src="js/app/student_show.js"></script>
+        <script src="js/app/timetable.js"></script>
+        <script src="js/app/checklist-model.js"></script>
+        <script src="node_modules/moment/moment.js"></script>
+        
+        <style>
+            body{
+                background: url(image/WhiteBg1.jpg)no-repeat center center fixed;
+                background-size: cover;
+            }
+            img{ 
+                max-width: 90%;
+                height: auto;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <nav class="navbar navbar-inverse navbar-fixed-top" style="background: #000000;color: white">
+                <div class="container-fluid">
+                    <div class="navbar-header col-md-6">
+                           <img src="image/logo-w.png"  height="100" width="150"> 
+                            
+                                <h4>Advisor Information System</h4>ระบบสารสนเทศอาจารย์ที่ปรึกษา
+                            
+                        </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <br>
+
+                        <form class="navbar-form navbar-right" ng-controller="appController" >        
+                            <h4 align="right" style="color: white">ผู้ใช้งาน : {{account.name}} 
+                                <span id="setting-profile" ng-click="settingProfile()">(เเก้ไขข้อมูลส่วนตัว)</span>
+                                <span id="setting-text"><a href="/logout" align="right">Logout</a></span>
+                            </h4>
+                            <h4 align="right"><a href="http://www.rmutk.ac.th/" class="text-success">Rajamangala University of Technology krungthep</a></h4>  
+                            
+                        </form>
+                    </div>
+                </div>
+            </nav>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-3 col-md-2 sidebar">
+                        <div class="btn-group-vertical">
+                            <a href="#/home" class="btn btn-primary">Home</a>
+                            <a href="#/admin_add_information" class="btn btn-primary">ผู้ดูแลระบบ</a>
+<!--                            <a href="#/teacher_show" class="btn btn-primary">อาจารย์</a>
+                            <a href="#/student_show" class="btn btn-primary">นักศึกษา</a>
+                            <a href="#/parent_show" class="btn btn-primary">ผู้ปกครอง</a>-->
+                            <a href="#/advise" class="btn btn-primary">ข้อมูลการให้คำปรึกษา</a>
+                            <a href="#/behavior" class="btn btn-primary">ข้อมูลความประพฤติ</a>
+                            <a href="#/appointment" class="btn btn-primary">ข้อมูลการนัดหมาย</a>
+                            <a href="#/course" class="btn btn-primary">หลักสูตรสาขา</a>
+                            <a href="#/course_subject_show_1" class="btn btn-primary">แผนการเรียน</a>
+                            <a href="#/timetable" class="btn btn-primary">ตารางเรียน/สอน</a>
+                        </div>
+                    </div>
+
+                    <div class="col-md-10">
+
+                        <div ng-view>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <script src="../material/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+        <script src="../material/dist/js/material.min.js"></script>
+        <script src="../material/dist/js/ripples.min.js"></script>
+
+    </body>
+</html>
