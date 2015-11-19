@@ -7,16 +7,14 @@ angular.module('advise').controller('adviseController', function (UserService, $
     $scope.studentShow = UserService.user.student;
     $scope.keyword = "";
     $scope.currentPage = 0;
+    $scope.student = [];
     var page = 0;
     var totalParent = 0;
     var totalPage = 0;
 
     $scope.saveAdvise = function () {
-
-
-        $scope.advise.teacher = $scope.account;
-
-        $http.post('/saveadvise', $scope.advise).success(function (data) {
+// $scope.advise.teacher = $scope.account;
+  $http.post('/saveadvise', $scope.advise).success(function (data) {
             getSuccess();
             $scope.clear();
             getAdvise();
@@ -33,8 +31,13 @@ angular.module('advise').controller('adviseController', function (UserService, $
     function getAccountLogin() {
         $http.get('/startpageuser').success(function (data) {
             $scope.account = data;
-            console.log(data + '----------------------->');
+            console.log(data.teacher);
+//            $http.post('/searchteacheraccount',data.teacher).success(function (data){
+//                console.log(data);
+//            });
+//            console.log(data.content + ' >>>>----------------------->');
             $scope.advise.teacher = data.teacher;
+            getAdvise();
         });
     }
 
@@ -59,12 +62,16 @@ angular.module('advise').controller('adviseController', function (UserService, $
         });
     };
 
-    getAdvise();
+    
 
     $scope.adviseshow = {};
     function getAdvise() {
-        $http.get('/getadvisee').success(function (data) {
+        var getAdviseForAccount = {};
+        getAdviseForAccount.searchBy =  $scope.account.dtype;
+        getAdviseForAccount.keyWord = $scope.account.name;
+        $http.post('/getadvisee',getAdviseForAccount).success(function (data) {
             $scope.adviseshow = data;
+           
             console.log('..........................' + data);
         }).error(function (data) {
             getError();
@@ -116,22 +123,24 @@ angular.module('advise').controller('adviseController', function (UserService, $
     
     
 
-    getStudent();
-    $scope.student = {};
-    function getStudent() {
-        $http.post('/getstudent', 'Student').success(function (data) {
-            console.log(data + '...............' + data.totalElements);
-            $scope.student = data;
-        }).error(function (data) {
-
-        });
-    }
-    ;
+//    getStudent();
+//    $scope.student = {};
+//    function getStudent() {
+//        $http.post('/getstudent', 'Student').success(function (data) {
+//            console.log(data + '...............' + data.totalElements);
+//            $scope.student = data;
+//        }).error(function (data) {
+//
+//        });
+//    }
+//    ;
 
     $scope.selectStudent = function (student) {
         $scope.advise.student = student;
         $scope.studentShow = student;
     };
+
+
 
     $scope.studentSearch = function () {
         console.log($scope.keyword);
@@ -216,8 +225,13 @@ angular.module('advise').controller('adviseController', function (UserService, $
         }
     };
 
-    $scope.clickParent = function () {
-        $('#complete-student-advise').openModal();
+    $scope.clickStudent = function () {
+        for(var i = 0 ; i < $scope.account.student.length ; i++){
+            console.log($scope.account.student[i]+' ppp');
+            $scope.student[i] = $scope.account.student[i];
+        }
+              
+        $('#complete-student-advise').modal('show');
     };
     
     

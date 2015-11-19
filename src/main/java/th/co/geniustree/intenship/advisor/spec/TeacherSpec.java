@@ -33,6 +33,16 @@ public class TeacherSpec {
             }
         };
     }
+    
+//    public static Specification<Teacher> emailStudent(final String keyword){
+//    return new Specification<Teacher>() {
+//
+//        @Override
+//        public Predicate toPredicate(Root<Teacher> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
+//      return cb.like(cb.upper(root.get(Teacher_.student)), null)
+//        }
+//    };
+//    }
 }
 
    

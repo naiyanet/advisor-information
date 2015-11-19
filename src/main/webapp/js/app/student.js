@@ -25,6 +25,7 @@ angular.module('student').controller('studentController', function (UserService,
 
     $scope.clear = function () {
         $scope.student = {};
+        UserService.user = {};
     };
 
     $scope.delStudent = {};

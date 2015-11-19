@@ -23,4 +23,9 @@ public class AdviseSearchService {
         Specifications<Advise> specifications = Specifications.where(AdviseSpec.nameLike("%"+keyword+"%"));
         return adviseRepo.findAll(specifications,pageable);
     }
+    
+    public Page<Advise> searchNameTeacherAdvise(String keyword,Pageable pageable){
+        Specifications<Advise> specifications = Specifications.where(AdviseSpec.nameTeacherLike("%"+keyword+"%"));
+        return adviseRepo.findAll(specifications,pageable);
+    }
 }

@@ -8,6 +8,7 @@ import javax.persistence.criteria.Root;
 import org.springframework.data.jpa.domain.Specification;
 import th.co.geniustree.intenship.advisor.model.Account;
 import th.co.geniustree.intenship.advisor.model.Account_;
+import th.co.geniustree.intenship.advisor.model.Student;
 
 
 /**

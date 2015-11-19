@@ -1,4 +1,3 @@
-
 package th.co.geniustree.intenship.advisor.controller;
 
 import java.io.ByteArrayInputStream;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartRequest;
 import th.co.geniustree.intenship.advisor.model.Advise;
 import th.co.geniustree.intenship.advisor.model.FileUpload;
+import th.co.geniustree.intenship.advisor.model.SearchData;
 import th.co.geniustree.intenship.advisor.repo.AdviseRepo;
 import th.co.geniustree.intenship.advisor.service.AdviseSearchService;
 
@@ -27,25 +27,35 @@ import th.co.geniustree.intenship.advisor.service.AdviseSearchService;
  */
 @RestController
 public class AdviseController {
+
     @Autowired
     private AdviseRepo adviseRepo;
     @Autowired
     private AdviseSearchService adviseSearchService;
-    @RequestMapping(value = "/getadvisee",method = RequestMethod.GET)
-    public Page<Advise> getAdvise(Pageable pageable){
-        return adviseRepo.findAll(pageable);
+
+    @RequestMapping(value = "/getadvisee", method = RequestMethod.POST)
+    public Page<Advise> getAdvise(@RequestBody SearchData searchData, Pageable pageable) {
+        String searchBy = searchData.getSearchBy();
+        String keyword = searchData.getKeyWord();
+        Page<Advise> advises = null;
+        if ("Teacher".equals(searchBy)) {
+            advises = adviseSearchService.searchNameTeacherAdvise(keyword, pageable);
+        } else {
+            advises = adviseSearchService.searchNameStudentAdvise(keyword, pageable);
+        }
+        return advises;
     }
-    
-    @RequestMapping(value = "/saveadvise" , method = RequestMethod.POST)
-    public void saveAdvise(@Validated @RequestBody Advise advise){
+
+    @RequestMapping(value = "/saveadvise", method = RequestMethod.POST)
+    public void saveAdvise(@Validated @RequestBody Advise advise) {
         adviseRepo.save(advise);
     }
-    
-    @RequestMapping(value = "/deleteadvise",method = RequestMethod.POST)
-    public void deleteAdvise(@RequestBody Advise advise){
+
+    @RequestMapping(value = "/deleteadvise", method = RequestMethod.POST)
+    public void deleteAdvise(@RequestBody Advise advise) {
         adviseRepo.delete(advise);
     }
-    
+
     @RequestMapping(value = "/savefileadvise", method = RequestMethod.POST)
     private FileUpload saveFile(MultipartRequest file) throws IOException {
         FileUpload fileUpload = new FileUpload();
@@ -55,7 +65,7 @@ public class AdviseController {
         return fileUpload;
 
     }
-    
+
     @RequestMapping(value = "/getfileadvise/{id}", method = RequestMethod.GET)
     public ResponseEntity<InputStreamResource> getFile(@PathVariable("id") FileUpload fileUpload) {
         ResponseEntity<InputStreamResource> body = ResponseEntity.ok().contentLength(fileUpload.getContent().length)
@@ -64,9 +74,11 @@ public class AdviseController {
                 .body(new InputStreamResource(new ByteArrayInputStream(fileUpload.getContent())));
         return body;
     }
-    
-    @RequestMapping(value = "/searchStudentInAdvise",method = RequestMethod.POST)
-    public Page<Advise> searchStudent(@RequestBody String keyword,Pageable pageable){
+
+    @RequestMapping(value = "/searchStudentInAdvise", method = RequestMethod.POST)
+    public Page<Advise> searchStudent(@RequestBody String keyword, Pageable pageable) {
         return adviseSearchService.searchNameStudentAdvise(keyword, pageable);
     }
+
+    
 }

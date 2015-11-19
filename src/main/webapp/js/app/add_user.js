@@ -9,7 +9,7 @@ angular.module('add_user').controller('add_userController', function (UserServic
         $http.post('/saveuser', $scope.user).success(function (data) {
             getSuccess();
             getUser();
-        });
+         });
     };
 
     $scope.edit = function (u) {

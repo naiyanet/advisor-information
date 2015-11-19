@@ -10,5 +10,5 @@ import th.co.geniustree.intenship.advisor.model.Advise;
  * @author User
  */
 public interface AdviseRepo extends JpaRepository<Advise, Integer>,JpaSpecificationExecutor<Advise>{
-    
+
 }

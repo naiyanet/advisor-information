@@ -12,7 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import th.co.geniustree.intenship.advisor.model.Account;
 import th.co.geniustree.intenship.advisor.model.SearchData;
+import th.co.geniustree.intenship.advisor.model.Student;
+import th.co.geniustree.intenship.advisor.model.Teacher;
 import th.co.geniustree.intenship.advisor.repo.AccountRepo;
+import th.co.geniustree.intenship.advisor.repo.StudentRepo;
+import th.co.geniustree.intenship.advisor.repo.TeacherRepo;
 import th.co.geniustree.intenship.advisor.service.AccountSearchService;
 
 /**
@@ -23,6 +27,8 @@ import th.co.geniustree.intenship.advisor.service.AccountSearchService;
 public class UserController {
     @Autowired
     private AccountRepo userRepo;
+    @Autowired
+    private TeacherRepo teacherRepo;
     
     @Autowired
     private AccountSearchService accountSearchService;
@@ -74,6 +80,11 @@ public class UserController {
     @RequestMapping(value = "/getuser/searchuser",method = RequestMethod.POST)
     public Page<Account> searchUser (@RequestBody String keyword,Pageable pageable){
         return accountSearchService.searchAccount(keyword, pageable);
+    }
+    
+    @RequestMapping(value = "/searchteacheraccount" , method = RequestMethod.POST)
+    public Teacher searchTeacherAccount(@RequestBody Integer id){
+    return teacherRepo.findOne(id);
     }
    
 }
