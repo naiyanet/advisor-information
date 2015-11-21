@@ -40,7 +40,7 @@ public class Advise implements Serializable{
     
     @ManyToOne
     private CategoryAdvise categoryAdvise;
- 
+    
     @ManyToOne
     private Student student;
     

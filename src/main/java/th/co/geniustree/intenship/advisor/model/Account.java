@@ -1,6 +1,6 @@
-
 package th.co.geniustree.intenship.advisor.model;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
@@ -29,35 +29,39 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 @Entity
 @Table(name = "ACCOUNT")
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-public class Account implements Serializable , UserDetails{
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public class Account implements Serializable, UserDetails {
+
     @Id
     @SequenceGenerator(name = "ACCOUNT", sequenceName = "ACCOUNT_SEQ", allocationSize = 1)
     @GeneratedValue(generator = "ACCOUNT", strategy = GenerationType.SEQUENCE)
+    @JsonView(Object.class)
     private Integer id;
-    
+
     @NotBlank(message = "please input email")
+    @JsonView(Object.class)
     private String email;
     private String password;
     private String filePic;
     private String idStudent;
     private String idCard;
+    @JsonView(Object.class)
     private String name;
-    
+
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date bDate;
     private Integer age;
+    @JsonView(Object.class)
     private String mobile;
     private String address;
     private boolean enable = true;
-    
-    @Column(name = "DTYPE" , insertable = false, updatable = false)
+    @JsonView(Object.class)
+    @Column(name = "DTYPE", insertable = false, updatable = false)
     private String dtype;
-   
+
     @ManyToMany
     private List<Authority> roles;
-    
-    
+
     public Integer getId() {
         return id;
     }
@@ -169,8 +173,6 @@ public class Account implements Serializable , UserDetails{
     public void setDtype(String dtype) {
         this.dtype = dtype;
     }
- 
-    
 
     @Override
     public int hashCode() {
@@ -201,17 +203,17 @@ public class Account implements Serializable , UserDetails{
 
     @Override
     public boolean isAccountNonExpired() {
-       return true;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-       return true;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-       return true;
+        return true;
     }
 
     @Override
@@ -221,10 +223,7 @@ public class Account implements Serializable , UserDetails{
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-       return Collections.emptySet();
+        return Collections.emptySet();
     }
 
-   
-    
-    
 }

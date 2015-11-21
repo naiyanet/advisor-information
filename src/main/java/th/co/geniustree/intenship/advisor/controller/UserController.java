@@ -1,6 +1,7 @@
 
 package th.co.geniustree.intenship.advisor.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -71,6 +72,7 @@ public class UserController {
     }
     
     @RequestMapping(value = "/startpageuser",method = RequestMethod.GET)
+    @JsonView(View.Account.class)
     public Account getCurrentLogin(){
         Account account =  (Account) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Integer id = userRepo.findByEmail(account.getEmail()).get().getId();

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
 import java.util.List;
@@ -12,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import th.co.geniustree.intenship.advisor.controller.View;
 
 /**
  *
@@ -26,11 +28,13 @@ public class Student extends Account implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "PARENT_ID")
+    @JsonView(View.Account.class)
     private Parent parent;
 
     @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "TEACHER_ID")
+    @JsonView(View.Account.class)
     private Teacher teacher;
 
     @JsonIgnore
