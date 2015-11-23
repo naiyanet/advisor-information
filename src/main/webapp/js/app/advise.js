@@ -12,31 +12,37 @@ angular.module('advise').controller('adviseController', function (UserService, $
     var page = 0;
     var totalParent = 0;
     var totalPage = 0;
-    
+
     $scope.checkTeacherLogin = function () {
         if ($scope.account.dtype === 'Teacher') {
             $scope.advise.teacher = $scope.account;
+            
             return true;
         }
         else {
             $scope.advise.student = $scope.account;
+            $scope.advise.teacher = $scope.account.teacher;
             return false;
         }
     };
-    
+
     getAccountLogin();
     function getAccountLogin() {
         $http.get('/startpageuser').success(function (data) {
             $scope.account = data;
             console.log(data.student + "tttttttttttttttt");
-            $scope.advise.teacher = data;
             getAdvise();
             getStudentOfteacher();
+            
         });
     }
-    
+
     $scope.saveAdvise = function () {
-        $scope.advise.teacher = $scope.account;
+//        if($scope.account.dtype == 'Student'){
+//            $scope.advise.teacher = $scope.account;
+//        }
+
+
         $http.post('/saveadvise', $scope.advise).success(function (data) {
             getSuccess();
             $scope.clear();
@@ -45,10 +51,10 @@ angular.module('advise').controller('adviseController', function (UserService, $
             getError();
         });
     };
-    
-    function getStudentOfteacher(){
-        $http.post('/getstudentofteacher' , $scope.advise.teacher.id).success(function (data){
-            console.log('00000000000000000000000000000000000000000000000000000'+data);
+
+    function getStudentOfteacher() {
+        $http.post('/getstudentofteacher', $scope.account.teacher.id).success(function (data) {
+            console.log('00000000000000000000000000000000000000000000000000000' + data);
             $scope.studentOfTeacher = data;
         });
     }
@@ -78,7 +84,8 @@ angular.module('advise').controller('adviseController', function (UserService, $
         }).error(function (data) {
             getError();
         });
-    };
+    }
+    ;
 
     getAdviseCategory();
 
