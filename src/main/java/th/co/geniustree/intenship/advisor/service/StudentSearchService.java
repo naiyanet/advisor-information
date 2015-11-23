@@ -25,4 +25,9 @@ public class StudentSearchService {
                 .or(StudentSpec.nameLike("%" + keyword + "%"));
         return studentRepo.findAll(specification, pageable);
     }
+    
+    public Page<Student> searchStudentByTeacher(Integer id , Pageable pageable){
+    Specifications<Student> specifications = Specifications.where(StudentSpec.teacherId(id));
+    return studentRepo.findAll(specifications,pageable);
+    }
 }

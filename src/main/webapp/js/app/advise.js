@@ -8,6 +8,7 @@ angular.module('advise').controller('adviseController', function (UserService, $
     $scope.keyword = "";
     $scope.currentPage = 0;
     $scope.student = [];
+    $scope.studentOfTeacher = {};
     var page = 0;
     var totalParent = 0;
     var totalPage = 0;
@@ -30,6 +31,7 @@ angular.module('advise').controller('adviseController', function (UserService, $
             console.log(data.student + "tttttttttttttttt");
             $scope.advise.teacher = data;
             getAdvise();
+            getStudentOfteacher();
         });
     }
     
@@ -43,6 +45,13 @@ angular.module('advise').controller('adviseController', function (UserService, $
             getError();
         });
     };
+    
+    function getStudentOfteacher(){
+        $http.post('/getstudentofteacher' , $scope.advise.teacher.id).success(function (data){
+            console.log('00000000000000000000000000000000000000000000000000000'+data);
+            $scope.studentOfTeacher = data;
+        });
+    }
 
     $scope.editAdvise = function (u) {
         $scope.advise = u;
@@ -211,11 +220,6 @@ angular.module('advise').controller('adviseController', function (UserService, $
     };
 
     $scope.clickStudent = function () {
-        for (var i = 0; i < $scope.account.student.length; i++) {
-            console.log($scope.account.student[i] + ' ppp');
-            $scope.student[i] = $scope.account.student[i];
-        }
-
         $('#complete-student-advise').modal('show');
     };
 

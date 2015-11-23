@@ -8,6 +8,7 @@ import javax.persistence.criteria.Root;
 import org.springframework.data.jpa.domain.Specification;
 import th.co.geniustree.intenship.advisor.model.Student;
 import th.co.geniustree.intenship.advisor.model.Student_;
+import th.co.geniustree.intenship.advisor.model.Teacher_;
 
 
 /**
@@ -34,6 +35,16 @@ public class StudentSpec {
                 return cb.like(cb.upper(root.get(Student_.email)), keyword.toUpperCase());
             }
         };
+    }
+    
+    public static Specification<Student> teacherId(final Integer id){
+    return new Specification<Student>() {
+
+        @Override
+        public Predicate toPredicate(Root<Student> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
+          return cb.equal(root.get(Student_.teacher).get(Teacher_.id), id);
+        }
+    };
     }
 }
 

@@ -19,8 +19,10 @@ import org.springframework.web.multipart.MultipartRequest;
 import th.co.geniustree.intenship.advisor.model.Advise;
 import th.co.geniustree.intenship.advisor.model.FileUpload;
 import th.co.geniustree.intenship.advisor.model.SearchData;
+import th.co.geniustree.intenship.advisor.model.Student;
 import th.co.geniustree.intenship.advisor.repo.AdviseRepo;
 import th.co.geniustree.intenship.advisor.service.AdviseSearchService;
+import th.co.geniustree.intenship.advisor.service.StudentSearchService;
 
 /**
  *
@@ -33,6 +35,8 @@ public class AdviseController {
     private AdviseRepo adviseRepo;
     @Autowired
     private AdviseSearchService adviseSearchService;
+    @Autowired
+    private StudentSearchService studentSearchService;
 
     @RequestMapping(value = "/getadvisee", method = RequestMethod.POST)
     public Page<Advise> getAdvise(@RequestBody SearchData searchData, Pageable pageable) {
@@ -81,4 +85,12 @@ public class AdviseController {
     public Page<Advise> searchStudent(@RequestBody String keyword, Pageable pageable) {
         return adviseSearchService.searchNameStudentAdvise(keyword, pageable);
     }
+
+    @RequestMapping(value = "/getstudentofteacher" , method = RequestMethod.POST)
+    public Page<Student> getStudentOfTeacher(@RequestBody Integer keyword, Pageable pageable) {
+        System.out.println("------------------------------------------>"+keyword);
+        Page<Student> students = studentSearchService.searchStudentByTeacher(keyword, pageable);
+        return students;
+    }
+
 }

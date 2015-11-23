@@ -26,8 +26,9 @@ public class Teacher extends Account implements Serializable{
     @JoinColumn(name = "FACULTY_ID")
     private Faculty faculty;
 
-    @JsonManagedReference
-    @JsonView(View.Account.class)
+//    @JsonManagedReference
+//    @JsonView(View.Account.class)
+    @JsonIgnore
     @OneToMany(mappedBy = "teacher")
     private List<Student> student;
     

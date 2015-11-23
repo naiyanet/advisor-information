@@ -72,7 +72,7 @@ public class UserController {
     }
     
     @RequestMapping(value = "/startpageuser",method = RequestMethod.GET)
-    @JsonView(View.Account.class)
+//    @JsonView(View.Account.class)
     public Account getCurrentLogin(){
         Account account =  (Account) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Integer id = userRepo.findByEmail(account.getEmail()).get().getId();
@@ -80,7 +80,7 @@ public class UserController {
     }
     
     @RequestMapping(value = "/getuser/searchuser",method = RequestMethod.POST)
-    @JsonView(View.Account.class)
+//    @JsonView(View.Account.class)
     public Page<Account> searchUser (@RequestBody String keyword,Pageable pageable){
         return accountSearchService.searchAccount(keyword, pageable);
     }

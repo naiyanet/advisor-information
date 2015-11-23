@@ -27,10 +27,10 @@ public class Student extends Account implements Serializable {
     @JsonView(View.Account.class)
     private Parent parent;
 
-    @JsonBackReference
+//    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "TEACHER_ID")
-    @JsonView(View.Account.class)
+//    @JsonView(View.Account.class)
     private Teacher teacher;
 
     @JsonIgnore
