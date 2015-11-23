@@ -7,6 +7,6 @@ package th.co.geniustree.intenship.advisor.controller;
 public interface View {
 
     public interface Account {
-
+        
     }
 }

@@ -1,5 +1,6 @@
 package th.co.geniustree.intenship.advisor.controller;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,9 +77,8 @@ public class AdviseController {
     }
 
     @RequestMapping(value = "/searchStudentInAdvise", method = RequestMethod.POST)
+    @JsonView(View.Account.class)
     public Page<Advise> searchStudent(@RequestBody String keyword, Pageable pageable) {
         return adviseSearchService.searchNameStudentAdvise(keyword, pageable);
     }
-
-    
 }

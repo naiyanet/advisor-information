@@ -80,11 +80,13 @@ public class UserController {
     }
     
     @RequestMapping(value = "/getuser/searchuser",method = RequestMethod.POST)
+    @JsonView(View.Account.class)
     public Page<Account> searchUser (@RequestBody String keyword,Pageable pageable){
         return accountSearchService.searchAccount(keyword, pageable);
     }
     
     @RequestMapping(value = "/searchteacheraccount" , method = RequestMethod.POST)
+    @JsonView(View.Account.class)
     public Teacher searchTeacherAccount(@RequestBody Integer id){
     return teacherRepo.findOne(id);
     }

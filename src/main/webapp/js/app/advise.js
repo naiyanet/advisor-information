@@ -11,10 +11,31 @@ angular.module('advise').controller('adviseController', function (UserService, $
     var page = 0;
     var totalParent = 0;
     var totalPage = 0;
-
+    
+    $scope.checkTeacherLogin = function () {
+        if ($scope.account.dtype === 'Teacher') {
+            $scope.advise.teacher = $scope.account;
+            return true;
+        }
+        else {
+            $scope.advise.student = $scope.account;
+            return false;
+        }
+    };
+    
+    getAccountLogin();
+    function getAccountLogin() {
+        $http.get('/startpageuser').success(function (data) {
+            $scope.account = data;
+            console.log(data.student + "tttttttttttttttt");
+            $scope.advise.teacher = data;
+            getAdvise();
+        });
+    }
+    
     $scope.saveAdvise = function () {
-// $scope.advise.teacher = $scope.account;
-  $http.post('/saveadvise', $scope.advise).success(function (data) {
+        $scope.advise.teacher = $scope.account;
+        $http.post('/saveadvise', $scope.advise).success(function (data) {
             getSuccess();
             $scope.clear();
             getAdvise();
@@ -27,32 +48,6 @@ angular.module('advise').controller('adviseController', function (UserService, $
         $scope.advise = u;
     };
 
-    getAccountLogin();
-    function getAccountLogin() {
-        $http.get('/startpageuser').success(function (data) {
-            $scope.account = data;
-            console.log(data.teacher);
-//            $http.post('/searchteacheraccount',data.teacher).success(function (data){
-//                console.log(data);
-//            });
-//            console.log(data.content + ' >>>>----------------------->');
-            $scope.advise.teacher = data.teacher;
-            getAdvise();
-        });
-    }
-
-    $scope.checkTeacherLogin = function () {
-        if ($scope.account.dtype === 'Teacher') {
-            $scope.advise.teacher = $scope.account;
-            return true;
-        }
-        else {
-            $scope.advise.student = $scope.account;
-
-            return false;
-        }
-    };
-
     $scope.delAdvise = {};
     $scope.deleteAdvise = function (delAd) {
         $http.post('/deleteadvise', delAd).success(function (data) {
@@ -62,22 +57,19 @@ angular.module('advise').controller('adviseController', function (UserService, $
         });
     };
 
-    
-
     $scope.adviseshow = {};
     function getAdvise() {
         var getAdviseForAccount = {};
-        getAdviseForAccount.searchBy =  $scope.account.dtype;
+        getAdviseForAccount.searchBy = $scope.account.dtype;
         getAdviseForAccount.keyWord = $scope.account.name;
-        $http.post('/getadvisee',getAdviseForAccount).success(function (data) {
+        $http.post('/getadvisee', getAdviseForAccount).success(function (data) {
             $scope.adviseshow = data;
-           
+
             console.log('..........................' + data);
         }).error(function (data) {
             getError();
         });
-    }
-    ;
+    };
 
     getAdviseCategory();
 
@@ -113,15 +105,11 @@ angular.module('advise').controller('adviseController', function (UserService, $
         dateFormat: 'yy-mm-dd'
     });
 
-
-
     $scope.adviseSearch = function () {
         $http.post('/searchStudentInAdvise', $scope.keyword).success(function (data) {
             $scope.adviseshow = data;
         });
     };
-    
-    
 
 //    getStudent();
 //    $scope.student = {};
@@ -132,15 +120,12 @@ angular.module('advise').controller('adviseController', function (UserService, $
 //        }).error(function (data) {
 //
 //        });
-//    }
-//    ;
+//    };
 
     $scope.selectStudent = function (student) {
         $scope.advise.student = student;
         $scope.studentShow = student;
     };
-
-
 
     $scope.studentSearch = function () {
         console.log($scope.keyword);
@@ -226,22 +211,18 @@ angular.module('advise').controller('adviseController', function (UserService, $
     };
 
     $scope.clickStudent = function () {
-        for(var i = 0 ; i < $scope.account.student.length ; i++){
-            console.log($scope.account.student[i]+' ppp');
+        for (var i = 0; i < $scope.account.student.length; i++) {
+            console.log($scope.account.student[i] + ' ppp');
             $scope.student[i] = $scope.account.student[i];
         }
-              
+
         $('#complete-student-advise').modal('show');
     };
-    
-    
 
     $scope.dowloads = function (advises) {
         location.href = '/getfileadvise/' + advises.fileUpload.id;
 
     };
-
-
     $scope.file;
     $scope.saveFileAdvise = function () {
         var fd = new FormData();
@@ -256,9 +237,6 @@ angular.module('advise').controller('adviseController', function (UserService, $
     };
 
 });
-
-
-
 
 
 app.directive('fileModel', function ($parse) {

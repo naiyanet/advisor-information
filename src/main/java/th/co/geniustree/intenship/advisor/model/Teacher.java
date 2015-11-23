@@ -25,9 +25,9 @@ public class Teacher extends Account implements Serializable{
     @ManyToOne
     @JoinColumn(name = "FACULTY_ID")
     private Faculty faculty;
-    
-//    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+
     @JsonManagedReference
+    @JsonView(View.Account.class)
     @OneToMany(mappedBy = "teacher")
     private List<Student> student;
     

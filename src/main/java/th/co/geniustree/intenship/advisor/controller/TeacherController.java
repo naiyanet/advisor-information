@@ -37,8 +37,5 @@ public class TeacherController {
     public Page<Teacher> searchTeacher(@RequestBody String keyword, Pageable pageable) {
         return teacherRepo.findByNameOrEmail(keyword, keyword, pageable);
     }
-//    @RequestMapping(value = "/findteacher",method = RequestMethod.POST)
-//    public Teacher findTeacher (@RequestBody String string){
-//        return teacherRepo.findByName(string);
-//    }
+
 }
