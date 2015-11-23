@@ -16,7 +16,7 @@ angular.module('advise').controller('adviseController', function (UserService, $
     $scope.checkTeacherLogin = function () {
         if ($scope.account.dtype === 'Teacher') {
             $scope.advise.teacher = $scope.account;
-            
+
             return true;
         }
         else {
@@ -33,7 +33,7 @@ angular.module('advise').controller('adviseController', function (UserService, $
             console.log(data.student + "tttttttttttttttt");
             getAdvise();
             getStudentOfteacher();
-            
+
         });
     }
 
@@ -53,10 +53,19 @@ angular.module('advise').controller('adviseController', function (UserService, $
     };
 
     function getStudentOfteacher() {
-        $http.post('/getstudentofteacher', $scope.account.teacher.id).success(function (data) {
+        var studentOrTeacher = {};
+        if ($scope.account.dtype === 'Teacher') {
+            studentOrTeacher = $scope.account.id;
+        }
+        else {
+            studentOrTeacher = $scope.account.teacher.id;
+        }
+        $http.post('/getstudentofteacher', studentOrTeacher).success(function (data) {
             console.log('00000000000000000000000000000000000000000000000000000' + data);
             $scope.studentOfTeacher = data;
         });
+//        }
+
     }
 
     $scope.editAdvise = function (u) {
