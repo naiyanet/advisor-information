@@ -15,44 +15,47 @@
                 <li><a href="http://md.rmutk.ac.th/">ระบบ E-Learning</a></li>
                 <li><a href="http://mis.rmutk.ac.th/">ระบบประเมินผลการสอน</a></li>
             </ul>
-
-
             <div class="panel panel-default" ng-repeat="news in informationshow.content">
                 <div class="panel-heading">
                     <h3 class="panel-title">{{news.title}}</h3>
                 </div>
                 <div class="panel-body">
-                    <p style="font-size: small">{{news.startTime}}</p>
-                    <p style="font-size: small">{{news.pageBrief}}</p>
-                    <p style="font-size: small">{{news.file}}</p>
-                    <p>
-                    <h5 data-toggle="modal" data-target="#complete-dialog" class="form-group" id="setting-text">ดูรายละเอียด</h5>
-                    <div id="complete-dialog" class="modal fade form-group" tabindex="-1"> 
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header form-group">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    <h4 class="modal-title">รายละเอียดการให้คำปรึกษา</h4>
-                                    <br>
-                                </div>
-                                <div class="modal-body form-group">
-                                    <div class="col-md-10 ">
-                                        <div style="word-wrap: break-word ; width: 100%">{{news.description}}</div>
+                    <div class="col-md-9">
+                        <label style="font-size: small">{{news.startTime}}</label>
+                        <p style="font-size: small">{{news.pageBrief}}</p>
+                        <p style="font-size: small">{{news.file}}</p>
+                        <p style="font-size: small"><a href="{{news.linkWeb}}">{{news.linkWeb}}</a></p>
+                        <div>
+                        <h5 data-toggle="modal" data-target="#complete-dialog" class="form-group" id="setting-text">ดูรายละเอียด</h5>
+                        <div id="complete-dialog" class="modal fade form-group" tabindex="-1"> 
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header form-group">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h4 class="modal-title">รายละเอียดการให้คำปรึกษา</h4>
+                                        <br>
                                     </div>
-                                </div>
-                                <div class="modal-footer form-group">
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                    <div class="modal-body form-group">
+                                        <div class="col-md-10 ">
+                                            <div style="word-wrap: break-word ; width: 100%">{{news.description}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer form-group">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        </div>
                     </div>
-                    </p>
-                    <p style="font-size: small"><a href="{{news.linkWeb}}">{{news.linkWeb}}</a></p>
-                    <p>
-                        <button ng-click="dowloads(news)">
+                    <div class="col-md-3" ng-if="!!news.fileUpload.id">
+                        <label style="font-size: small">ดาวน์โหลดเอกสาร/file</label>
+                        {{news.fileUpload.name}}
+                        <button ng-click="dowloads(news)" >
                             <span class="mdi-file-file-download"></span>
                         </button>
-                    </p>
+                        <label style="color: red" ng-if="!news.fileUpload.id"></label>
+                    </div>
                 </div>
             </div>
 

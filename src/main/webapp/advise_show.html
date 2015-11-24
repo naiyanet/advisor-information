@@ -72,9 +72,10 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <button ng-click="dowloads(advi)">
+                                        <button ng-click="dowloads(advi)" ng-if="!!advi.fileUpload.id">
                                             <span class="mdi-file-file-download"></span>
                                         </button>
+                                        <label style="color: red" ng-if="!advi.fileUpload.id">ไม่มีไฟล์ข้อมูล</label>
                                     </td>
                                 </tr>
                             </tbody>
