@@ -67,9 +67,10 @@
                                 </div>
                             </td>
                             <td>
-                                <button ng-click="dowloads(beha)">
+                                <button ng-click="dowloads(beha)" ng-if="!!beha.fileUpload.id">
                                     <span class="mdi-file-file-download"></span>
                                 </button>
+                                <label style="color: red" ng-if="!beha.fileUpload.id">ไม่มีไฟล์ข้อมูล</label>
                             </td>
                         </tr>
                     </tbody>

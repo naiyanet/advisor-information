@@ -23,7 +23,11 @@ public class BehaviorSearchService {
         Specifications<Behavior> specifications = Specifications.where(BehaviorSpec.nameLike("%" + keyword + "%"));
         return behaviorRepo.findAll(specifications, pageable);
     }
-
+    public Page<Behavior> searchParentName(String keyword,Pageable pageable){
+        Specifications<Behavior> specifications = Specifications.where(BehaviorSpec.nameParentLike("%"+keyword+"%"));
+        return behaviorRepo.findAll(specifications,pageable);
+    }
+    
     public Page<Behavior> searchTeacherId(Integer keyword, Pageable pageable) {
         Specifications<Behavior> specifications = Specifications.where(BehaviorSpec.idTeacherLike(keyword));
         return behaviorRepo.findAll(specifications, pageable);

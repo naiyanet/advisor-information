@@ -48,6 +48,8 @@ public class BehaviorController {
            behaviors = behaviorSearchService.searchTeacherName(keyword, pageable);
         }if("Student".equals(searchBy)){
             behaviors = behaviorSearchService.searchNameStudentBehavior(keyword, pageable);
+        }if("Parent".equals(searchBy)){
+            behaviors = behaviorSearchService.searchParentName(keyword, pageable);
         }
         return behaviors;
     }
