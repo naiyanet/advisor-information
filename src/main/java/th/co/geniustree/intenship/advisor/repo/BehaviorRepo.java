@@ -11,4 +11,5 @@ import th.co.geniustree.intenship.advisor.model.Behavior;
  */
 public interface BehaviorRepo extends JpaRepository<Behavior, Integer>,JpaSpecificationExecutor<Behavior>{
     
+            
 }

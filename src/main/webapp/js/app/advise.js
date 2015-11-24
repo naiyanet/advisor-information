@@ -7,7 +7,6 @@ angular.module('advise').controller('adviseController', function (UserService, $
     $scope.studentShow = UserService.user.student;
     $scope.keyword = "";
     $scope.currentPage = 0;
-    $scope.student = [];
     $scope.studentOfTeacher = {};
     var page = 0;
     var totalParent = 0;
@@ -38,11 +37,6 @@ angular.module('advise').controller('adviseController', function (UserService, $
     }
 
     $scope.saveAdvise = function () {
-//        if($scope.account.dtype == 'Student'){
-//            $scope.advise.teacher = $scope.account;
-//        }
-
-
         $http.post('/saveadvise', $scope.advise).success(function (data) {
             getSuccess();
             $scope.clear();
@@ -64,8 +58,6 @@ angular.module('advise').controller('adviseController', function (UserService, $
             console.log('00000000000000000000000000000000000000000000000000000' + data);
             $scope.studentOfTeacher = data;
         });
-//        }
-
     }
 
     $scope.editAdvise = function (u) {

@@ -1,4 +1,3 @@
-
 package th.co.geniustree.intenship.advisor.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +15,18 @@ import th.co.geniustree.intenship.advisor.spec.BehaviorSpec;
  */
 @Service
 public class BehaviorSearchService {
+
     @Autowired
     private BehaviorRepo behaviorRepo;
-    
-    public Page<Behavior> searchNameStudentBehavior(String keyword,Pageable pageable){
-        Specifications<Behavior> specifications = Specifications.where(BehaviorSpec.nameLike("%"+keyword+"%"));
-                return behaviorRepo.findAll(specifications,pageable);
-                }
+
+    public Page<Behavior> searchNameStudentBehavior(String keyword, Pageable pageable) {
+        Specifications<Behavior> specifications = Specifications.where(BehaviorSpec.nameLike("%" + keyword + "%"));
+        return behaviorRepo.findAll(specifications, pageable);
+    }
+
+    public Page<Behavior> searchTeacherId(Integer keyword, Pageable pageable) {
+        Specifications<Behavior> specifications = Specifications.where(BehaviorSpec.idTeacherLike(keyword));
+        return behaviorRepo.findAll(specifications, pageable);
+    }
+
 }

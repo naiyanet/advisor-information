@@ -6,19 +6,32 @@ angular.module('behavior').controller('behaviorController', function (UserServic
     $scope.studentShow = UserService.user.student;
     $scope.keyword = "";
     $scope.currentPage = 0;
+    $scope.studentOfTeacher = {};
     var page = 0;
     var totalParent = 0;
     var totalPage = 0;
 
-    $scope.BehaviorPageAddShows = function () {
-        if ($scope.account.dtype == 'Teacher') {
+
+    $scope.checkTeacherLogin = function () {
+        if ($scope.account.dtype === 'Teacher') {
+            $scope.behavior.teacher = $scope.account;
             return true;
         } else {
+            $scope.behavior.student = $scope.account;
+            $scope.behavior.teacher = $scope.account.teacher;
             return false;
         }
     };
-
     getAccountLogin();
+    function getAccountLogin() {
+        $http.get('/startpageuser').success(function (data) {
+            $scope.account = data;
+            getBehavior();
+            getStudentOfteacher();
+            
+        });
+    }
+
     $scope.saveBehavior = function () {
         $scope.behavior.teacher = $scope.account;
         $http.post('/savebehavior', $scope.behavior).success(function (data) {
@@ -31,11 +44,15 @@ angular.module('behavior').controller('behaviorController', function (UserServic
         });
     };
 
-
-    function getAccountLogin() {
-        $http.get('/startpageuser').success(function (data) {
-            $scope.account = data;
-            console.log(data + '----------------------->');
+    function getStudentOfteacher() {
+        var studentOrTeacher = {};
+        if ($scope.account.dtype === 'Teacher') {
+            studentOrTeacher = $scope.account.id;
+        } else {
+            studentOrTeacher = $scope.account.teacher.id;
+        }
+        $http.post('/getidteacher', studentOrTeacher).success(function (data) {
+            $scope.studentOfTeacher = data;
         });
     }
 
@@ -48,8 +65,6 @@ angular.module('behavior').controller('behaviorController', function (UserServic
         $scope.behavior = {};
     };
 
-
-
     $scope.delBehavior = {};
     $scope.deleteBehavior = function (delBehavior) {
         $http.post('/deletebehavior', delBehavior).success(function (data) {
@@ -59,14 +74,15 @@ angular.module('behavior').controller('behaviorController', function (UserServic
         });
     };
 
-    getBehavior();
-
-
-
+//    getBehavior();
     $scope.behaviorshow = {};
     function getBehavior() {
-        $http.get('/getbehavior').success(function (data) {
+//        var getBehaviorForAccount = {};
+        $http.post('/getbehavior', $scope.account.id).success(function (data) {
             $scope.behaviorshow = data;
+            console.log('..........................' + data);
+        }).error(function (data) {
+            getError();
         });
     }
     ;
@@ -91,10 +107,7 @@ angular.module('behavior').controller('behaviorController', function (UserServic
             $scope.behaviorshow = data;
         });
     };
-    
-    
-    
-    
+
     getStudent();
     $scope.student = {};
     function getStudent() {
@@ -107,6 +120,9 @@ angular.module('behavior').controller('behaviorController', function (UserServic
     }
     ;
 
+
+
+
     $scope.selectStudent = function (student) {
         $scope.behavior.student = student;
         $scope.studentShow = student;
@@ -116,7 +132,6 @@ angular.module('behavior').controller('behaviorController', function (UserServic
         console.log($scope.keyword);
         $http.post('/student/search', $scope.keyword).success(function (data) {
             $scope.student = data;
-            console.log(data);
         });
     };
 
@@ -194,15 +209,9 @@ angular.module('behavior').controller('behaviorController', function (UserServic
             $('#pre-page').removeClass('disabled');
         }
     };
-
-
-
-
-
-
-
-
-
+    $scope.clickStudent = function () {
+        $('#complete-student').modal('show');
+    };
 
 
     $scope.dowloads = function (be) {
@@ -223,17 +232,7 @@ angular.module('behavior').controller('behaviorController', function (UserServic
         });
     };
 
-
-
-
-
-
 });
-
-
-
-
-
 
 
 
