@@ -1,23 +1,25 @@
 
 <div class="col-md-12">
     <br>
-    <div class="col-md-6" ng-show="checkTeacherLogin()">
-        <a href="#/behaviorAdd"><button class="btn btn-success" style="width: 200px">รายงานความประพฤติ</button></a>
-    </div>
+    <div  ng-show="checkTeacherLogin()">
+        <div class="col-md-6">
+            <a href="#/behaviorAdd"><button class="btn btn-success" style="width: 200px">รายงานความประพฤติ</button></a>
+        </div>
 
-    <div class="col-md-6">
-        <div class="panel panel-primary">
-            <div class="panel-heading">ค้นหาชื่อ :</div>
-            <div class="panel-body" style="height: 70px">
-                <div class="row">
-                    <div class="form-group">
-                        <label class="col-md-3">Search</label>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control col-md-3" ng-model="keyword">
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">ค้นหาชื่อ :</div>
+                <div class="panel-body" style="height: 70px">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-3">Search</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control col-md-3" ng-model="keyword">
+                            </div>
+                            <button class="btn btn-default" ng-click="behaviorSearch(keyword)">
+                                <span class="mdi-action-search"></span>
+                            </button>
                         </div>
-                        <button class="btn btn-default" ng-click="behaviorSearch(keyword)">
-                            <span class="mdi-action-search"></span>
-                        </button>
                     </div>
                 </div>
             </div>

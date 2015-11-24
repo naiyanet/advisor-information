@@ -37,4 +37,15 @@ public class BehaviorSpec {
         };
     }
     
+    public static Specification<Behavior> NameTeacherLike(final String keyword){
+        return new Specification(){
+
+            @Override
+            public Predicate toPredicate(Root root, CriteriaQuery cq, CriteriaBuilder cb) {
+               return cb.like(cb.upper(root.get(Behavior_.teacher).get(Teacher_.name)), keyword.toUpperCase());
+            }
+            
+        };
+    }
+    
 }

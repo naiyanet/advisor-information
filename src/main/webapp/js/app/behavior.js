@@ -77,15 +77,16 @@ angular.module('behavior').controller('behaviorController', function (UserServic
 //    getBehavior();
     $scope.behaviorshow = {};
     function getBehavior() {
-//        var getBehaviorForAccount = {};
-        $http.post('/getbehavior', $scope.account.id).success(function (data) {
+        var getBehaviorForAccount = {};
+        getBehaviorForAccount.keyWord = $scope.account.name;
+        getBehaviorForAccount.searchBy = $scope.account.dtype;
+        $http.post('/getbehavior', getBehaviorForAccount).success(function (data) {
             $scope.behaviorshow = data;
             console.log('..........................' + data);
         }).error(function (data) {
             getError();
         });
-    }
-    ;
+    };
 
     function getSuccess() {
         alert('Save Success');
@@ -94,7 +95,6 @@ angular.module('behavior').controller('behaviorController', function (UserServic
     function getError() {
         alert('Error');
     }
-
 
     $('.datepicker-custom').datepicker({
         changeYear: true,
@@ -119,9 +119,6 @@ angular.module('behavior').controller('behaviorController', function (UserServic
         });
     }
     ;
-
-
-
 
     $scope.selectStudent = function (student) {
         $scope.behavior.student = student;

@@ -37,18 +37,20 @@ public class BehaviorController {
     @Autowired
     private StudentSearchService studentSearchService;
     
-//    @RequestMapping(value = "/getbehavior",method = RequestMethod.POST)
-//    public Page<Behavior> getBehavior (@RequestBody SearchData searchData,Pageable pageable){
-//        String searchBy = searchData.getSearchBy();
-//        String keyword = searchData.getKeyWord();
-//        Page<Behavior> behaviors = null;
-//        if("Teacher".equals(searchBy)){
-//            behaviors = behaviorSearchService.searchNameStudentBehavior(keyword, pageable);
-//        }else{
-//            behaviors = behaviorSearchService.searchNameStudentBehavior(keyword, pageable);
-//        }
-//        return behaviors;
-//    }
+    @RequestMapping(value = "/getbehavior",method = RequestMethod.POST)
+    public Page<Behavior> getBehavior (@RequestBody SearchData searchData,Pageable pageable){
+        String searchBy = searchData.getSearchBy();
+        String keyword = searchData.getKeyWord();
+        Page<Behavior> behaviors = null;
+        System.out.println("teacher-------------------------------------------------------------"+searchBy);
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++"+keyword);
+        if("Teacher".equals(searchBy)){
+           behaviors = behaviorSearchService.searchTeacherName(keyword, pageable);
+        }if("Student".equals(searchBy)){
+            behaviors = behaviorSearchService.searchNameStudentBehavior(keyword, pageable);
+        }
+        return behaviors;
+    }
     
     @RequestMapping(value = "/savebehavior",method = RequestMethod.POST)
     public void saveBehavior (@Validated @RequestBody Behavior behavior){
@@ -86,22 +88,21 @@ public class BehaviorController {
 
      @RequestMapping(value = "/getidteacher" , method = RequestMethod.POST)
     public Page<Student> getStudentOfTeacher(@RequestBody Integer keyword, Pageable pageable) {
-        System.out.println("------------------------------------------>"+keyword);
         Page<Student> students = studentSearchService.searchStudentByTeacher(keyword, pageable);
         return students;
     }
     
-    @RequestMapping(value = "/getbehavior",method = RequestMethod.POST)
-    public Page<Behavior> getBehavior (@RequestBody Integer id,Pageable pageable){
-         Page<Behavior> behaviors = null;
-         
-         behaviors = behaviorSearchService.searchTeacherId(id, pageable);
-         
-//        if("Teacher".equals(searchBy)){
-//           
-//        }else{
-//            
-//        }
-        return behaviors;
-    }
+//    @RequestMapping(value = "/getbehavior",method = RequestMethod.POST)
+//    public Page<Behavior> getBehavior (@RequestBody Integer id,Pageable pageable){
+//         Page<Behavior> behaviors = null;
+//         
+//         behaviors = behaviorSearchService.searchTeacherId(id, pageable);
+//         
+////        if("Teacher".equals(searchBy)){
+////           
+////        }else{
+////            
+////        }
+//        return behaviors;
+//    }
 }

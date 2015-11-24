@@ -47,10 +47,7 @@ app.controller('appController', function (UserService, $scope, $http) {
             return false;
         }
     };
-    
-//    function getAccount(){
-//        if($scope.account == )
-//    };
+
 });
 
 app.config(function ($routeProvider) {
@@ -96,7 +93,7 @@ app.config(function ($routeProvider) {
                 controller: 'appointmentController',
                 templateUrl: 'appointmentAdd.html'
             })
-            .when('/behavior', {
+            .when('/behaviorShow', {
                 controller: 'behaviorController',
                 templateUrl: 'behavior_show.html'
             })

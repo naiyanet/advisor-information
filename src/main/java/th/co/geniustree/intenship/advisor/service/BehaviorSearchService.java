@@ -29,4 +29,9 @@ public class BehaviorSearchService {
         return behaviorRepo.findAll(specifications, pageable);
     }
 
+    public Page<Behavior> searchTeacherName(String keyword, Pageable pageable) {
+        Specifications<Behavior> specifications = Specifications.where(BehaviorSpec.NameTeacherLike("%" + keyword + "%"));
+        return behaviorRepo.findAll(specifications, pageable);
+    }
+
 }
