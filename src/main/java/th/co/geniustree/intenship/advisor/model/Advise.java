@@ -14,6 +14,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
@@ -30,7 +32,6 @@ public class Advise implements Serializable{
     
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dates;
-    
     private String title;
     private String detail;
     private String description;

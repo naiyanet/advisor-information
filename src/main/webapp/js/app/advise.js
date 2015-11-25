@@ -35,7 +35,7 @@ angular.module('advise').controller('adviseController', function (UserService, $
 
         });
     }
-
+    $scope.error = {};
     $scope.saveAdvise = function () {
         $http.post('/saveadvise', $scope.advise).success(function (data) {
             getSuccess();

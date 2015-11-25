@@ -41,11 +41,13 @@ public class Account implements Serializable, UserDetails {
     @NotBlank(message = "please input email")
     @JsonView(Object.class)
     private String email;
+    @NotBlank(message = "please input password")
     private String password;
     private String filePic;
     private String idStudent;
     private String idCard;
     @JsonView(Object.class)
+    @NotBlank(message = "please input name")
     private String name;
 
     @Temporal(javax.persistence.TemporalType.DATE)

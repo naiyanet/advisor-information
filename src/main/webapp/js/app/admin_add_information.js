@@ -9,9 +9,9 @@ var app = angular.module('admin_add_information').controller('admin_add_informat
     $scope.saveInfor = function () {
         console.log($scope.information);
         $http.post('/saveinformation', $scope.information).success(function (data) {
-            getSuccess();
             getInformation();
             $scope.clear();
+            $('#complete-dialog-saveinformation').modal('show');
         }).error(function (data) {
             getError();
         });
@@ -57,9 +57,6 @@ var app = angular.module('admin_add_information').controller('admin_add_informat
         $scope.information = updateInformation;
     };
 
-    function getSuccess() {
-        alert('Save Success');
-    }
     function getError() {
         alert('Error');
     }
@@ -71,9 +68,6 @@ var app = angular.module('admin_add_information').controller('admin_add_informat
         yearRange: '-100:+100',
         dateFormat: 'yy-mm-dd'
     });
-
-
-
 
     $scope.page = {};
     $scope.size = {};

@@ -1,5 +1,5 @@
 function growl(message, type, position) {
-    var alretType = 'alert-' + type;
+    var alretType = type;
     var $growlCustom = $('#growl-custom');
     $growlCustom.removeAttr('class');
     $growlCustom.html(message);
@@ -8,10 +8,10 @@ function growl(message, type, position) {
 
     switch (position) {
         case 'top':
-            positionHeight = (browser().scrollTop()) + 50;
+            positionHeight = 100;
             break;
         case 'buttom':
-            positionHeight = ($(window).outerHeight() + browser().scrollTop()) - 80;
+            positionHeight = $(window).outerHeight() - 100;
             break;
         default :
             positionHeight = ($(window).outerHeight() - browser().scrollTop());
@@ -19,7 +19,7 @@ function growl(message, type, position) {
 
     $growlCustom.css('top', positionHeight);
     $growlCustom.css('left', positionWidth);
-    $growlCustom.addClass(alretType).fadeIn(1000).fadeOut(2000);
+    $growlCustom.addClass(alretType).fadeIn(100).fadeOut(5000);
 }
 
 function browser() {
@@ -34,5 +34,3 @@ function browser() {
     }
     return brwsr;
 }
-
-
