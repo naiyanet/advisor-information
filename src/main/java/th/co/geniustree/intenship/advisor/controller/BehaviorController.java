@@ -42,8 +42,6 @@ public class BehaviorController {
         String searchBy = searchData.getSearchBy();
         String keyword = searchData.getKeyWord();
         Page<Behavior> behaviors = null;
-        System.out.println("teacher-------------------------------------------------------------"+searchBy);
-        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++"+keyword);
         if("Teacher".equals(searchBy)){
            behaviors = behaviorSearchService.searchTeacherName(keyword, pageable);
         }if("Student".equals(searchBy)){
@@ -94,17 +92,4 @@ public class BehaviorController {
         return students;
     }
     
-//    @RequestMapping(value = "/getbehavior",method = RequestMethod.POST)
-//    public Page<Behavior> getBehavior (@RequestBody Integer id,Pageable pageable){
-//         Page<Behavior> behaviors = null;
-//         
-//         behaviors = behaviorSearchService.searchTeacherId(id, pageable);
-//         
-////        if("Teacher".equals(searchBy)){
-////           
-////        }else{
-////            
-////        }
-//        return behaviors;
-//    }
 }

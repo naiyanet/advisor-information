@@ -1,10 +1,7 @@
-var app = angular.module('app', [   'ngRoute', 'home', 'add_user', 'admin_add_information',
-                                    'advise', 'appointment', 'behavior', 'course',
-                                    'course_add', 'course_subject_1', 'course_subject_2', 
-                                    'course_subject_3','course_subject_4', 'course_subject_1_term2',
-                                    'course_subject_2_term2','course_subject_3_term2','course_subject_4_term2',
-                                    'parent', 'teacher', 'student','studentshow', 'teachershow', 
-                                    'parentshow','timetable', 'checklist-model']);
+var app = angular.module('app', [   'ngRoute', 'home', 'add_user', 'admin_add_information','allstudent','advise', 'appointment', 'behavior', 'course',
+                                    'course_add', 'course_subject_1', 'course_subject_2','course_subject_3','course_subject_4', 'course_subject_1_term2',
+                                    'course_subject_2_term2','course_subject_3_term2','course_subject_4_term2','parent', 'teacher', 'student','studentshow', 
+                                    'teachershow','parentshow','timetable','allteacher', 'checklist-model']);
 
 var app = angular.module('app');
 
@@ -56,6 +53,14 @@ app.config(function ($routeProvider) {
             .when('/home', {
                 controller: 'homeController',
                 templateUrl: 'home.html'
+            })
+            .when('/allstudent', {
+                controller: 'allstudentController',
+                templateUrl: 'all_student_show.html'
+            })
+            .when('/allteacher', {
+                controller: 'allteacherController',
+                templateUrl: 'all_teacher_show.html'
             })
             .when('/user_show', {
                 controller: 'add_userController',

@@ -9,12 +9,10 @@ $scope.CourseSubjectClassOne = {};
         $http.post('/savecoursesubjectclassone',$scope.CourseSubjectClassOne).success(function (data) {
             getSuccess();
             getCourseSubjectClassOne();
-            console.log(data);
             $scope.clear();
         }).error(function (data){
             getError();
-        });
-        
+        }); 
     };
       
     $scope.clear = function () {

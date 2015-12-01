@@ -1,0 +1,33 @@
+
+<div class="col-md-12">
+    <br>
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">อาจารย์ประจำสาขาวิชาเทคโนโลยีคอมพิวเตอร์</h3>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <table class="table table-striped table-hover ">
+                            <thead>
+                                <tr>                           
+                                    <th>อาจารย์</th>
+                                    <th>E-mail</th>
+                                    <th>เบอร์โทรศัพท์</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="teachers in showteacher.content">
+                                    <td >{{teachers.name}}</td>
+                                    <td >{{teachers.email}}</td>
+                                    <td >{{teachers.mobile}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

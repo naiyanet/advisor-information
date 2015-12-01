@@ -3,19 +3,18 @@ angular.module('advise').controller('adviseController', function (UserService, $
 
     $scope.advise = {};
     $scope.account = {};
-    $scope.mo = {};
+//    $scope.mo = {};
     $scope.studentShow = UserService.user.student;
     $scope.keyword = "";
     $scope.currentPage = 0;
     $scope.studentOfTeacher = {};
-    var page = 0;
-    var totalParent = 0;
+//    var page = 0;
+//    var totalParent = 0;
     var totalPage = 0;
 
     $scope.checkTeacherLogin = function () {
         if ($scope.account.dtype === 'Teacher') {
             $scope.advise.teacher = $scope.account;
-
             return true;
         }
         else {
@@ -29,7 +28,6 @@ angular.module('advise').controller('adviseController', function (UserService, $
     function getAccountLogin() {
         $http.get('/startpageuser').success(function (data) {
             $scope.account = data;
-            console.log(data.student + "tttttttttttttttt");
             getAdvise();
             getStudentOfteacher();
 
@@ -60,19 +58,6 @@ angular.module('advise').controller('adviseController', function (UserService, $
         });
     }
 
-    $scope.editAdvise = function (u) {
-        $scope.advise = u;
-    };
-
-    $scope.delAdvise = {};
-    $scope.deleteAdvise = function (delAd) {
-        $http.post('/deleteadvise', delAd).success(function (data) {
-            getAdvise();
-        }).error(function (data) {
-            getError();
-        });
-    };
-
     $scope.adviseshow = {};
     function getAdvise() {
         var getAdviseForAccount = {};
@@ -85,22 +70,32 @@ angular.module('advise').controller('adviseController', function (UserService, $
         }).error(function (data) {
             getError();
         });
-    }
-    ;
+    };
 
     getAdviseCategory();
-
     $scope.advisecateshow = {};
     function getAdviseCategory() {
         $http.get('/getcategory').success(function (data) {
             $scope.advisecateshow = data;
-            console.log(data);
         }).error(function (data) {
             getError();
         });
-    }
-    ;
+    };
+    
+///////////////////////////////////////////////////////////////////
+    $scope.editAdvise = function (u) {
+        $scope.advise = u;
+    };
 
+    $scope.delAdvise = {};
+    $scope.deleteAdvise = function (delAd) {
+        $http.post('/deleteadvise', delAd).success(function (data) {
+            getAdvise();
+        }).error(function (data) {
+            getError();
+        });
+    };
+    
     $scope.clickUpdate = function (updateAdvise) {
         $scope.advise = updateAdvise;
     };
@@ -115,29 +110,18 @@ angular.module('advise').controller('adviseController', function (UserService, $
     function getError() {
         alert('Error');
     }
-
+///////////////Setting Calendar////////////////////////////////////
     $('.datepicker-custom').datepicker({
         changeYear: true,
         yearRange: '-100:+100',
         dateFormat: 'yy-mm-dd'
     });
-
+///////Search StudentSearchService////////////////////////////////
     $scope.adviseSearch = function () {
         $http.post('/searchStudentInAdvise', $scope.keyword).success(function (data) {
             $scope.adviseshow = data;
         });
     };
-
-//    getStudent();
-//    $scope.student = {};
-//    function getStudent() {
-//        $http.post('/getstudent', 'Student').success(function (data) {
-//            console.log(data + '...............' + data.totalElements);
-//            $scope.student = data;
-//        }).error(function (data) {
-//
-//        });
-//    };
 
     $scope.selectStudent = function (student) {
         $scope.advise.student = student;
@@ -151,12 +135,11 @@ angular.module('advise').controller('adviseController', function (UserService, $
             console.log(data);
         });
     };
-
+//// Paging Select Student///////////////////////////////////////
     countStudent();
     function countStudent() {
         $http.get('/countstudent').success(function (data) {
             totalStudent = data;
-            console.log(data);
             totalPageStudent();
             console.log(totalPage);
         });
@@ -226,11 +209,17 @@ angular.module('advise').controller('adviseController', function (UserService, $
             $('#pre-page').removeClass('disabled');
         }
     };
-
+//////////////////////////////////////////////////////////////////
+//Show Modal Student /////////////////////////////////////////////
     $scope.clickStudent = function () {
         $('#complete-student-advise').modal('show');
     };
+//////////////////////////////////////////////////////////////////
 
+
+
+
+//Download files/////////////////////////////////////////////////
     $scope.dowloads = function (advises) {
         location.href = '/getfileadvise/' + advises.fileUpload.id;
 
@@ -247,8 +236,10 @@ angular.module('advise').controller('adviseController', function (UserService, $
             $scope.advise.fileUpload = data;
         });
     };
+/////////////////////////////////////////////////////////////////
 
 });
+
 
 
 app.directive('fileModel', function ($parse) {

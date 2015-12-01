@@ -22,13 +22,13 @@ angular.module('behavior').controller('behaviorController', function (UserServic
             return false;
         }
     };
+    
     getAccountLogin();
     function getAccountLogin() {
         $http.get('/startpageuser').success(function (data) {
             $scope.account = data;
             getBehavior();
-            getStudentOfteacher();
-            
+            getStudentOfteacher();    
         });
     }
 
@@ -112,13 +112,11 @@ angular.module('behavior').controller('behaviorController', function (UserServic
     $scope.student = {};
     function getStudent() {
         $http.post('/getstudent', 'Student').success(function (data) {
-            console.log(data + '...............' + data.totalElements);
             $scope.student = data;
         }).error(function (data) {
 
         });
-    }
-    ;
+    };
 
     $scope.selectStudent = function (student) {
         $scope.behavior.student = student;
