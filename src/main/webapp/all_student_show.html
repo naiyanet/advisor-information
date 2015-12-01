@@ -51,7 +51,19 @@
                         </table>
                     </div>
                 </form>
+
             </div>
         </div>
     </div>
+        <div class="row">
+            <div class="left">
+                <ul class="pagination pagination-sm">
+                    <li id="first-page"><a ng-click="firstPage()">&Lt;</a></li>
+                    <li id="pre-page" ><a ng-click="prePage()">&lt;</a></li>
+                    <li><a>{{currentPage + 1}}</a></li>
+                    <li id="next-page"><a ng-click="nextPage()">&gt;</a></li>
+                    <li id="final-page"><a ng-click="finalPage()">&gg;</a></li>
+                </ul>
+            </div>
+        </div>
 </div>

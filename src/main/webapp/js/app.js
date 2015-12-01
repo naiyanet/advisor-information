@@ -1,10 +1,8 @@
-var app = angular.module('app', [   'ngRoute', 'home', 'add_user', 'admin_add_information','allstudent','advise', 'appointment', 'behavior', 'course',
-                                    'course_add', 'course_subject_1', 'course_subject_2','course_subject_3','course_subject_4', 'course_subject_1_term2',
-                                    'course_subject_2_term2','course_subject_3_term2','course_subject_4_term2','parent', 'teacher', 'student','studentshow', 
-                                    'teachershow','parentshow','timetable','allteacher', 'checklist-model']);
-
+var app = angular.module('app', ['ngRoute', 'home', 'add_user', 'admin_add_information', 'allstudent', 'advise', 'appointment', 'behavior', 'course',
+    'course_add', 'course_subject_1', 'course_subject_2', 'course_subject_3', 'course_subject_4', 'course_subject_1_term2',
+    'course_subject_2_term2', 'course_subject_3_term2', 'course_subject_4_term2', 'parent', 'teacher', 'student', 'studentshow',
+    'teachershow', 'parentshow', 'timetable', 'allteacher', 'checklist-model']);
 var app = angular.module('app');
-
 app.controller('appController', function (UserService, $scope, $http) {
 
     $scope.account = {};
@@ -27,12 +25,10 @@ app.controller('appController', function (UserService, $scope, $http) {
             location.href = '#/parent_show';
         }
     };
-
     $scope.AdminLogin = function () {
         if ($scope.account.status == 'admin') {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     };
@@ -44,7 +40,13 @@ app.controller('appController', function (UserService, $scope, $http) {
             return false;
         }
     };
-
+    $scope.Allstudentshow = function () {
+        if ($scope.account.dtype == 'Teacher') {
+            return  true;
+        } else {
+            return false;
+        }
+    };
 });
 
 app.config(function ($routeProvider) {
@@ -190,14 +192,11 @@ app.config(function ($routeProvider) {
                 redirectTo: '/'
             });
 });
-
-
 app.factory('UserService', function () {
     return {
         user: {}
     };
 });
-
 app.factory('AdviseService', function () {
     return {
         adviseservice: {}

@@ -11,6 +11,21 @@ INSERT INTO ACCOUNT(ID,NAME,EMAIL,MOBILE,ADDRESS,PASSWORD,DTYPE,ENABLE)
 INSERT INTO ACCOUNT(ID,NAME,EMAIL,MOBILE,ADDRESS,PASSWORD,DTYPE,ENABLE) 
         values(ACCOUNT_SEQ.nextVal,'นายพูนศักดิ์ วงศ์สวัสดิ์','pskw@rmutk.ac.th','022879639','bangkok','1234','Teacher',1);
 
+INSERT INTO ACCOUNT(ID,NAME,EMAIL,MOBILE,ADDRESS,PASSWORD,DTYPE,ENABLE) 
+        values(ACCOUNT_SEQ.nextVal,'นายวิโรจน์ เลิศธีระชาญชัย','wirotelert@rmutk.ac.th','022879639','bangkok','1234','Teacher',1);
+
+INSERT INTO ACCOUNT(ID,NAME,EMAIL,MOBILE,ADDRESS,PASSWORD,DTYPE,ENABLE) 
+        values(ACCOUNT_SEQ.nextVal,'นายนรินทร์ จีระนันตสิน','narin.j@rmutk.ac.th','022879639','bangkok','1234','Teacher',1);
+
+INSERT INTO ACCOUNT(ID,NAME,EMAIL,MOBILE,ADDRESS,PASSWORD,DTYPE,ENABLE) 
+        values(ACCOUNT_SEQ.nextVal,'นายพนัสชัย ศรีบำรุง','panuschai@rmutk.ac.th','022879639','bangkok','1234','Teacher',1);
+
+INSERT INTO ACCOUNT(ID,NAME,EMAIL,MOBILE,ADDRESS,PASSWORD,DTYPE,ENABLE) 
+        values(ACCOUNT_SEQ.nextVal,'ว่าที่ร้อยตรี ดร. ประสิทธิ์ จิยะพานิช','prasit.ji@rmutk.ac.th','022879639','bangkok','1234','Teacher',1);
+
+INSERT INTO ACCOUNT(ID,NAME,EMAIL,MOBILE,ADDRESS,PASSWORD,DTYPE,ENABLE) 
+        values(ACCOUNT_SEQ.nextVal,'นายเฉียบวุฒิ รัตนวิไลสกุล','chaibwoot@hotmail.com','022879639','bangkok','1234','Teacher',1);
+
 INSERT INTO ACCOUNT(ID,NAME,EMAIL,MOBILE,ADDRESS,PASSWORD,DTYPE,ENABLE,STATUS) 
         values(ACCOUNT_SEQ.nextVal,'นางสาวปรียาภรณ์ มัชฌิกะ','preeyaporn.m@rmutk.ac.th','022879639','bangkok','1234','Teacher',1,'admin');
 
