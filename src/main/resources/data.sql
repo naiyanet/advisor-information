@@ -2,6 +2,12 @@
 INSERT INTO ACCOUNT(ID,NAME,EMAIL,MOBILE,ADDRESS,PASSWORD,DTYPE,ENABLE) 
         values(ACCOUNT_SEQ.nextVal,'somying','somyinggh@login','098888888','chonburi','1234','Student',1);
 
+INSERT INTO ACCOUNT(ID,NAME,EMAIL,MOBILE,ADDRESS,PASSWORD,DTYPE,ENABLE) 
+        values(ACCOUNT_SEQ.nextVal,'นัยเนตร แหบคงเหล็ก','naiyanet@gmail.com','0867398315','bangkok','1234','Student',1);
+
+INSERT INTO ACCOUNT(ID,NAME,EMAIL,MOBILE,ADDRESS,PASSWORD,DTYPE,ENABLE) 
+        values(ACCOUNT_SEQ.nextVal,'วิภาดา จันทร์ดำ','wipada@gmail.com','098888888','bangkok','1234','Student',1);
+
 INSERT INTO ACCOUNT(ID,NAME,EMAIL,MOBILE,ADDRESS,PASSWORD,DTYPE,ENABLE)
         values(ACCOUNT_SEQ.nextVal,'somchai','somchaigh@login','0988889999','bangkok','1234','Student',1);
 

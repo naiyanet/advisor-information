@@ -47,6 +47,13 @@ app.controller('appController', function (UserService, $scope, $http) {
             return false;
         }
     };
+    $scope.Appointmentshow = function () {
+        if ($scope.account.dtype == 'Teacher' || $scope.account.dtype == 'Student') {
+            return  true;
+        } else {
+            return false;
+        }
+    };
 });
 
 app.config(function ($routeProvider) {
