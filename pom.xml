@@ -143,6 +143,16 @@
                     </dependency>
                 </dependencies>
             </plugin>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <server>planest</server>
+                    <update>true</update>
+                    <url>http://128.199.86.108:8080</url>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 

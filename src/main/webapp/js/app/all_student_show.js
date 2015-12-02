@@ -27,8 +27,13 @@ angular.module('allstudent').controller('allstudentController', function (UserSe
         });
     }
     
+    $scope.keyword = "";
+    $scope.studentSearch = function () {
+        $http.post('/student/search', $scope.keyword).success(function (data) {
+            $scope.studentOrTeacher = data;
+        });
+    };
     
-       
     countStudent();
     function countStudent() {
         $http.get('/countstudent').success(function (data) {
