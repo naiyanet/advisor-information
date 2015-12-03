@@ -1,18 +1,18 @@
 
 INSERT INTO ACCOUNT(ID,NAME,EMAIL,MOBILE,ADDRESS,PASSWORD,DTYPE,ENABLE) 
-        values(ACCOUNT_SEQ.nextVal,'somying','somyinggh@login','098888888','chonburi','1234','Student',1);
+        values(ACCOUNT_SEQ.nextVal,'นางสาวสมหญิง กอไก่','somyinggh@login','098888888','chonburi','1234','Student',1);
 
 INSERT INTO ACCOUNT(ID,NAME,EMAIL,MOBILE,ADDRESS,PASSWORD,DTYPE,ENABLE) 
-        values(ACCOUNT_SEQ.nextVal,'นัยเนตร แหบคงเหล็ก','naiyanet@gmail.com','0867398315','bangkok','1234','Student',1);
+        values(ACCOUNT_SEQ.nextVal,'นางสาวนัยเนตร แหบคงเหล็ก','naiyanet@gmail.com','0867398315','bangkok','1234','Student',1);
 
 INSERT INTO ACCOUNT(ID,NAME,EMAIL,MOBILE,ADDRESS,PASSWORD,DTYPE,ENABLE) 
-        values(ACCOUNT_SEQ.nextVal,'วิภาดา จันทร์ดำ','wipada@gmail.com','098888888','bangkok','1234','Student',1);
+        values(ACCOUNT_SEQ.nextVal,'`นางสาววิภาดา จันทร์ดำ','wipada@gmail.com','098888888','bangkok','1234','Student',1);
 
 INSERT INTO ACCOUNT(ID,NAME,EMAIL,MOBILE,ADDRESS,PASSWORD,DTYPE,ENABLE)
-        values(ACCOUNT_SEQ.nextVal,'somchai','somchaigh@login','0988889999','bangkok','1234','Student',1);
+        values(ACCOUNT_SEQ.nextVal,'นายสมชาย ชายชาย','somchaigh@login','0988889999','bangkok','1234','Student',1);
 
 INSERT INTO ACCOUNT(ID,NAME,EMAIL,MOBILE,ADDRESS,PASSWORD,DTYPE,ENABLE) 
-        values(ACCOUNT_SEQ.nextVal,'somruk','somruk@login','0988880000','bangkok','1234','Parent',1);
+        values(ACCOUNT_SEQ.nextVal,'นายสมรักษ์ รักษ์โลก','somruk@login','0988880000','bangkok','1234','Parent',1);
 
 INSERT INTO ACCOUNT(ID,NAME,EMAIL,MOBILE,ADDRESS,PASSWORD,DTYPE,ENABLE) 
         values(ACCOUNT_SEQ.nextVal,'นายพูนศักดิ์ วงศ์สวัสดิ์','pskw@rmutk.ac.th','022879639','bangkok','1234','Teacher',1);

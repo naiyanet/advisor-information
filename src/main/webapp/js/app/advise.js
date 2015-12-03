@@ -3,7 +3,6 @@ angular.module('advise').controller('adviseController', function (UserService, $
 
     $scope.advise = {};
     $scope.account = {};
-//    $scope.mo = {};
     $scope.studentShow = UserService.user.student;
     $scope.keyword = "";
     $scope.currentPage = 0;

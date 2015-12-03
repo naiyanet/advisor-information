@@ -1,6 +1,5 @@
 package th.co.geniustree.intenship.advisor.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import java.io.Serializable;
@@ -27,10 +26,8 @@ public class Student extends Account implements Serializable {
     @JsonView(View.Account.class)
     private Parent parent;
 
-//    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "TEACHER_ID")
-//    @JsonView(View.Account.class)
     private Teacher teacher;
 
     @JsonIgnore
@@ -40,7 +37,21 @@ public class Student extends Account implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy = "student")
     private List<Behavior> behaviors;
+  
+    @OneToMany(mappedBy = "student")
+    @JsonIgnore
+    private List<Appointment> appointment;
 
+    public List<Appointment> getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(List<Appointment> appointment) {
+        this.appointment = appointment;
+    }
+    
+    
+    
     public Faculty getFaculty() {
         return faculty;
     }
@@ -80,5 +91,6 @@ public class Student extends Account implements Serializable {
     public void setBehaviors(List<Behavior> behaviors) {
         this.behaviors = behaviors;
     }
+
 
 }

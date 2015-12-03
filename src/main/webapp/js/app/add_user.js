@@ -1,7 +1,11 @@
 angular.module('add_user', []);
 angular.module('add_user').controller('add_userController', function (UserService, $scope, $http) {
 
-
+    $scope.keyword = "";
+    $scope.currentPage = 0;
+    var page = 0;
+    var totalUser = 0;
+    var totalPage = 0;
     $scope.keyword = null;
     $scope.user = {};
 
@@ -9,7 +13,7 @@ angular.module('add_user').controller('add_userController', function (UserServic
         $http.post('/saveuser', $scope.user).success(function (data) {
             getSuccess();
             getUser();
-         });
+        });
     };
 
     $scope.edit = function (u) {
@@ -82,5 +86,6 @@ angular.module('add_user').controller('add_userController', function (UserServic
             });
         }
     };
+
 
 });

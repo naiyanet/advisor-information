@@ -1,77 +1,46 @@
 <br>
-<div class="col-md-6"
-     <a href="#/appointmentAdd"><button class="btn btn-success" style="width: 200px">เพิ่มการนัดหมาย</button></a>
-</div>
-<div class="col-md-6">
-    <div class="panel panel-primary">
-        <div class="panel-heading">ค้นหาชื่อ หรือ email:
-        </div>
-        <div class="panel-body" style="height: 70px">
-            <div class="row">
-                <div class="form-group">
-                    <label class="col-md-3">Search</label>
-                    <div class="col-md-6">
-                        <input type="text" class="form-control col-md-3" ng-model="keyword"></span>
-                    </div>
-                    <button class="btn btn-default" ng-click="searchUser(keyword)">
-                        <span class="mdi-action-search"></span>
-                    </button>
-                </div>
+<div class="col-md-12">
+    <div class="col-md-7">
+        <div class="card">
+            <div class="card-content">
+                <div id='fullcalendar' style="width: 100%; height: 100%;"></div>
             </div>
         </div>
     </div>
-</div>
-<br>
-<div class="col-md-12">
-    <div class="panel panel-primary">
-        <div class="panel-heading">ข้อมูลนัดหมาย</div>
-        <div class="panel-body">
-            นัดหมาย
+
+
+    <div class="col-md-5">
+        <br>
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">รายละเอียดนัดหมาย</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table table-striped table-hover ">
+                    <thead>
+                        <tr>
+                            <th>นักศึกษา</th>
+                            <th>หัวเรื่อง</th>
+                            <th>วันที่</th>
+                            <th>Start at</th>
+                            <th>End at</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="appo in appointmentshow.content">
+                            <td>{{appo.student.name}}</td>
+                            <td>{{appo.topic}}</td>
+                            <td>{{appo.date}}</td>
+                            <td>{{appo.startTime}}</td>
+                            <td>{{appo.endTime}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
-        <div class="container">                                                 
-            <table class="table" style=" max-width:650px;">
-                <thead>
-                    <tr class="success">
-                        <th>หัวเรื่อง</th>
-                        <th>ประเภท</th>
-                        <th>Start at</th>
-                        <th>End at</th>
-                        <th>Remove</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>ประชุมโฮมรูม</td>
-                        <td>นัดกลุ่ม</td>
-                        <td>12/ม.ค./58</td>
-                        <td>08:00</td>
-                        <td><button type="button" class="btn btn-danger">
-                                <span class="glyphicon "></span> Delete
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>ปรึกษาโปรเจค</td>
-                        <td>นัดเดี่ยว</td>
-                        <td>20/ม.ค./58</td>
-                        <td>17:00</td>
-                        <td><button type="button" class="btn btn-danger">
-                                <span class="glyphicon "></span> Delete
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>การลงทะเบียนเทอมหน้า</td>
-                        <td>นัดกลุ่ม</td>
-                        <td>5/มี.ค./58</td>
-                        <td>13:00</td>
-                        <td><button type="button" class="btn btn-danger">
-                                <span class="glyphicon "></span> Delete
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>      
-    </div>  
+        <div class="col-md-2">
+            <a href="#/appointmentAdd"><button class="btn btn-success glyphicon glyphicon-calendar" style="width: 200px">&nbsp;เพิ่มการนัดหมาย</button></a>
+        </div>
+    </div>
+
 </div>

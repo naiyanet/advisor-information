@@ -1,19 +1,14 @@
 
 package th.co.geniustree.intenship.advisor.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import th.co.geniustree.intenship.advisor.controller.View;
 
 /**
  *
@@ -26,8 +21,6 @@ public class Teacher extends Account implements Serializable{
     @JoinColumn(name = "FACULTY_ID")
     private Faculty faculty;
 
-//    @JsonManagedReference
-//    @JsonView(View.Account.class)
     @JsonIgnore
     @OneToMany(mappedBy = "teacher")
     private List<Student> student;
@@ -39,10 +32,23 @@ public class Teacher extends Account implements Serializable{
     @JsonIgnore
     @OneToMany(mappedBy = "teacher")
     private List<Behavior> behaviors;
-
+   
+    @OneToMany(mappedBy = "teacher")
+    @JsonIgnore
+    private List<Appointment> appointment;
+    
     @JsonView(Object.class)
     private String status;
 
+    public List<Appointment> getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(List<Appointment> appointment) {
+        this.appointment = appointment;
+    }
+
+    
 
     public String getStatus() {
         return status;
@@ -83,9 +89,5 @@ public class Teacher extends Account implements Serializable{
     public void setBehaviors(List<Behavior> behaviors) {
         this.behaviors = behaviors;
     }
-    
-    
-    
-    
-    
+
 }
