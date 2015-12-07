@@ -58,3 +58,4 @@ insert into CATEGORYADVISE(id,name_Category) values(CATEGORYADVISE_SEQ.nextVal,'
 insert into CATEGORYADVISE(id,name_Category) values(CATEGORYADVISE_SEQ.nextVal,'หมวดกิจกรรม');
 insert into CATEGORYADVISE(id,name_Category) values(CATEGORYADVISE_SEQ.nextVal,'หมวดทั่วไป');
 insert into CATEGORYADVISE(id,name_Category) values(CATEGORYADVISE_SEQ.nextVal,'อื่น ๆ ');
+

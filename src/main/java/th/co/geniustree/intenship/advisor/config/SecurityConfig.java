@@ -1,4 +1,3 @@
-
 package th.co.geniustree.intenship.advisor.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private MyUserDetailService userDetailsService;
-
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -49,10 +47,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers()
                 .frameOptions()
                 .disable()
-//                .and()
                 .authorizeRequests().anyRequest().authenticated();
     }
-
 
     @Override
     public void configure(WebSecurity web) throws Exception {
@@ -66,8 +62,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/less/**")
                 .antMatchers("/material/**")
                 .antMatchers("/css/**")
+                .antMatchers("/file/teacher.docx")
+                .antMatchers("/parent_show.html")
+                .antMatchers("/file/**")
                 .antMatchers("/index.html")
                 .antMatchers("/scripts/**/*.{js,html}");
+
     }
 
 }

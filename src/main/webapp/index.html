@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
     <head>
 
         <meta charset="utf-8">
@@ -85,11 +86,11 @@
                         <div class="row"  >
                             <div class="col-md-4">
                                 <label>อาจารย์ : Read me!!</label>
-                                <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+                                     <a class="btn btn-info" href="file/teacher.docx" role="button">View details &raquo;</a>
                             </div>
                             <div class="col-md-4">
                                 <label>นักศึกษา : Read me!!</label>
-                                <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+                                     <p><a class="btn btn-danger" href="#" role="button">View details &raquo;</a></p>
                             </div>
                             <div class="col-md-4">
                                 <label>ผู้ปกครอง : Read me!!</label>
@@ -108,7 +109,6 @@
 
             </div>
         </div>
-
         <style>
             #growl-custom{
                 display: none;
