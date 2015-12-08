@@ -61,9 +61,10 @@ angular.module('appointment').controller('appointmentController', function (User
         $scope.startTime = "";
         $scope.endTime = "";
     };
-
+    
+    
     $scope.deleteAppointment = function (appo) {
-        $http.post('/deleteappointment', appo.id).success(function (data) {
+        $http.post('/delappointment', appo.id).success(function (data) {
             getAppointment();
         }).error(function (data) {
             getError();

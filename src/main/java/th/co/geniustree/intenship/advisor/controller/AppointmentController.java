@@ -1,20 +1,14 @@
 package th.co.geniustree.intenship.advisor.controller;
 
-import java.io.ByteArrayInputStream;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import th.co.geniustree.intenship.advisor.model.Appointment;
-import th.co.geniustree.intenship.advisor.model.FileUpload;
 import th.co.geniustree.intenship.advisor.model.SearchData;
 import th.co.geniustree.intenship.advisor.model.Student;
 import th.co.geniustree.intenship.advisor.repo.AppointmentRepo;
@@ -52,9 +46,9 @@ public class AppointmentController {
         appointmentRepo.save(appointment);
     }
     
-     @RequestMapping(value = "/deleteappointment",method = RequestMethod.POST)
-    public void deleteAppointment(@RequestBody Appointment appointment){
-        appointmentRepo.delete(appointment.getId());
+     @RequestMapping(value = "/delappointment",method = RequestMethod.POST)
+    public void deleteAppointment(@RequestBody Integer appointment){
+        appointmentRepo.delete(appointment);
     }
     
     
