@@ -92,5 +92,10 @@ public class AdviseController {
         Page<Student> students = studentSearchService.searchStudentByTeacher(keyword, pageable);
         return students;
     }
+    
+    @RequestMapping(value = "/gettotaladvisor" ,method = RequestMethod.GET)
+    private long getTotalRowAdvisor(){
+        return adviseRepo.count();
+    }
 
 }

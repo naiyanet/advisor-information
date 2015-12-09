@@ -38,16 +38,18 @@ public class Account implements Serializable, UserDetails {
     @JsonView(Object.class)
     private Integer id;
 
-    @NotBlank(message = "please input email")
+    @NotBlank(message = "กรุณากรอกอีเมล์")
     @JsonView(Object.class)
     private String email;
-    @NotBlank(message = "please input password")
+    
+    @NotBlank(message = "กรุณากรอกรหัสผ่าน")
     private String password;
     private String filePic;
     private String idStudent;
     private String idCard;
+    
     @JsonView(Object.class)
-    @NotBlank(message = "please input name")
+    @NotBlank(message = "กรุณากรอกชื่อผู้ใช้งาน")
     private String name;
 
     @Temporal(javax.persistence.TemporalType.DATE)

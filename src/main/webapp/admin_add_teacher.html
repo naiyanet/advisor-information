@@ -33,28 +33,27 @@
                             <div class="form-group">
                                 <div class="icon-preview">
                                     <label class="col-md-3 control-label "> ชื่อผู้ใช้งาน :</label>
-                                    <div class="col-md-5">
-                                        <input type="username" class="form-control" placeholder="Enter name"ng-model="teacher.name">
+                                    <div class="col-md-5"><span style="color: red">{{teachererror.violations.name.message}}</span>
+                                        <input type="username" class="form-control" placeholder="Enter name"ng-model="teacher.name" ng-change="teachererror.violations.name.message = ''">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-3 control-label"> รหัสผ่าน :</label>
-                                <div class="col-md-5">
-                                    <input type="password" ng-change="checkPassword()" class="form-control" placeholder="Enter password"ng-model="teacher.password">
+                                <div class="col-md-5"><span style="color: red">{{teachererror.violations.password.message}}</span>
+                                    <input type="password" ng-change="checkPasswordTeacher()" class="form-control" placeholder="Enter password" ng-model="teacher.password" ng-change="teachererror.violations.password.message = ''">
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group"><i id="confirm" class=""></i>
                                 <label class="col-md-3 control-label"> ยืนยันรหัสผ่าน :</label>
-                                <div class="col-md-5">
-                                    <input ng-change="checkPassword()" type="password" class="form-control" placeholder="Confirm password" ng-model="password">
-
+                                <div class="col-md-5"><span style="color: red">{{teachererror.violations.password.message}}</span>
+                                    <input ng-change="checkPasswordTeacher()" type="password" class="form-control" placeholder="Confirm password" ng-model="password" ng-change="teachererror.violations.password.message = ''">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-md-3 control-label"> อีเมล์ :</label>
-                                <div class="col-md-5">
-                                    <input type="email" class="form-control" placeholder="Enter email"ng-model="teacher.email">
+                                <div class="col-md-5"><span style="color: red">{{teachererror.violations.email.message}}</span>
+                                    <input type="email" class="form-control" placeholder="Enter email" ng-model="teacher.email" ng-change="teachererror.violations.email.message = ''">
                                 </div>
                             </div>
                             <div class="form-group">

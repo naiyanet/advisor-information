@@ -40,6 +40,7 @@ app.controller('appController', function (UserService, $scope, $http) {
             return false;
         }
     };
+    
     $scope.Allstudentshow = function () {
         if ($scope.account.dtype == 'Teacher') {
             return  true;
@@ -47,6 +48,7 @@ app.controller('appController', function (UserService, $scope, $http) {
             return false;
         }
     };
+    
     $scope.Appointmentshow = function () {
         if ($scope.account.dtype == 'Teacher' || $scope.account.dtype == 'Student') {
             return  true;

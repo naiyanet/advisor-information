@@ -25,6 +25,7 @@
             </div>
         </div>
     </div>
+
     <div class="col-md-12">
         <div class="panel panel-primary">
             <div class="panel-heading">รายงานความประพฤติ</div>
@@ -32,41 +33,20 @@
                 <table class="table table-striped table-hover ">
                     <thead>
                         <tr>
-                            <th>ชื่อนักศึกษา</th>
-                            <th>วันที่</th>
-                            <th>ชื่อเรื่อง</th>
-                            <th>รายละเอียดความประพฤติ</th>
-                            <th>File</th>
+                            <th ng-show="behaviorshowname()" style="width: 20%">ชื่อนักศึกษา</th>
+                            <th style="width: 10%">วันที่</th>
+                            <th style="width: 15%">ชื่อเรื่อง</th>
+                            <th style="width: 35%">รายละเอียดความประพฤติ</th>
+                            <th style="width: 10%">File</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat="beha in behaviorshow.content">
-                            <td>{{beha.student.name}}</td>
-                            <td>{{beha.dates}}</td>
-                            <td>{{beha.title}}</td>
-                            <td>
-                                <h5 data-toggle="modal" data-target="#complete-dialog" class="form-group" id="setting-text">ดูรายละเอียด</h5>
-                                <div id="complete-dialog" class="modal fade form-group" tabindex="-1"> 
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header form-group">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                <h4 class="modal-title">รายละเอียดรายงานความประพฤติ</h4>
-                                                <br>
-                                            </div>
-                                            <div class="modal-body form-group">
-                                                <div class="col-md-10 ">
-                                                    <div style="word-wrap: break-word ; width: 100%">{{beha.detail}}</div>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer form-group">
-                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
+                            <td ng-show="behaviorshowname()" style="width: 20%">{{beha.student.name}}</td>
+                            <td style="width: 10%">{{beha.dates}}</td>
+                            <td style="width: 15%">{{beha.title}}</td>
+                            <td style="width: 35%">{{beha.detail}}</td>
+                            <td style="width: 10%">
                                 <button ng-click="dowloads(beha)" ng-if="!!beha.fileUpload.id">
                                     <span class="mdi-file-file-download"></span>
                                 </button>
@@ -75,6 +55,13 @@
                         </tr>
                     </tbody>
                 </table>
+                <ul class="pagination pull-right">
+                    <li id="firstpage"><a ng-click="firstPageBehavior()">&Lt;</a></li>
+                    <li id="prepage" ><a ng-click="prePageBehavior()">&lt;</a></li>
+                    <li><a>{{page + 1}}</a></li>
+                    <li id="nextpage"><a ng-click="nextPageBehavior()">&gt;</a></li>
+                    <li id="finalpage"><a ng-click="finalPageBehavior()">&gg;</a></li>
+                </ul>
             </div>
         </div>
     </div>

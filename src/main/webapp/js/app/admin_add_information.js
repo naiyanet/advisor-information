@@ -3,9 +3,12 @@ var app = angular.module('admin_add_information').controller('admin_add_informat
 
     $scope.searchData = {};
 
-
     $scope.information = {};
-
+    $scope.page = 0;
+    $scope.size = '3';
+    var totalRow = 0;
+    var totalPage = 0;
+    
     $scope.saveInfor = function () {
         console.log($scope.information);
         $http.post('/saveinformation', $scope.information).success(function (data) {
@@ -33,12 +36,17 @@ var app = angular.module('admin_add_information').controller('admin_add_informat
             getError();
         });
     };
+    
+    $scope.delete = {};
+    $scope.clickDelete = function (information) {
+        $scope.delete = information;
+    };
 
     getInformation();
 
     $scope.informationshow = {};
     function getInformation() {
-        $http.get('/getinformation').success(function (data) {
+        $http.get('/getinformation',{params: {page: $scope.page, size: $scope.size}}).success(function (data) {
             $scope.informationshow = data;
             console.log(data);
             for (var i = 0; i < data.totalElements; i++) {
@@ -50,8 +58,8 @@ var app = angular.module('admin_add_information').controller('admin_add_informat
         }).error(function (data) {
 
         });
-    }
-    ;
+    };
+    
 
     $scope.clickUpdate = function (updateInformation) {
         $scope.information = updateInformation;
@@ -61,7 +69,86 @@ var app = angular.module('admin_add_information').controller('admin_add_informat
         alert('Error');
     }
 
+    ///////////////////////////////////////////Paging 
+    $scope.selectSizeInformation = function () {
+        $scope.page = 0;
+        getInformation();
+        getTotalRow();
+    };
 
+    getTotalRow();
+    function getTotalRow() {
+        $http.get('/gettotalinformation').success(function (data) {
+            totalRow = data;
+            findPage();
+            if ($scope.page == 0) {
+                $('#prepageinformation , #firstpageinformation').addClass('disabled');
+            }
+            if ($scope.page == totalPage - 1) {
+                $('#nextpageinformation , #finalpageinformation').addClass('disabled');
+            }
+
+        });
+    }
+
+    function findPage() {
+        var result = parseInt(totalRow / $scope.size);
+        if ((totalRow % $scope.size) != 0) {
+            result++;
+        }
+        totalPage = result;
+    }
+    
+    $scope.firstPageinformation = function () {
+        if (!$('#-page').hasClass('disabled')) {
+            $scope.page = 0;
+            getInformation();
+            $('#firstpageinformation').addClass('disabled');
+            $('#prepageinformation').addClass('disabled');
+            $('#nextpageinformation').removeClass('disabled');
+            $('#finalpageinformation').removeClass('disabled');
+        }
+    };
+
+    $scope.prePageinformation = function () {
+        if (!$('#prepageinformation').hasClass('disabled')) {
+            $scope.page--;
+            getInformation();
+            if ($scope.page == 0) {
+                $('#firstpageinformation').addClass('disabled');
+                $('#prepageinformation').addClass('disabled');
+            }
+            $('#nextpageinformation').removeClass('disabled');
+            $('#finalpageinformation').removeClass('disabled');
+        }
+    };
+
+    $scope.nextPageinformation = function () {
+        if (!$('#nextpageinformation').hasClass('disabled')) {
+            $scope.page++;
+            getInformation();
+            if ($scope.page == totalPage - 1) {
+                $('#nextpageinformation').addClass('disabled');
+                $('#finalpageinformation').addClass('disabled');
+            }
+            $('#firstpageinformation').removeClass('disabled');
+            $('#prepageinformation').removeClass('disabled');
+        }
+    };
+
+    $scope.finalPageinformation = function () {
+        if (!$('#finalpageinformation').hasClass('disabled')) {
+            $scope.page = totalPage - 1;
+            getInformation();
+            $('#nextpageinformation').addClass('disabled');
+            $('#finalpageinformation').addClass('disabled');
+            $('#firstpageinformation').removeClass('disabled');
+            $('#prepageinformation').removeClass('disabled');
+        }
+    };
+    
+    
+    //////////////////////////////////////////////////////////
 
     $('.datepicker-custom').datepicker({
         changeYear: true,
@@ -69,23 +156,9 @@ var app = angular.module('admin_add_information').controller('admin_add_informat
         dateFormat: 'yy-mm-dd'
     });
 
-    $scope.page = {};
-    $scope.size = {};
+    
 
-    $scope.search = function () {
-        search();
-    };
-
-    function search() {
-        $scope.searchData.keyWord;
-        $http.post('/searchinformation', $scope.searchData, {params: {page: $scope.page, size: $scope.size}})
-                .success(function (data) {
-                    $scope.information = data;
-                    if (!data.content.length) {
-                        $("#complete-dialog").modal('show');
-                    }
-                });
-    }
+    
 
     $scope.dowloads = function (information) {
         location.href = '/getfileinformation/' + information.fileUpload.id;
@@ -107,11 +180,7 @@ var app = angular.module('admin_add_information').controller('admin_add_informat
         });
     };
 
-
-
-
 });
-
 
 
 

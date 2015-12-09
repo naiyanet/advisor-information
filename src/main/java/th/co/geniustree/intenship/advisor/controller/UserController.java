@@ -89,4 +89,8 @@ public class UserController {
     return teacherRepo.findOne(id);
     }
     
+    @RequestMapping(value = "/gettotaluser" ,method = RequestMethod.GET)
+    private long getTotalRowAdvisor(){
+        return userRepo.count();
+    }
 }

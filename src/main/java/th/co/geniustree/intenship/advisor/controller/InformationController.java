@@ -90,5 +90,9 @@ public class InformationController {
                 .body(new InputStreamResource(new ByteArrayInputStream(fileUpload.getContent())));
         return body;
     }
-
+    
+    @RequestMapping(value = "/gettotalinformation" ,method = RequestMethod.GET)
+    private long getTotalRowAdvisor(){
+        return informationRepo.count();
+    }
 }

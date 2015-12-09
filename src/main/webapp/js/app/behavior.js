@@ -7,10 +7,19 @@ angular.module('behavior').controller('behaviorController', function (UserServic
     $scope.keyword = "";
     $scope.currentPage = 0;
     $scope.studentOfTeacher = {};
-    var page = 0;
-    var totalParent = 0;
+    
+    $scope.page = 0;
+    $scope.size = '10';
+    var totalRow = 0;
     var totalPage = 0;
 
+    $scope.behaviorshowname = function () {
+        if ($scope.account.dtype == 'Teacher') {
+            return  true;
+        } else {
+            return false;
+        }
+    };
 
     $scope.checkTeacherLogin = function () {
         if ($scope.account.dtype === 'Teacher') {
@@ -22,13 +31,13 @@ angular.module('behavior').controller('behaviorController', function (UserServic
             return false;
         }
     };
-    
+
     getAccountLogin();
     function getAccountLogin() {
         $http.get('/startpageuser').success(function (data) {
             $scope.account = data;
             getBehavior();
-            getStudentOfteacher();    
+            getStudentOfteacher();
         });
     }
 
@@ -74,19 +83,19 @@ angular.module('behavior').controller('behaviorController', function (UserServic
         });
     };
 
-//    getBehavior();
     $scope.behaviorshow = {};
     function getBehavior() {
         var getBehaviorForAccount = {};
         getBehaviorForAccount.keyWord = $scope.account.name;
         getBehaviorForAccount.searchBy = $scope.account.dtype;
-        $http.post('/getbehavior', getBehaviorForAccount).success(function (data) {
+        $http.post('/getbehavior', getBehaviorForAccount,{params: {page: $scope.page, size: $scope.size}}).success(function (data) {
             $scope.behaviorshow = data;
             console.log('..........................' + data);
         }).error(function (data) {
             getError();
         });
-    };
+    }
+    ;
 
     function getSuccess() {
         alert('Save Success');
@@ -95,13 +104,93 @@ angular.module('behavior').controller('behaviorController', function (UserServic
     function getError() {
         alert('Error');
     }
-
+/////////////////////////////////////////////////////////datepicker
     $('.datepicker-custom').datepicker({
         changeYear: true,
         yearRange: '-100:+100',
         dateFormat: 'yy-mm-dd'
     });
+////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////Paging 
+    $scope.selectSizeBehavior = function () {
+        $scope.page = 0;
+        getBehavior();
+        getTotalRow();
+    };
 
+    getTotalRow();
+    function getTotalRow() {
+        $http.get('/gettotalbehavior').success(function (data) {
+            totalRow = data;
+            findPage();
+            if ($scope.page == 0) {
+                $('#prepage , #firstpage').addClass('disabled');
+            }
+            if ($scope.page == totalPage - 1) {
+                $('#nextpage , #finalpage').addClass('disabled');
+            }
+
+        });
+    }
+
+    function findPage() {
+        var result = parseInt(totalRow / $scope.size);
+        if ((totalRow % $scope.size) != 0) {
+            result++;
+        }
+        totalPage = result;
+    }
+
+    $scope.firstPageBehavior = function () {
+        if (!$('#-page').hasClass('disabled')) {
+            $scope.page = 0;
+            getBehavior();
+            $('#firstpagebehavior').addClass('disabled');
+            $('#prepagebehavior').addClass('disabled');
+            $('#nextpagebehavior').removeClass('disabled');
+            $('#finalpagebehavior').removeClass('disabled');
+        }
+    };
+
+    $scope.prePageBehavior = function () {
+        if (!$('#prepagebehavior').hasClass('disabled')) {
+            $scope.page--;
+            getBehavior();
+            if ($scope.page == 0) {
+                $('#firstpagebehavior').addClass('disabled');
+                $('#prepagebehavior').addClass('disabled');
+            }
+            $('#nextpagebehavior').removeClass('disabled');
+            $('#finalpagebehavior').removeClass('disabled');
+        }
+    };
+
+    $scope.nextPageBehavior = function () {
+        if (!$('#nextpagebehavior').hasClass('disabled')) {
+            $scope.page++;
+            getBehavior();
+            if ($scope.page == totalPage - 1) {
+                $('#nextpagebehavior').addClass('disabled');
+                $('#finalpagebehavior').addClass('disabled');
+            }
+            $('#firstpagebehavior').removeClass('disabled');
+            $('#prepagebehavior').removeClass('disabled');
+        }
+    };
+
+    $scope.finalPageBehavior = function () {
+        if (!$('#finalpagebehavior').hasClass('disabled')) {
+            $scope.page = totalPage - 1;
+            getBehavior();
+            $('#nextpagebehavior').addClass('disabled');
+            $('#finalpagebehavior').addClass('disabled');
+            $('#firstpagebehavior').removeClass('disabled');
+            $('#prepagebehavior').removeClass('disabled');
+        }
+    };
+
+
+    //////////////////////////////////////////////////////////
     $scope.behaviorSearch = function () {
         $http.post('/searchStudentInBehavior', $scope.keyword).success(function (data) {
             $scope.behaviorshow = data;
@@ -116,7 +205,8 @@ angular.module('behavior').controller('behaviorController', function (UserServic
         }).error(function (data) {
 
         });
-    };
+    }
+    ;
 
     $scope.selectStudent = function (student) {
         $scope.behavior.student = student;
@@ -130,80 +220,6 @@ angular.module('behavior').controller('behaviorController', function (UserServic
         });
     };
 
-    countStudent();
-    function countStudent() {
-        $http.get('/countstudent').success(function (data) {
-            totalStudent = data;
-            console.log(data);
-            totalPageStudent();
-            console.log(totalPage);
-        });
-
-        function totalPageStudent() {
-            totalPage = parseInt(totalStudent / 10);
-            if ((totalStudent % 10) != 0) {
-                totalPage++;
-            }
-            if ($scope.currentPage == 0) {
-                $('#first-page').addClass('disabled');
-                $('#pre-page').addClass('disabled');
-                $('#next-page').addClass('disabled');
-                $('#final-page').addClass('disabled');
-            }
-            if (totalPage > 1) {
-                $('#next-page').removeClass('disabled');
-                $('#final-page').removeClass('disabled');
-            }
-        }
-    }
-
-    $scope.firstPage = function () {
-        if (!$('#first-page').hasClass('disabled')) {
-            $scope.currentPage = 0;
-            getParent();
-            $('#first-page').addClass('disabled');
-            $('#pre-page').addClass('disabled');
-            $('#next-page').removeClass('disabled');
-            $('#final-page').removeClass('disabled');
-        }
-    };
-
-    $scope.prePage = function () {
-        if (!$('#pre-page').hasClass('disabled')) {
-            $scope.currentPage--;
-            getParent();
-            if ($scope.currentPage == 0) {
-                $('#first-page').addClass('disabled');
-                $('#pre-page').addClass('disabled');
-            }
-            $('#next-page').removeClass('disabled');
-            $('#final-page').removeClass('disabled');
-        }
-    };
-
-    $scope.nextPage = function () {
-        if (!$('#next-page').hasClass('disabled')) {
-            $scope.currentPage++;
-            getParent();
-            if ($scope.currentPage == totalPage - 1) {
-                $('#next-page').addClass('disabled');
-                $('#final-page').addClass('disabled');
-            }
-            $('#first-page').removeClass('disabled');
-            $('#pre-page').removeClass('disabled');
-        }
-    };
-
-    $scope.finalPage = function () {
-        if (!$('#final-page').hasClass('disabled')) {
-            $scope.currentPage = totalPage - 1;
-            getParent();
-            $('#next-page').addClass('disabled');
-            $('#final-page').addClass('disabled');
-            $('#first-page').removeClass('disabled');
-            $('#pre-page').removeClass('disabled');
-        }
-    };
     $scope.clickStudent = function () {
         $('#complete-student').modal('show');
     };

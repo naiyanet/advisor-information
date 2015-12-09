@@ -3,7 +3,6 @@ angular.module('student', []);
 angular.module('student').controller('studentController', function (UserService, $scope, $http) {
 
     $scope.student = UserService.user;
-//    $scope.student.teacher = {};
     $scope.teacherShow = UserService.user.teacher;
     $scope.parentShow = UserService.user.parent;
     $scope.keyword = "";
@@ -11,15 +10,19 @@ angular.module('student').controller('studentController', function (UserService,
     var page = 0;
     var totalParent = 0;
     var totalPage = 0;
-
+    
+    $scope.studenterror = {};
+    
     $scope.saveStudent = function () {
-        $http.post('/savestudent', $scope.student).success(function (data) {
+            $http.post('/savestudent', $scope.student).success(function (data) {
             getSuccess();
+            checkPassword();
             getStudent();
             console.log(data);
             $scope.clear();
+            $scope.clearUser();
         }).error(function (data) {
-            getError();
+            $scope.studenterror = data;
         });
     };
 
@@ -27,7 +30,28 @@ angular.module('student').controller('studentController', function (UserService,
         $scope.student = {};
         UserService.user = {};
     };
-
+    
+    
+    $scope.checkPassword = function () {
+        checkPassword();
+    };
+    function checkPassword() {
+        if (!!$scope.password && !!$scope.student.password) {
+            if (($scope.password == $scope.student.password)) {
+                $('#confirm').removeClass('mdi-content-clear').addClass('mdi-action-done').css('color', 'green');
+                return true;
+            }
+            if ($scope.password != $scope.student.password) {
+                $('#confirm').removeClass('mdi-action-done').addClass('mdi-content-clear').css('color', 'red');
+                return false;
+            }
+        }
+        else {
+            $('#confirm').removeClass('mdi-content-clear , mdi-action-done');
+        }
+    }
+    
+    
     $scope.delStudent = {};
     $scope.deleteStudent = function (delstudent) {
         $http.post('/deletestudent', delstudent).success(function (data) {

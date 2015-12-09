@@ -1,11 +1,13 @@
 angular.module('allstudent', []);
 angular.module('allstudent').controller('allstudentController', function (UserService, $scope, $http) {
-   $scope.account = {};
-   $scope.keyword = "";
-    $scope.currentPage = 0;
+    $scope.account = {};
+    $scope.keyword = "";
+    $scope.page = 0;
+    $scope.size = '10';
+    var totalRow = 0;
     var totalPage = 0;
-    
-   getAccountLogin();
+
+    getAccountLogin();
     function getAccountLogin() {
         $http.get('/startpageuser').success(function (data) {
             $scope.account = data;
@@ -13,99 +15,114 @@ angular.module('allstudent').controller('allstudentController', function (UserSe
             getStudentOfteacher();
         });
     }
-    
+
     function getStudentOfteacher() {
         var studentOrTeacher = {};
         if ($scope.account.dtype === 'Teacher') {
             studentOrTeacher = $scope.account.id;
-        }
-        else {
+        } else {
             studentOrTeacher = $scope.account.teacher.id;
         }
-        $http.post('/getstudentall', studentOrTeacher).success(function (data) {
+        $http.post('/getstudentall', studentOrTeacher, {params: {page: $scope.page, size: $scope.size}}).success(function (data) {
             $scope.studentOrTeacher = data;
         });
     }
-    
+    ;
+
     $scope.keyword = "";
     $scope.studentSearch = function () {
         $http.post('/student/search', $scope.keyword).success(function (data) {
             $scope.studentOrTeacher = data;
         });
     };
-    
-    countStudent();
-    function countStudent() {
-        $http.get('/countstudent').success(function (data) {
-            totalStudent = data;
-            totalPageStudent();
-            console.log(totalPage);
-        });
 
-        function totalPageStudent() {
-            totalPage = parseInt(totalStudent / 10);
-            if ((totalStudent % 10) != 0) {
-                totalPage++;
+
+    ///////////////////////////////////////////Paging 
+    $scope.selectSizeStudentall = function () {
+        $scope.page = 0;
+//        getStudentOfteacher();
+//        $scope.studentOrTeacher = data;
+        getTotalRow();
+    };
+
+    getTotalRow();
+    function getTotalRow() {
+        $http.get('/gettotalstudentall').success(function (data) {
+            totalRow = data;
+            findPage();
+            if ($scope.page == 0) {
+                $('#prepage , #firstpage').addClass('disabled');
             }
-            if ($scope.currentPage == 0) {
-                $('#first-page').addClass('disabled');
-                $('#pre-page').addClass('disabled');
-                $('#next-page').addClass('disabled');
-                $('#final-page').addClass('disabled');
+            if ($scope.page == totalPage - 1) {
+                $('#nextpage , #finalpage').addClass('disabled');
             }
-            if (totalPage > 1) {
-                $('#next-page').removeClass('disabled');
-                $('#final-page').removeClass('disabled');
-            }
-        }
+
+        });
     }
 
-    $scope.firstPage = function () {
-        if (!$('#first-page').hasClass('disabled')) {
-            $scope.currentPage = 0;
-            getParent();
-            $('#first-page').addClass('disabled');
-            $('#pre-page').addClass('disabled');
-            $('#next-page').removeClass('disabled');
-            $('#final-page').removeClass('disabled');
+    function findPage() {
+        var result = parseInt(totalRow / $scope.size);
+        if ((totalRow % $scope.size) != 0) {
+            result++;
+        }
+        totalPage = result;
+    }
+
+    $scope.firstPageallstudent = function () {
+        if (!$('#-page').hasClass('disabled')) {
+            $scope.page = 0;
+//            getStudentOfteacher();
+//            $scope.studentOrTeacher = data;
+            $('#firstpage').addClass('disabled');
+            $('#prepage').addClass('disabled');
+            $('#nextpage').removeClass('disabled');
+            $('#finalpage').removeClass('disabled');
         }
     };
 
-    $scope.prePage = function () {
-        if (!$('#pre-page').hasClass('disabled')) {
-            $scope.currentPage--;
-            getParent();
-            if ($scope.currentPage == 0) {
-                $('#first-page').addClass('disabled');
-                $('#pre-page').addClass('disabled');
+    $scope.prePageallstudent = function () {
+        if (!$('#prepage').hasClass('disabled')) {
+            $scope.page--;
+//            getStudentOfteacher();
+//            $scope.studentOrTeacher = data;
+            if ($scope.page == 0) {
+                $('#firstpage').addClass('disabled');
+                $('#prepage').addClass('disabled');
             }
-            $('#next-page').removeClass('disabled');
-            $('#final-page').removeClass('disabled');
+            $('#nextpage').removeClass('disabled');
+            $('#finalpage').removeClass('disabled');
         }
     };
 
-    $scope.nextPage = function () {
-        if (!$('#next-page').hasClass('disabled')) {
-            $scope.currentPage++;
-            getParent();
-            if ($scope.currentPage == totalPage - 1) {
-                $('#next-page').addClass('disabled');
-                $('#final-page').addClass('disabled');
+    $scope.nextPageallstudent = function () {
+        if (!$('#nextpage').hasClass('disabled')) {
+            $scope.page++;
+//            getStudentOfteacher();
+//            $scope.studentOrTeacher = data;
+            if ($scope.page == totalPage - 1) {
+                $('#nextpage').addClass('disabled');
+                $('#finalpage').addClass('disabled');
             }
-            $('#first-page').removeClass('disabled');
-            $('#pre-page').removeClass('disabled');
+            $('#firstpage').removeClass('disabled');
+            $('#prepage').removeClass('disabled');
         }
     };
 
-    $scope.finalPage = function () {
-        if (!$('#final-page').hasClass('disabled')) {
-            $scope.currentPage = totalPage - 1;
-            getParent();
-            $('#next-page').addClass('disabled');
-            $('#final-page').addClass('disabled');
-            $('#first-page').removeClass('disabled');
-            $('#pre-page').removeClass('disabled');
+    $scope.finalPageallstudent = function () {
+        if (!$('#finalpage').hasClass('disabled')) {
+            $scope.page = totalPage - 1;
+//            getStudentOfteacher();
+//            $scope.studentOrTeacher = data;
+            $('#nextpage').addClass('disabled');
+            $('#finalpage').addClass('disabled');
+            $('#firstpage').removeClass('disabled');
+            $('#prepage').removeClass('disabled');
         }
     };
-    
+
+
+    //////////////////////////////////////////////////////////
+
+
+
 });

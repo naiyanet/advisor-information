@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,6 +32,8 @@ public class Advise implements Serializable{
     private String idSubject;
     
     @Temporal(javax.persistence.TemporalType.DATE)
+    @NotNull(message = "กรุณากรอกวันที่")
+    @Column(nullable = false)
     private Date dates;
     private String title;
     private String detail;

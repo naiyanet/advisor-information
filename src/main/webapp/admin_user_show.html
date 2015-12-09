@@ -83,7 +83,13 @@
                     </div>
 
                 </div>
-
+                <ul class="pagination pull-right">
+                    <li id="firstpageuser"><a ng-click="firstPageUser()">&Lt;</a></li>
+                    <li id="prepageuser" ><a ng-click="prePageUser()">&lt;</a></li>
+                    <li><a>{{page + 1}}</a></li>
+                    <li id="nextpageuser"><a ng-click="nextPageUser()">&gt;</a></li>
+                    <li id="finalpageuser"><a ng-click="finalPageUser()">&gg;</a></li>
+                </ul>
             </div>
             <div class="progress progress-striped">
                 <div class="progress-bar progress-bar-success" style="width: 100%"></div>

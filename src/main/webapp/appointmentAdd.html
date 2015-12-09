@@ -84,7 +84,7 @@
             <table class="table table-striped table-hover ">
                 <thead>
                     <tr>
-                        <th>นักศึกษา</th>
+                        <th  ng-show="appointmentshowname()">นักศึกษา</th>
                         <th>หัวเรื่อง</th>
                         <th>วันที่</th>
                         <th>Start at</th>
@@ -95,7 +95,7 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="appo in appointmentshow.content">
-                        <td>{{appo.student.name}}</td>
+                        <td ng-show="appointmentshowname()">{{appo.student.name}}</td>
                         <td>{{appo.topic}}</td>
                         <td>{{appo.date}}</td>
                         <td>{{appo.startTime}}</td>

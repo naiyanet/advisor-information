@@ -29,7 +29,15 @@ angular.module('appointment').controller('appointmentController', function (User
             return false;
         }
     };
-
+    
+    $scope.appointmentshowname = function () {
+        if ($scope.account.dtype == 'Teacher') {
+            return  true;
+        } else {
+            return false;
+        }
+    };
+    
     getAccountLogin();
     function getAccountLogin() {
         $http.get('/startpageuser').success(function (data) {

@@ -35,43 +35,22 @@
                         <table class="table table-striped table-hover ">
                             <thead>
                                 <tr>                           
-                                    <th>นักศึกษา</th>
-                                    <th>วันที่-เวลา</th>
-                                    <th>หมวด</th>
-                                    <th>ชื่อเรื่อง</th>
-                                    <th>รายละเอียดคำปรึกษา</th>
-                                    <th>download</th>
+                                    <th ng-show="advisorshowname()" style="width: 20%">นักศึกษา</th>
+                                    <th style="width: 10%">วันที่-เวลา</th>
+                                    <th style="width: 10%">หมวด</th>
+                                    <th style="width: 15%">ชื่อเรื่อง</th>
+                                    <th style="width: 35%">รายละเอียดคำปรึกษา</th>
+                                    <th style="width: 10%">download</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr ng-repeat="advi in adviseshow.content">
-                                    <td >{{advi.student.name}}</td>
-                                    <td >{{advi.dates}}</td>
-                                    <td >{{advi.categoryAdvise.nameCategory}}</td>
-                                    <td >{{advi.title}}</td>
-                                    <td >
-                                        <h5 data-toggle="modal" data-target="#complete-dialog" class="form-group" id="setting-text">ดูรายละเอียด</h5>
-                                        <div id="complete-dialog" class="modal fade form-group" tabindex="-1"> 
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header form-group">
-                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                        <h4 class="modal-title">รายละเอียดการให้คำปรึกษา</h4>
-                                                        <br>
-                                                    </div>
-                                                    <div class="modal-body form-group">
-                                                        <div class="col-md-10 ">
-                                                            <div style="word-wrap: break-word ; width: 100%">{{advi.detail}}</div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer form-group">
-                                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
+                                    <td ng-show="advisorshowname()" style="width: 20%">{{advi.student.name}}</td>
+                                    <td style="width: 10%">{{advi.dates}}</td>
+                                    <td style="width: 10%">{{advi.categoryAdvise.nameCategory}}</td>
+                                    <td style="width: 15%">{{advi.title}}</td>
+                                    <td style="width: 35%">{{advi.detail}}</td>
+                                    <td style="width: 10%">
                                         <button ng-click="dowloads(advi)" ng-if="!!advi.fileUpload.id">
                                             <span class="mdi-file-file-download"></span>
                                         </button>
@@ -82,6 +61,16 @@
                         </table>
                     </div>
                 </form>
+
+                
+                        <ul class="pagination pull-right">
+                            <li id="firstpageadvisor"><a ng-click="firstPageAdvise()">&Lt;</a></li>
+                            <li id="prepageadvisor" ><a ng-click="prePageAdvise()">&lt;</a></li>
+                            <li><a>{{page + 1}}</a></li>
+                            <li id="nextpageadvisor"><a ng-click="nextPageAdvise()">&gt;</a></li>
+                            <li id="finalpageadvisor"><a ng-click="finalPageAdvise()">&gg;</a></li>
+                        </ul>
+                   
             </div>
         </div>
     </div>

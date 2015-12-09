@@ -2,12 +2,11 @@ angular.module('add_user', []);
 angular.module('add_user').controller('add_userController', function (UserService, $scope, $http) {
 
     $scope.keyword = "";
-    $scope.currentPage = 0;
-    var page = 0;
-    var totalUser = 0;
-    var totalPage = 0;
-    $scope.keyword = null;
     $scope.user = {};
+    $scope.page = 0;
+    $scope.size = '10';
+    var totalRow = 0;
+    var totalPage = 0;
 
     $scope.saveUser = function () {
         $http.post('/saveuser', $scope.user).success(function (data) {
@@ -42,7 +41,7 @@ angular.module('add_user').controller('add_userController', function (UserServic
 
     $scope.usershow = {};
     function getUser() {
-        $http.get('/getuser').success(function (data) {
+        $http.get('/getuser',{params: {page: $scope.page, size: $scope.size}}).success(function (data) {
             $scope.usershow = data;
         }).error(function (data) {
 
@@ -87,5 +86,84 @@ angular.module('add_user').controller('add_userController', function (UserServic
         }
     };
 
+    ///////////////////////////////////////////Paging 
+    $scope.selectSizeUser = function () {
+        $scope.page = 0;
+        getUser();
+        getTotalRow();
+    };
 
+    getTotalRow();
+    function getTotalRow() {
+        $http.get('/gettotaluser').success(function (data) {
+            totalRow = data;
+            findPage();
+            if ($scope.page == 0) {
+                $('#prepageuser , #firstpageuser').addClass('disabled');
+            }
+            if ($scope.page == totalPage - 1) {
+                $('#nextpageuser , #finalpageuser').addClass('disabled');
+            }
+
+        });
+    }
+
+    function findPage() {
+        var result = parseInt(totalRow / $scope.size);
+        if ((totalRow % $scope.size) != 0) {
+            result++;
+        }
+        totalPage = result;
+    }
+    
+    $scope.firstPageUser = function () {
+        if (!$('#-page').hasClass('disabled')) {
+            $scope.page = 0;
+            getUser();
+            $('#firstpageuser').addClass('disabled');
+            $('#prepageuser').addClass('disabled');
+            $('#nextpageuser').removeClass('disabled');
+            $('#finalpageuser').removeClass('disabled');
+        }
+    };
+
+    $scope.prePageUser = function () {
+        if (!$('#prepageuser').hasClass('disabled')) {
+            $scope.page--;
+            getUser();
+            if ($scope.page == 0) {
+                $('#firstpageuser').addClass('disabled');
+                $('#prepageuser').addClass('disabled');
+            }
+            $('#nextpageuser').removeClass('disabled');
+            $('#finalpageuser').removeClass('disabled');
+        }
+    };
+
+    $scope.nextPageUser = function () {
+        if (!$('#nextpageuser').hasClass('disabled')) {
+            $scope.page++;
+            getUser();
+            if ($scope.page == totalPage - 1) {
+                $('#nextpageuser').addClass('disabled');
+                $('#finalpageuser').addClass('disabled');
+            }
+            $('#firstpageuser').removeClass('disabled');
+            $('#prepageuser').removeClass('disabled');
+        }
+    };
+
+    $scope.finalPageUser = function () {
+        if (!$('#finalpageuser').hasClass('disabled')) {
+            $scope.page = totalPage - 1;
+            getUser();
+            $('#nextpageuser').addClass('disabled');
+            $('#finalpageuser').addClass('disabled');
+            $('#firstpageuser').removeClass('disabled');
+            $('#prepageuser').removeClass('disabled');
+        }
+    };
+    
+    
+    //////////////////////////////////////////////////////////
 });

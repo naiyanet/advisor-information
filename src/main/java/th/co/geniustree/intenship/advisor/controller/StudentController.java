@@ -59,4 +59,9 @@ public class StudentController {
         Page<Student> students = searchService.searchStudentByTeacher(keyword, pageable);
         return students;
     }
+    
+    @RequestMapping(value = "/gettotalstudentall" ,method = RequestMethod.GET)
+    private long getTotalRowStudentofTeacher(){
+        return studentRepo.count();
+    }
 }

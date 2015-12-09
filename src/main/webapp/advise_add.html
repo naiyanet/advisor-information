@@ -92,7 +92,6 @@
                         <td>{{ad.categoryAdvise.nameCategory}}</td>
                         <td>{{ad.title}}</td>
                         <td>
-
                             <h5 data-toggle="modal" data-target="#complete-dialog" class="form-group" id="setting-text">ดูรายละเอียด</h5>
                             <div id="complete-dialog" class="modal fade form-group" tabindex="-1"> 
                                 <div class="modal-dialog">
@@ -128,6 +127,15 @@
                     </tr>
                 </tbody>
             </table>
+            
+                    <ul class="pagination pull-right">
+                        <li id="firstpageadvisor"><a ng-click="firstPageAdvise()">&Lt;</a></li>
+                        <li id="prepageadvisor" ><a ng-click="prePageAdvise()">&lt;</a></li>
+                        <li><a>{{page + 1}}</a></li>
+                        <li id="nextpageadvisor"><a ng-click="nextPageAdvise()">&gt;</a></li>
+                        <li id="finalpageadvisor"><a ng-click="finalPageAdvise()">&gg;</a></li>
+                    </ul>
+                
         </div>
     </div>
 </div>

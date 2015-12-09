@@ -35,4 +35,5 @@ public class CourseSubjectClassOneController {
     public void deleteCourseSubjectClassOne(@RequestBody CourseSubjectClassOne courseClass){
         courseSubjectClassOneRepo.delete(courseClass);
     }
+    
 }

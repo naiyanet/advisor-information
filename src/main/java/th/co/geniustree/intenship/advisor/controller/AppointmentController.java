@@ -63,5 +63,9 @@ public class AppointmentController {
     public Page<Appointment> searchStudent(@RequestBody String keyword, Pageable pageable) {
         return appointmentSearchService.searchNameStudentAppointment(keyword, pageable);
     }
-
+    
+    @RequestMapping(value = "/gettotalappointment" ,method = RequestMethod.GET)
+    private long getTotalRowAdvisor(){
+        return appointmentRepo.count();
+    }
 }

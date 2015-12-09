@@ -92,4 +92,8 @@ public class BehaviorController {
         return students;
     }
     
+    @RequestMapping(value = "/gettotalbehavior" ,method = RequestMethod.GET)
+    private long getTotalRowAdvisor(){
+        return behaviorRepo.count();
+    }
 }
