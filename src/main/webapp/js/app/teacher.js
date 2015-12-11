@@ -12,6 +12,7 @@ angular.module('teacher').controller('teacherController', function (UserService 
             console.log(data);
             $scope.clear();
             $scope.clearUser();
+//            location.href = '#/user_show';
         }).error(function (data) {
             $scope.teachererror = data;
         });

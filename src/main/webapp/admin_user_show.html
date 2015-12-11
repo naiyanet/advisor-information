@@ -11,15 +11,20 @@
                     ผู้ใช้งานระบบ <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="#/admin_add_user">เพิ่มอาจารย์</a></li>
-                    <li><a href="#/admin_add_user">เพิ่มนักศึกษา</a></li>
-                    <li><a href="#/admin_add_user">เพิ่มผู้ปกครอง</a></li>
-                    <li  class="active"><a href="#/user_show">ข้อมูลผู้ใช้งานระบบ</a></li>
+                    <li><a href="#/teacher">เพิ่มอาจารย์</a></li>
+                    <li><a href="#/student">เพิ่มนักศึกษา</a></li>
+                    <li><a href="#/parent">เพิ่มผู้ปกครอง</a></li>
+                    <li class="active"><a href="#/user_show">ข้อมูลผู้ใช้งานระบบ</a></li> 
                 </ul>
             </li>
         </ul>
     </div>
     <br>
+    <div class="form-group col-md-7">
+        <a href="#/teacher"><input value="เพิ่มอาจารย์" type="submit" class="btn btn-primary"></a>
+        <a href="#/student"><input value="เพิ่มนักศึกษา" type="submit" class="btn btn-primary"></a>
+        <a href="#/parent"><input value="เพิ่มผู้ปกครอง" type="submit" class="btn btn-primary"></a>
+    </div>
     <div class="col-md-5">
         <div class="panel panel-primary">
             <div class="panel-heading">
@@ -40,6 +45,7 @@
             </div>
         </div>
     </div>
+
     <div class="col-md-12">
         <div class="panel panel-success">
             <div class="panel-heading">
@@ -99,15 +105,6 @@
     </div>
 
 </div>
-
-<!--<ul class="pagination pull-right" >
-    <li id="firstPage"><a ng-click="firstPage()">«</a></li>
-    <li id="prePage"><a ng-click="prePage()">&LT;</a></li>
-    <li><a>{{page + 1}}</a></li>
-    <li id="nextPage"><a ng-click="nextPage()">&GT;</a></li>
-    <li id="finalPage"><a ng-click="finalPage()">»</a></li>
-</ul>-->
-
 
 
 

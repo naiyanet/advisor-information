@@ -9,6 +9,7 @@ angular.module('parent').controller('parentController', function (UserService, $
             getSuccess();
             checkPasswordParent();
             getParent();
+//            location.href = '#/user_show';
             console.log(data);
             $scope.clear();
             $scope.clearUser();

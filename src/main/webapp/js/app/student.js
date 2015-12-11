@@ -18,6 +18,7 @@ angular.module('student').controller('studentController', function (UserService,
             getSuccess();
             checkPassword();
             getStudent();
+//            location.href = '#/user_show';
             console.log(data);
             $scope.clear();
             $scope.clearUser();
@@ -28,6 +29,8 @@ angular.module('student').controller('studentController', function (UserService,
 
     $scope.clear = function () {
         $scope.student = {};
+        $scope.teacherShow = {};
+        $scope.parentShow = {};
         UserService.user = {};
     };
     
