@@ -5,7 +5,7 @@
     <groupId>th.co.geniustree.intenship</groupId>
     <artifactId>advisor</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <name>advisor</name>
     
@@ -18,6 +18,7 @@
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
     </properties>
     
     <dependencies>
