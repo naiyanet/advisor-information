@@ -56,12 +56,6 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="text" class="col-lg-2 control-label">เนื้อหาย่อ</label>
-                <div class="col-lg-10">
-                    <input type="text" class="form-control" ng-model="information.pageBrief">
-                </div>
-            </div>
-            <div class="form-group">
                 <label for="textArea" class="col-lg-2 control-label">รายละเอียด</label>
                 <div class="col-lg-10">
                     <textarea class="form-control" rows="3" id="textArea" ng-model="information.description"></textarea>
@@ -94,7 +88,6 @@
                             <th>วันที่ลงข่าว</th>
                             <th>ชื่อเรื่อง</th>
                             <th>file</th>
-                            <th>เนื้อหาย่อ</th>
                             <th>รายละเอียด</th>
                             <th>link web</th>
                             <th>Edit</th>
@@ -103,12 +96,11 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="infor in informationshow.content">                      
-                            <td>{{infor.startTime}}</td>
-                            <td>{{infor.title}}</td>                         
-                            <td>{{infor.fileUpload.name}}</td>
-                            <td>{{infor.pageBrief}}</td>
-                            <td>{{infor.description}}</td>
-                            <td>{{infor.linkWeb}}</td>
+                            <td style="word-wrap: break-word ;">{{infor.startTime}}</td>
+                            <td style="word-wrap: break-word ;">{{infor.title}}</td>                         
+                            <td style="word-wrap: break-word ;">{{infor.fileUpload.name}}</td>
+                            <td style="word-wrap: break-word ;">{{infor.description}}</td>
+                            <td style="word-wrap: break-word ;">{{infor.linkWeb}}</td>
                             <td>
                                 <button ng-click="editInformation(infor)">
                                     <span class="mdi-editor-mode-edit"></span>

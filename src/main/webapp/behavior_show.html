@@ -43,10 +43,10 @@
                     <tbody>
                         <tr ng-repeat="beha in behaviorshow.content">
                             <td ng-show="behaviorshowname()" style="width: 20%">{{beha.student.name}}</td>
-                            <td style="width: 10%">{{beha.dates}}</td>
-                            <td style="width: 15%">{{beha.title}}</td>
-                            <td style="width: 35%">{{beha.detail}}</td>
-                            <td style="width: 10%">
+                            <td style="width: 10%; word-wrap: break-word ;">{{beha.dates}}</td>
+                            <td style="width: 15%; word-wrap: break-word ;">{{beha.title}}</td>
+                            <td style="width: 35%; word-wrap: break-word ;">{{beha.detail}}</td>
+                            <td style="width: 10%; word-wrap: break-word ;">
                                 <button ng-click="dowloads(beha)" ng-if="!!beha.fileUpload.id">
                                     <span class="mdi-file-file-download"></span>
                                 </button>

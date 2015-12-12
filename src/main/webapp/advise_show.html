@@ -46,11 +46,11 @@
                             <tbody>
                                 <tr ng-repeat="advi in adviseshow.content">
                                     <td ng-show="advisorshowname()" style="width: 20%">{{advi.student.name}}</td>
-                                    <td style="width: 10%">{{advi.dates}}</td>
-                                    <td style="width: 10%">{{advi.categoryAdvise.nameCategory}}</td>
-                                    <td style="width: 15%">{{advi.title}}</td>
-                                    <td style="width: 35%">{{advi.detail}}</td>
-                                    <td style="width: 10%">
+                                    <td style="width: 10%; word-wrap: break-word ;">{{advi.dates}}</td>
+                                    <td style="width: 10%; word-wrap: break-word ;">{{advi.categoryAdvise.nameCategory}}</td>
+                                    <td style="width: 15%; word-wrap: break-word ;">{{advi.title}}</td>
+                                    <td style="width: 35%; word-wrap: break-word ;">{{advi.detail}}</td>
+                                    <td style="width: 10%; word-wrap: break-word ;">
                                         <button ng-click="dowloads(advi)" ng-if="!!advi.fileUpload.id">
                                             <span class="mdi-file-file-download"></span>
                                         </button>
