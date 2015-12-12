@@ -1,7 +1,6 @@
 
 package th.co.geniustree.intenship.advisor.controller;
 
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,8 +24,8 @@ public class SelectCategoryController {
     private SelectCategoryRepo selectCategoryRepo;
     
     @RequestMapping(value = "/getselectcategory",method = RequestMethod.GET)
-    public List<SelectCategory> getSelectCategory(){
-        return selectCategoryRepo.findAll();
+    public Page<SelectCategory> getSelectCategory(Pageable pageable){
+        return selectCategoryRepo.findAll(pageable);
     }
     @RequestMapping(value = "/saveselectcategory",method = RequestMethod.POST)
     public void saveSelectCategory(@RequestBody SelectCategory selectCategory){
