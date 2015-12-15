@@ -64,8 +64,8 @@
                     </div>
                     <div class="form-group">
                         <center>
-                            <button class="btn btn-success" ng-click="saveAppointment()">Save</button>
-                            <a href="#/appointment"><button class="btn btn-danger">Cancle</button></a>
+                            <button class="btn btn-success" ng-click="saveAppointment()">บันทึก</button>
+                            <a href="#/appointment"><button class="btn btn-danger">ยกเลิก</button></a>
                         </center>
                     </div>
                 </form> 
@@ -87,10 +87,10 @@
                         <th  ng-show="appointmentshowname()">นักศึกษา</th>
                         <th>หัวเรื่อง</th>
                         <th>วันที่</th>
-                        <th>Start at</th>
-                        <th>End at</th>
-                        <th>Edit</th>
-                        <th>Remove</th>
+                        <th>เวลาเริ่ม</th>
+                        <th>สิ้นสุดเวลา</th>
+                        <th>แก้ไข</th>
+                        <th>ลบ</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -102,12 +102,12 @@
                         <td  style="word-wrap: break-word ;">{{appo.endTime}}</td>
                         <td>
                             <button type="button" class="btn btn-success btn-sm" ng-click="editappoint(appo)">
-                                <span class="glyphicon glyphicon-edit "></span> Edit
+                                <span class="glyphicon glyphicon-edit "></span> แก้ไข
                             </button>
                         </td>
                         <td>
                             <button type="button" class="btn btn-danger btn-sm" ng-click="deleteAppointment(appo)">
-                                <span class="glyphicon "></span> Delete
+                                <span class="glyphicon "></span> ลบ
                             </button>
                         </td>
                     </tr>

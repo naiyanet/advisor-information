@@ -34,15 +34,15 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputFile" class="col-lg-2 control-label">File</label>
+                            <label for="inputFile" class="col-lg-2 control-label">แนบไฟล์</label>
                             <div class="col-lg-10">
                                 <input type="file" class="form-control" file-model="file" custom-on-change ="saveFileBehavior">
                             </div>
                         </div>
                         <div class="form-group">
                             <center>
-                                <button class="btn btn-success" ng-click="saveBehavior()">Save</button>
-                                <a href="#/behavior"><button class="btn btn-danger">Cancle</button></a>
+                                <button class="btn btn-success" ng-click="saveBehavior()">บันทึก</button>
+                                <a href="#/behavior"><button class="btn btn-danger">ยกเลิก</button></a>
                             </center>
                         </div>
                     </fieldset>
@@ -66,9 +66,9 @@
                         <th>วันที่</th>
                         <th>ชื่อเรื่อง</th>
                         <th>รายละเอียดความประพฤติ</th>
-                        <th>File</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
+                        <th>ไฟล์แนบ</th>
+                        <th>แก้ไข</th>
+                        <th>ลบ</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -92,7 +92,7 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer form-group">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">ปิดหน้าต่าง</button>
                                         </div>
                                     </div>
                                 </div>
@@ -135,13 +135,13 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Search</label>
+                        <label class="col-md-3 control-label">ค้นหา :</label>
                         <div class="col-md-5">
                             <input type="student" class="form-control" placeholder="Enter Student" ng-model="keyword">
                         </div>
 
                         <div class="col-md-2">
-                            <button class="btn btn-info" style="margin-top: -5px" ng-click="studentSearch()">Search</button>
+                            <button class="btn btn-info" style="margin-top: -5px" ng-click="studentSearch()">ค้นหา</button>
                         </div>
                     </div>
                 </div>
@@ -165,7 +165,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button class="btn btn-danger" data-dismiss="modal">Exit</button>
+                    <button class="btn btn-danger" data-dismiss="modal">ปิด</button>
                 </div>
 
             </div>

@@ -26,13 +26,13 @@
                     <label class="update control-label col-sm-2 clear-prefix" ><span style="color: red">*</span>วันที่เรียน : </label>
                     <div class="col-sm-10">
                         <select class="form-control" style="width:500px;" id="select-workstatus" ng-model="timetable.day" ng-init="timetable.status = 'Monday'">
-                            <option value="Monday">Monday</option>
-                            <option value="Tuesday">Tuesday</option>
-                            <option value="Wednesday">Wednesday</option>
-                            <option value="Thursday">Thursday</option>
-                            <option value="Friday">Friday</option>
-                            <option value="Saturday">Saturday</option>
-                            <option value="Sunday">Sunday</option>
+                            <option value="Monday">จันทร์</option>
+                            <option value="Tuesday">อังคาร</option>
+                            <option value="Wednesday">พุธ</option>
+                            <option value="Thursday">พฤหัสบดี</option>
+                            <option value="Friday">ศุกร์</option>
+                            <option value="Saturday">เสาร์</option>
+                            <option value="Sunday">อาทิตย์</option>
                         </select>
                     </div>
                 </div>
@@ -57,7 +57,6 @@
                             <option value=21>21</option>
                         </select>:
                         <select class="selectpicker" ng-model="timetable.startTm">
-                            <option value=00>00</option>
                             <option value=00>00</option>
                             <option value=30>30</option>
                         </select>
@@ -84,7 +83,6 @@
                             <option value=21>21</option>
                         </select>:
                         <select class="selectpicker" ng-model="timetable.endTm">
-                            <option value=00>00</option>
                             <option value=00>00</option>
                             <option value=30>30</option>
                         </select>
@@ -113,7 +111,7 @@
                         <th>ชื่อวิชา</th>
                         <th>วันที่เรียน</th>
                         <th>เวลาเรียน</th>
-                        <th>Remove</th>
+                        <th>ลบ</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -123,7 +121,7 @@
                         <td>{{t_ime.day}}</td>
                         <td>{{t_ime.startT + ".00" + " - " + t_ime.endT + ".00"}}</td>
                         <td><button type="button" class="btn btn-danger btn-sm" ng-click="delTimetable(t_ime)">
-                                <span class="glyphicon "></span> Delete
+                                <span class="glyphicon "></span> ลบ
                             </button>
                         </td>
                     </tr>
