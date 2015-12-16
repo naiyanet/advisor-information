@@ -1,4 +1,3 @@
-
 package th.co.geniustree.intenship.advisor.spec;
 
 import java.util.Date;
@@ -15,8 +14,9 @@ import th.co.geniustree.intenship.advisor.model.Information_;
  * @author User
  */
 public class InformationSpec {
+
     public static Specification<Information> titleLike(final String keyword) {
-        return  new Specification<Information>(){
+        return new Specification<Information>() {
 
             @Override
             public Predicate toPredicate(Root<Information> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
@@ -24,10 +24,10 @@ public class InformationSpec {
             }
         };
     }
-    
-    public static Specification<Information> startTimeLike(final Date start,final Date end) {
+
+    public static Specification<Information> startTimeLike(final Date start, final Date end) {
         String startTime = Information_.startTime + "";
-        return  new Specification<Information>(){
+        return new Specification<Information>() {
 
             @Override
             public Predicate toPredicate(Root<Information> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
@@ -35,5 +35,16 @@ public class InformationSpec {
             }
         };
     }
-    
+
+    public static Specification<Information> lessThanOrEqualToTimeOutInformation(Date date) {
+        return new Specification<Information>() {
+
+            @Override
+            public Predicate toPredicate(Root<Information> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
+               return cb.lessThanOrEqualTo(root.get(Information_.endTime), date);
+            }
+
+        };
+    }
+
 }

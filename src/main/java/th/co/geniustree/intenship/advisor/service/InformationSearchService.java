@@ -1,7 +1,7 @@
-
 package th.co.geniustree.intenship.advisor.service;
 
 import java.util.Date;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,16 +18,22 @@ import th.co.geniustree.intenship.advisor.spec.InformationSpec;
  */
 @Service
 public class InformationSearchService {
+
     @Autowired
     private InformationRepo informationRepo;
-    
-    public Page<Information> searchByStartTime (Date start,Date end, Pageable pageble){
-        Specification<Information> specification = Specifications.where(InformationSpec.startTimeLike(start,end));
+
+    public Page<Information> searchByStartTime(Date start, Date end, Pageable pageble) {
+        Specification<Information> specification = Specifications.where(InformationSpec.startTimeLike(start, end));
         return informationRepo.findAll(specification, pageble);
     }
-    
-    public Page<Information> searchByTitle (String keyword,Pageable pageable){
-        Specifications<Information> specification = Specifications.where(InformationSpec.titleLike("%"+keyword+"%"));
-        return informationRepo.findAll(specification,pageable);
+
+    public Page<Information> searchByTitle(String keyword, Pageable pageable) {
+        Specifications<Information> specification = Specifications.where(InformationSpec.titleLike("%" + keyword + "%"));
+        return informationRepo.findAll(specification, pageable);
+    }
+
+    public List<Information> searchlessThanOrEqualToTimeOutInformation(Date date) {
+        Specifications<Information> specifications = Specifications.where(InformationSpec.lessThanOrEqualToTimeOutInformation(date));
+        return informationRepo.findAll(specifications);
     }
 }

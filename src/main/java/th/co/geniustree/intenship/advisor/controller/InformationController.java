@@ -1,4 +1,3 @@
-
 package th.co.geniustree.intenship.advisor.controller;
 
 import java.io.ByteArrayInputStream;
@@ -6,7 +5,9 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
@@ -42,7 +43,7 @@ public class InformationController {
 
     @RequestMapping(value = "/getinformation", method = RequestMethod.GET)
     public Page<Information> getInformation(Pageable pageable) {
-        return informationRepo.findAll(pageable);
+        return informationRepo.findAllByOrderByIdDesc(pageable);
     }
 
     @RequestMapping(value = "/saveinformation", method = RequestMethod.POST)
@@ -62,12 +63,12 @@ public class InformationController {
 
         Page<Information> informations = null;
         if ("title".equals(searchBy)) {
-            informations = informationSearchService.searchByTitle(keyword, pageable);
+            informations = informationRepo.findByTitleOrderByIdDesc(keyword, pageable);
         }
         if ("startTime".equals(searchBy)) {
             DateFormat sim = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
             Date date = sim.parse(keyword);
-            informations = informationSearchService.searchByStartTime(date, date, pageable);
+            informations = informationRepo.findByEndTimeBetweenOrderByIdDesc(date, date, pageable);
         }
         return informations;
     }
@@ -81,7 +82,7 @@ public class InformationController {
         return fileUpload;
 
     }
-    
+
     @RequestMapping(value = "/getfileinformation/{id}", method = RequestMethod.GET)
     public ResponseEntity<InputStreamResource> getFile(@PathVariable("id") FileUpload fileUpload) {
         ResponseEntity<InputStreamResource> body = ResponseEntity.ok().contentLength(fileUpload.getContent().length)
@@ -90,9 +91,23 @@ public class InformationController {
                 .body(new InputStreamResource(new ByteArrayInputStream(fileUpload.getContent())));
         return body;
     }
-    
-    @RequestMapping(value = "/gettotalinformation" ,method = RequestMethod.GET)
-    private long getTotalRowAdvisor(){
+
+    @RequestMapping(value = "/gettotalinformation", method = RequestMethod.GET)
+    private long getTotalRowAdvisor() {
         return informationRepo.count();
+    }
+
+    @RequestMapping(value = "/timeoutinformation", method = RequestMethod.GET)
+    public void timeOutInformaton() throws ParseException {
+        System.out.println("------------------------------------------------------------------------------------------------------------------------------------------------>hello");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        String day = df.format(new Date());
+        Date keywordDate = df.parse(day);
+        System.out.println("-------------------------------------------->>>>>>>>>>>>>>>"+keywordDate);
+        ArrayList<Information> listEndTime = (ArrayList<Information>) informationSearchService.searchlessThanOrEqualToTimeOutInformation(keywordDate);
+        for(int i = 0 ; i < listEndTime.size() ; i++){
+            System.out.println("------------------------------------------>"+listEndTime.get(i));
+            informationRepo.delete(listEndTime.get(i));
+        }
     }
 }

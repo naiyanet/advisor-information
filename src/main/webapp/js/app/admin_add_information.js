@@ -5,12 +5,15 @@ var app = angular.module('admin_add_information').controller('admin_add_informat
 
     $scope.information = {};
     $scope.page = 0;
-    $scope.size = '3';
+    $scope.size = '10';
     var totalRow = 0;
     var totalPage = 0;
     
+    $http.get('/timeoutinformation');
+
     $scope.saveInfor = function () {
         console.log($scope.information);
+        $scope.information.startTime = new Date($scope.information.startTime);
         $http.post('/saveinformation', $scope.information).success(function (data) {
             getInformation();
             $scope.clear();
@@ -36,7 +39,7 @@ var app = angular.module('admin_add_information').controller('admin_add_informat
             getError();
         });
     };
-    
+
     $scope.delete = {};
     $scope.clickDelete = function (information) {
         $scope.delete = information;
@@ -46,23 +49,27 @@ var app = angular.module('admin_add_information').controller('admin_add_informat
 
     $scope.informationshow = {};
     function getInformation() {
-        $http.get('/getinformation',{params: {page: $scope.page, size: $scope.size}}).success(function (data) {
+        $http.get('/getinformation', {params: {page: $scope.page, size: $scope.size}}).success(function (data) {
             $scope.informationshow = data;
-            console.log(data);
-            for (var i = 0; i < data.totalElements; i++) {
-                if (!!data.content[i].startTime) {
+           for (var i = 0; i < data.content.length; i++) {
+                console.log(data.totalElements);
+                if (data.content[i].startTime !== undefined) {
                     var d = new Date(data.content[i].startTime).setYear(new Date(data.content[i].startTime).getFullYear() + 543);
+                    console.log(d + '   --------------------');
                     $scope.informationshow.content[i].startTime = moment(d).format('D MMMM YYYY');
                 }
             }
         }).error(function (data) {
 
         });
-    };
-    
+    }
+    ;
+
 
     $scope.clickUpdate = function (updateInformation) {
         $scope.information = updateInformation;
+        $scope.information.startTime = new Date(updateInformation.startTime);
+        $scope.information.endTime = new Date(updateInformation.endTime);
     };
 
     function getError() {
@@ -98,7 +105,7 @@ var app = angular.module('admin_add_information').controller('admin_add_informat
         }
         totalPage = result;
     }
-    
+
     $scope.firstPageinformation = function () {
         if (!$('#-page').hasClass('disabled')) {
             $scope.page = 0;
@@ -146,8 +153,8 @@ var app = angular.module('admin_add_information').controller('admin_add_informat
             $('#prepageinformation').removeClass('disabled');
         }
     };
-    
-    
+
+
     //////////////////////////////////////////////////////////
 
     $('.datepicker-custom').datepicker({
@@ -156,9 +163,9 @@ var app = angular.module('admin_add_information').controller('admin_add_informat
         dateFormat: 'yy-mm-dd'
     });
 
-    
 
-    
+
+
 
     $scope.dowloads = function (information) {
         location.href = '/getfileinformation/' + information.fileUpload.id;

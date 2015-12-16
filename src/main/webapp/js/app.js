@@ -5,6 +5,8 @@ var app = angular.module('app', ['ngRoute', 'home', 'add_user', 'admin_add_infor
 var app = angular.module('app');
 app.controller('appController', function (UserService, $scope, $http) {
 
+    $http.get('/timeoutinformation');
+
     $scope.account = {};
     getAccountLogin();
     function getAccountLogin() {

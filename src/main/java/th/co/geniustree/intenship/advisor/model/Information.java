@@ -124,6 +124,11 @@ public class Information implements Serializable{
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Information{" + "id=" + id + ", startTime=" + startTime + ", endTime=" + endTime + ", title=" + title + ", pageBrief=" + pageBrief + ", description=" + description + ", linkWeb=" + linkWeb + ", fileUpload=" + fileUpload + '}';
+    }
     
     
 }
