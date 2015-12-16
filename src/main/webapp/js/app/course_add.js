@@ -12,7 +12,6 @@ angular.module('course').controller('courseController', function ($scope, $http)
     function getCourseCategory() {
         $http.get('/getcategorycourse').success(function (data) {
             $scope.coursecategoryshow = data;
-            console.log(data);
         }).error(function (data) {
 
         });
@@ -24,11 +23,9 @@ angular.module('course').controller('courseController', function ($scope, $http)
         $scope.categoryGroup = $scope.select.categoryCourse.categoryGroupCourse;
         if ($scope.select.categoryCourse.categoryCourseName == 'หมวดวิชาเลือกเสรี') {
             $scope.selectFreedom = true;
-        }
-        else {
+        } else {
             $scope.selectFreedom = false;
         }
-        console.log($scope.selectFreedom);
     };
 
 
@@ -42,78 +39,82 @@ angular.module('course').controller('courseController', function ($scope, $http)
             getSuccess();
             $scope.clear();
             getCourseAdd();
-        }).error(function (){
+        }).error(function () {
             getError();
         });
     };
 
-     $scope.editCourse = function (u) {
+    $scope.editCourse = function (u) {
         $scope.select = u;
-     };
+        $scope.courseAddshow = {};
+    };
 
 
 
     $scope.clear = function () {
-        $scope.select = {};
+        $scope.select = {};   
     };
 
     $scope.deleteCourse = function (del) {
         console.log(del);
         $http.post('/deleteselectcategory', del).success(function (data) {
-            console.log('delete Success');
-             var dataLength = $(data).length;
-            var courseSocialArray = 0;
-            var courseLanguageArray = 0;
-            var courseMathArray = 0;
-            var courseActivityArray = 0;
-            var courseBasicArray = 0;
-            var courseForceArray = 0;
-            var courseChoiceArray = 0;
-            var courseFreedomeArray = 0;
- 
-            for (i = 0; i < dataLength; i++) {
-                if (data[i].categoryGroupCourse == 'กลุ่มวิชาสังคมศาสตร์และมนุษย์ศาสตร์') {
-                    $scope.courseSocial[courseSocialArray++] = data[i];
-                 }
-                if (data[i].categoryGroupCourse == 'กลุ่มวิชาภาษา') {
-                    $scope.courseLanguage[courseLanguageArray++] = data[i];
-                }
-                if (data[i].categoryGroupCourse == 'กลุ่มวิชาวิทยาศาสตร์และคณิตศาสตร์') {
-                    $scope.courseMath[courseMathArray++] = data[i];
-                }
-                if (data[i].categoryGroupCourse == 'กลุ่มวิชาพลศึกษาหรือนันทนาการหรือกิจกรรม') {
-                    $scope.courseActivity[courseActivityArray++] = data[i];
-                }
-                if (data[i].categoryGroupCourse == 'กลุ่มวิชาชีพพื้นฐาน') {
-                    $scope.courseBasic[courseBasicArray++] = data[i];
-                 }
-                if (data[i].categoryGroupCourse == 'กลุ่มวิชาชีพบังคับ') {
-                    $scope.courseForce[courseForceArray++] = data[i];
-                }
-                if (data[i].categoryGroupCourse == 'กลุ่มวิชาชีพเลือก') {
-                    $scope.courseChoice[courseChoiceArray++] = data[i];
-                }
-                if (data[i].categoryCourse == 'หมวดวิชาเลือกเสรี') {
-                    $scope.courseFreedome[courseFreedomeArray++] = data[i];
-                 }
 
-            }
+            console.log('delete Success');
+//            var dataLength = $(data).length;
+//            var courseSocialArray = 0;
+//            var courseLanguageArray = 0;
+//            var courseMathArray = 0;
+//            var courseActivityArray = 0;
+//            var courseBasicArray = 0;
+//            var courseForceArray = 0;
+//            var courseChoiceArray = 0;
+//            var courseFreedomeArray = 0;
+//
+//            for (i = 0; i < dataLength; i++) {
+//                if (data[i].categoryGroupCourse == 'กลุ่มวิชาสังคมศาสตร์และมนุษย์ศาสตร์') {
+//                    $scope.courseSocial[courseSocialArray++] = data[i];
+//                }
+//                if (data[i].categoryGroupCourse == 'กลุ่มวิชาภาษา') {
+//                    $scope.courseLanguage[courseLanguageArray++] = data[i];
+//                }
+//                if (data[i].categoryGroupCourse == 'กลุ่มวิชาวิทยาศาสตร์และคณิตศาสตร์') {
+//                    $scope.courseMath[courseMathArray++] = data[i];
+//                }
+//                if (data[i].categoryGroupCourse == 'กลุ่มวิชาพลศึกษาหรือนันทนาการหรือกิจกรรม') {
+//                    $scope.courseActivity[courseActivityArray++] = data[i];
+//                }
+//                if (data[i].categoryGroupCourse == 'กลุ่มวิชาชีพพื้นฐาน') {
+//                    $scope.courseBasic[courseBasicArray++] = data[i];
+//                }
+//                if (data[i].categoryGroupCourse == 'กลุ่มวิชาชีพบังคับ') {
+//                    $scope.courseForce[courseForceArray++] = data[i];
+//                }
+//                if (data[i].categoryGroupCourse == 'กลุ่มวิชาชีพเลือก') {
+//                    $scope.courseChoice[courseChoiceArray++] = data[i];
+//                }
+//                if (data[i].categoryCourse == 'หมวดวิชาเลือกเสรี') {
+//                    $scope.courseFreedome[courseFreedomeArray++] = data[i];
+//                }
+//            }
+////            getCourseAdd();
+//            getCourseCategory();
         }).error(function (data) {
             getError();
         });
         getCourseAdd();
+//        getCourseCategory();
     };
-    
-    
+
+
     function getSuccess() {
         alert('Save Success');
     }
     function getError() {
         alert('Error');
     }
-    
-    
-    
+
+
+
     //======================================================================================================
     $scope.courseSocial = [];
     $scope.courseLanguage = [];
@@ -127,7 +128,7 @@ angular.module('course').controller('courseController', function ($scope, $http)
     $scope.courseFreedome = [];
 
 
-   $scope.courseAddshow = {};
+    $scope.courseAddshow = {};
     function getCourseAdd() {
         $http.get('/getselectcategory').success(function (data) {
             var dataLength = $(data).length;
@@ -139,11 +140,11 @@ angular.module('course').controller('courseController', function ($scope, $http)
             var courseForceArray = 0;
             var courseChoiceArray = 0;
             var courseFreedomeArray = 0;
- 
+
             for (i = 0; i < dataLength; i++) {
                 if (data[i].categoryGroupCourse == 'กลุ่มวิชาสังคมศาสตร์และมนุษย์ศาสตร์') {
                     $scope.courseSocial[courseSocialArray++] = data[i];
-                 }
+                }
                 if (data[i].categoryGroupCourse == 'กลุ่มวิชาภาษา') {
                     $scope.courseLanguage[courseLanguageArray++] = data[i];
                 }
@@ -155,7 +156,7 @@ angular.module('course').controller('courseController', function ($scope, $http)
                 }
                 if (data[i].categoryGroupCourse == 'กลุ่มวิชาชีพพื้นฐาน') {
                     $scope.courseBasic[courseBasicArray++] = data[i];
-                 }
+                }
                 if (data[i].categoryGroupCourse == 'กลุ่มวิชาชีพบังคับ') {
                     $scope.courseForce[courseForceArray++] = data[i];
                 }
@@ -164,13 +165,13 @@ angular.module('course').controller('courseController', function ($scope, $http)
                 }
                 if (data[i].categoryCourse == 'หมวดวิชาเลือกเสรี') {
                     $scope.courseFreedome[courseFreedomeArray++] = data[i];
-                 }
+                }
 
             }
 
         }).error(function (data) {
 
-        getError();
+            getError();
         });
     }
     ;

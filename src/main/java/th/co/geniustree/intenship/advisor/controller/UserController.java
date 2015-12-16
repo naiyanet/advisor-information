@@ -45,7 +45,7 @@ public class UserController {
     }
     
     @RequestMapping(value = "/deleteuser",method = RequestMethod.POST)
-    public void deleteUser(@RequestBody Account user){
+    public void deleteUser(@RequestBody Integer user){
         userRepo.delete(user);
     }
     

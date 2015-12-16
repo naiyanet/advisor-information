@@ -13,6 +13,7 @@
                 <li><a href="http://reg.rmutk.ac.th/registrar/home.asp">ระบบลงทะเบียนเรียน</a></li>
                 <li><a href="http://md.rmutk.ac.th/">ระบบ E-Learning</a></li>
                 <li><a href="http://mis.rmutk.ac.th/">ระบบประเมินผลการสอน</a></li>
+                <li><a href="https://www.facebook.com/%E0%B8%81%E0%B8%AD%E0%B8%87%E0%B8%9E%E0%B8%B1%E0%B8%92%E0%B8%99%E0%B8%B2%E0%B8%99%E0%B8%B1%E0%B8%81%E0%B8%A8%E0%B8%B6%E0%B8%81%E0%B8%A9%E0%B8%B2-%E0%B8%A1%E0%B8%AB%E0%B8%B2%E0%B8%A7%E0%B8%B4%E0%B8%97%E0%B8%A2%E0%B8%B2%E0%B8%A5%E0%B8%B1%E0%B8%A2%E0%B9%80%E0%B8%97%E0%B8%84%E0%B9%82%E0%B8%99%E0%B9%82%E0%B8%A5%E0%B8%A2%E0%B8%B5%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%A1%E0%B8%87%E0%B8%84%E0%B8%A5%E0%B8%81%E0%B8%A3%E0%B8%B8%E0%B8%87%E0%B9%80%E0%B8%97%E0%B8%9E-449150661868525">กองพัฒนานักศึกษา</a></li>
             </ul>
             <div class="panel panel-default" ng-repeat="news in informationshow.content">
                 <div class="panel-heading">
@@ -29,7 +30,7 @@
                         </div>
                     </div>
                     <div class="col-md-3" ng-if="!!news.fileUpload.id">
-                        <label style="font-size: small">ดาวน์โหลดเอกสาร/file</label>
+                        <label style="font-size: small">ดาวน์โหลดเอกสาร/ไฟล์แนบ</label>
                         {{news.fileUpload.name}}
                         <button ng-click="dowloads(news)" >
                             <span class="mdi-file-file-download"></span>
