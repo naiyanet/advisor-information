@@ -30,29 +30,26 @@
         <div class="panel-body">
             <div class="form-group">
                 <label for="text" class="col-lg-2 control-label">วันเดือนปี</label>
-                <div class="col-lg-10">
-
-
-                    <input class="datepicker-custom form-control" type="text" ng-model="information.startTime">
+                <div class="col-lg-10"><span style="color: red">{{saveinformationerror.violations.startTime.message}}</span>
+                    <input class="datepicker-custom form-control" type="text" ng-model="information.startTime" ng-change="saveinformationerror.violations.startTime.message = ''">
                 </div>
             </div>
             <div class="form-group">
                 <label for="text" class="col-lg-2 control-label">หมดเวลาแสดง</label>
-                <div class="col-lg-10">
-
-                    <input class="datepicker-custom form-control"  type="text" ng-model="information.endTime">
+                <div class="col-lg-10"><span style="color: red">{{saveinformationerror.violations.endTime.message}}</span>
+                    <input class="datepicker-custom form-control"  type="text" ng-model="information.endTime" ng-change="saveinformationerror.violations.endTime.message = ''">
                 </div>
             </div>
             <div class="form-group">
                 <label for="text" class="col-lg-2 control-label">ชื่อเรื่อง</label>
-                <div class="col-lg-10">
-                    <input type="text" class="form-control" ng-model="information.title">
+                <div class="col-lg-10"><span style="color: red">{{saveinformationerror.violations.title.message}}</span>
+                    <input type="text" class="form-control" ng-model="information.title" ng-change="saveinformationerror.violations.title.message = ''">
                 </div>
             </div>
             <div class="form-group">
                 <label for="textArea" class="col-lg-2 control-label">รายละเอียด</label>
-                <div class="col-lg-10">
-                    <textarea class="form-control" rows="3" id="textArea" ng-model="information.description"></textarea>
+                <div class="col-lg-10"><span style="color: red">{{saveinformationerror.violations.description.message}}</span>
+                    <textarea class="form-control" rows="3" id="textArea" ng-model="information.description" ng-change="saveinformationerror.violations.description.message = ''"></textarea>
                 </div>
             </div>
             <div class="form-group">
@@ -69,8 +66,8 @@
             </div>
             <div class="form-group">
                 <div class="col-lg-10 col-lg-offset-2">
-                    <button class="btn btn-primary" ng-click="saveInfor()">บันทึก</button>
-                    <a href="#/admin_add_User"><button class="btn btn-danger">ยกเลิก</button></a>
+                    <button class="btn btn-primary" ng-click="saveInformation()">บันทึก</button>
+                    <a href="#/home"><button class="btn btn-danger">ยกเลิก</button></a>
                 </div>
             </div>
         </div>
@@ -160,6 +157,3 @@
         </div>
     </div>
 </div>
-
-
-

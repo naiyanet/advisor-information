@@ -65,7 +65,7 @@ public class AppointmentController {
     }
     
     @RequestMapping(value = "/gettotalappointment" ,method = RequestMethod.GET)
-    private long getTotalRowAdvisor(){
+    private long getTotalRowAppointment(){
         return appointmentRepo.count();
     }
 }

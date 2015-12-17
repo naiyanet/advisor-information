@@ -90,7 +90,7 @@ public class UserController {
     }
     
     @RequestMapping(value = "/gettotaluser" ,method = RequestMethod.GET)
-    private long getTotalRowAdvisor(){
+    private long getTotalRowUser(){
         return userRepo.count();
     }
 }

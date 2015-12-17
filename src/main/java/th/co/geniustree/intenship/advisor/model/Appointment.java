@@ -3,6 +3,7 @@ package th.co.geniustree.intenship.advisor.model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +13,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotBlank;
 
 
 
@@ -27,8 +30,12 @@ public class Appointment implements Serializable {
     @SequenceGenerator(name = "APPOINTMENT", sequenceName = "APPOINTMENT_SEQ", allocationSize = 1)
     @GeneratedValue(generator = "APPOINTMENT", strategy = GenerationType.SEQUENCE)
     private Integer id;
+    @NotBlank(message = "กรุณากรอกหัวข้อเรื่อง")
     private String topic;
+    
     @Temporal(TemporalType.DATE)
+    @NotNull(message = "กรุณากรอกวันที่")
+    @Column(nullable = false)
     private Date date;
     @Temporal(TemporalType.TIME)
     private Date startTime;

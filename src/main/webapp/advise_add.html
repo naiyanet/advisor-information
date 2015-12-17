@@ -25,20 +25,20 @@
 
                     <div class="form-group">
                         <label for="text" class="col-lg-2 control-label">วันที่-เวลา</label>
-                        <div class="col-lg-10" >
-                            <input class="datepicker-custom form-control" type="text" ng-model="advise.dates">
+                        <div class="col-lg-10" ><span style="color: red">{{saveadvieserror.violations.dates.message}}</span>
+                            <input class="datepicker-custom form-control" type="text" ng-model="advise.dates" ng-change="saveadvieserror.violations.dates.message = ''">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="text" class="col-lg-2 control-label">ชื่อเรื่อง</label>
-                        <div class="col-lg-10">
-                            <input type="text" class="form-control" ng-model="advise.title">
+                        <div class="col-lg-10"><span style="color: red">{{saveadvieserror.violations.title.message}}</span>
+                            <input type="text" class="form-control" ng-model="advise.title" ng-change="saveadvieserror.violations.title.message = ''">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="text" class="col-lg-2 control-label">รายละเอียดการให้คำปรึกษา</label>
-                        <div class="col-lg-10">
-                            <textarea class="form-control" rows="3" id="textArea" ng-model="advise.detail"></textarea>
+                        <div class="col-lg-10"><span style="color: red">{{saveadvieserror.violations.detail.message}}</span>
+                            <textarea class="form-control" rows="3" id="textArea" ng-model="advise.detail" ng-change="saveadvieserror.violations.detail.message = ''"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
@@ -91,58 +91,31 @@
                         <td  style="word-wrap: break-word ;">{{ad.dates}}</td>
                         <td  style="word-wrap: break-word ;">{{ad.categoryAdvise.nameCategory}}</td>
                         <td  style="word-wrap: break-word ;">{{ad.title}}</td>
-                        <td>
-                            <h5 data-toggle="modal" data-target="#complete-dialog" class="form-group" id="setting-text">ดูรายละเอียด</h5>
-                            <div id="complete-dialog" class="modal fade form-group" tabindex="-1"> 
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header form-group">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                            <h4 class="modal-title">รายละเอียดการให้คำปรึกษา</h4>
-                                            <br>
-                                        </div>
-                                        <div class="modal-body form-group">
-                                            <div class="col-md-10">
-                                                <div style="word-wrap: break-word ; width: 100%">{{ad.detail}}</div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer form-group">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">ปิดหน้าต่าง</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>{{ad.fileUpload.name}}</td>
+                        <td  style="word-wrap: break-word ;">{{ad.detail}}</td>
+                        <td  style="word-wrap: break-word ;">{{ad.fileUpload.name}}</td>
                         <td>
                             <button ng-click="editAdvise(ad)">
                                 <span class="mdi-editor-mode-edit"></span>
                             </button>
                         </td>
                         <td>
-                            <button ng-click="deleteAdvise(ad)">
+                            <button ng-click="clickDelete(ad)" data-toggle="modal" data-target="#complete-dialog-deleteadvise">
                                 <span class="mdi-action-delete"></span>
                             </button>
                         </td>
                     </tr>
                 </tbody>
             </table>
-            
-                    <ul class="pagination pull-right">
-                        <li id="firstpageadvisor"><a ng-click="firstPageAdvise()">&Lt;</a></li>
-                        <li id="prepageadvisor" ><a ng-click="prePageAdvise()">&lt;</a></li>
-                        <li><a>{{page + 1}}</a></li>
-                        <li id="nextpageadvisor"><a ng-click="nextPageAdvise()">&gt;</a></li>
-                        <li id="finalpageadvisor"><a ng-click="finalPageAdvise()">&gg;</a></li>
-                    </ul>
-                
         </div>
+        <ul class="pagination pull-right">
+            <li id="firstpageadvisor"><a ng-click="firstPageAdvise()">&Lt;</a></li>
+            <li id="prepageadvisor" ><a ng-click="prePageAdvise()">&lt;</a></li>
+            <li><a>{{page + 1}}</a></li>
+            <li id="nextpageadvisor"><a ng-click="nextPageAdvise()">&gt;</a></li>
+            <li id="finalpageadvisor"><a ng-click="finalPageAdvise()">&gg;</a></li>
+        </ul>
     </div>
 </div>
-
-
-
-
 
 
 
@@ -185,7 +158,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="row">
+<!--                <div class="row">
                     <div class="right">
                         <ul class="pagination pagination-sm">
                             <li id="first-page"><a ng-click="firstPage()">&Lt;</a></li>
@@ -195,7 +168,7 @@
                             <li id="final-page"><a ng-click="finalPage()">&gg;</a></li>
                         </ul>
                     </div>
-                </div>
+                </div>-->
                 <div class="modal-footer">
                     <button class="btn btn-danger" data-dismiss="modal">ปิด</button>
                 </div>
@@ -204,3 +177,37 @@
         </div>
     </div>
 </div> 
+
+
+<div id="complete-dialog-saveadvise" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="modal-title">บันทึกสำเร็จ</h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-dismiss="modal">ตกลง</button> 
+            </div>
+        </div>
+    </div>
+</div>
+<div id="complete-dialog-deleteadvise" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="modal-title">ยืนยันการลบ</h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+
+                <button class="btn btn-primary" ng-click="deleteAdvise(delete)" data-toggle="modal" data-target="#complete-dialog-deleteadvise">ลบ</button>
+                <button class="btn btn-primary" data-dismiss="modal">ยกเลิก</button>
+            </div>
+        </div>
+    </div>
+</div>

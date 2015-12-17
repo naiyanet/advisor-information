@@ -93,7 +93,7 @@ public class InformationController {
     }
 
     @RequestMapping(value = "/gettotalinformation", method = RequestMethod.GET)
-    private long getTotalRowAdvisor() {
+    private long getTotalRowInformation() {
         return informationRepo.count();
     }
 

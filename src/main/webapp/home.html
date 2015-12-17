@@ -17,11 +17,15 @@
             </ul>
             <div class="panel panel-default" ng-repeat="news in informationshow.content">
                 <div class="panel-heading">
-                    <h3 class="panel-title">{{news.title}}</h3>
+                    <div class="panel-title col-md-9">
+                        <b>{{news.title}}</b>
+                    </div>
+                    <div class="panel-title">
+                        {{news.startTime}}
+                    </div>
                 </div>
                 <div class="panel-body">
                     <div class="col-md-9">
-                        <label style="font-size: small">{{news.startTime}}</label>
                         <p style="font-size: small">{{news.pageBrief}}</p>
                         <p style="font-size: small">{{news.file}}</p>
                         <p style="font-size: small"><a href="{{news.linkWeb}}">{{news.linkWeb}}</a></p>
@@ -52,27 +56,5 @@
 <div class="col-md-4">
     <div class="datepicker-custom form-control" style="height: 250px">
     </div>
-</div>
-
-
-
-
-
-<div id="complete-dialog" class="modal fade" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3 class="modal-title">ไม่มี! ที่คุณค้นหา</h4>
-            </div>
-            <div class="modal-body">
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary" data-dismiss="modal">ตกลง</button>
-
-            </div>
-        </div>
-    </div>
-
 </div>
 

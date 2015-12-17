@@ -79,7 +79,7 @@
                                         </button>
                                     </td>
                                     <td  width="10%">
-                                        <button ng-click="deleteUser(us)">
+                                        <button ng-click="clickDelete(us)" data-toggle="modal" data-target="#complete-dialog-userdelete">
                                             <span class="mdi-action-delete"></span>
                                         </button>
                                     </td>
@@ -110,4 +110,20 @@
 
 
 
+<div id="complete-dialog-userdelete" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="modal-title">ยืนยันการลบ</h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
 
+                <button class="btn btn-primary" ng-click="deleteUser(delete)" data-toggle="modal" data-target="#complete-dialog-userdelete">ลบ</button>
+                <button class="btn btn-primary" data-dismiss="modal">ยกเลิก</button>
+            </div>
+        </div>
+    </div>
+</div>

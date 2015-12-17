@@ -17,20 +17,20 @@
                         </div> 
                         <div class="form-group">
                             <label for="text" class="col-lg-2 control-label">วันที่</label>
-                            <div class="col-lg-10">
-                                <input class="datepicker-custom form-control" type="text" ng-model="behavior.dates">
+                            <div class="col-lg-10"><span style="color: red">{{savebehaviorerror.violations.dates.message}}</span>
+                                <input class="datepicker-custom form-control" type="text" ng-model="behavior.dates" ng-change="savebehaviorerror.violations.dates.message = ''">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="text" class="col-lg-2 control-label">ชื่อเรื่อง</label>
-                            <div class="col-lg-10">
-                                <input type="text" class="form-control" ng-model="behavior.title">
+                            <div class="col-lg-10"><span style="color: red">{{savebehaviorerror.violations.title.message}}</span>
+                                <input type="text" class="form-control" ng-model="behavior.title" ng-change="savebehaviorerror.violations.title.message = ''">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="text" class="col-lg-2 control-label">รายละเอียดความประพฤติ</label>
-                            <div class="col-lg-10">
-                                <input type="text" class="form-control" ng-model="behavior.detail"> 
+                            <div class="col-lg-10"><span style="color: red">{{savebehaviorerror.violations.detail.message}}</span>
+                                <input type="text" class="form-control" ng-model="behavior.detail" ng-change="savebehaviorerror.violations.detail.message = ''"> 
                             </div>
                         </div>
                         <div class="form-group">
@@ -76,50 +76,31 @@
                         <td  style="word-wrap: break-word ;">{{beha.student.name}}</td>
                         <td  style="word-wrap: break-word ;">{{beha.dates}}</td>
                         <td  style="word-wrap: break-word ;">{{beha.title}}</td>
-                        <td>
-                            <h5 data-toggle="modal" data-target="#complete-dialog" class="form-group" id="setting-text">ดูรายละเอียด</h5>
-                            <div id="complete-dialog" class="modal fade form-group" tabindex="-1"> 
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header form-group">
-                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                            <h4 class="modal-title">รายละเอียดรายงานความประพฤติ</h4>
-                                            <br>
-                                        </div>
-                                        <div class="modal-body form-group">
-                                            <div class="col-md-10 ">
-                                                <div style="word-wrap: break-word ; width: 100%">{{beha.detail}}</div>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer form-group">
-                                            <button type="button" class="btn btn-danger" data-dismiss="modal">ปิดหน้าต่าง</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>{{beha.fileUpload.name}}</td>
+
+                        <td style="word-wrap: break-word ;">{{beha.detail}}</td>
+                        <td style="word-wrap: break-word ;">{{beha.fileUpload.name}}</td>                          
                         <td>
                             <button ng-click="editBehavior(beha)">
                                 <span class="mdi-editor-mode-edit"></span>
                             </button>
                         </td>
                         <td>
-                            <button ng-click="deleteBehavior(beha)">
+                            <button ng-click="clickDelete(beha)" data-toggle="modal" data-target="#complete-dialog-deletebehavior">
                                 <span class="mdi-action-delete"></span>
                             </button>
                         </td>
                     </tr>
                 </tbody>
             </table>
-            <ul class="pagination pull-right">
-                <li id="firstpage"><a ng-click="firstPageBehavior()">&Lt;</a></li>
-                <li id="prepage" ><a ng-click="prePageBehavior()">&lt;</a></li>
-                <li><a>{{page + 1}}</a></li>
-                <li id="nextpage"><a ng-click="nextPageBehavior()">&gt;</a></li>
-                <li id="finalpage"><a ng-click="finalPageBehavior()">&gg;</a></li>
-            </ul>
+
         </div>
+        <ul class="pagination pull-right">
+            <li id="firstpagebehavior"><a ng-click="firstPageBehavior()">&Lt;</a></li>
+            <li id="prepagebehavior" ><a ng-click="prePageBehavior()">&lt;</a></li>
+            <li><a>{{page + 1}}</a></li>
+            <li id="nextpagebehavior"><a ng-click="nextPageBehavior()">&gt;</a></li>
+            <li id="finalpagebehavior"><a ng-click="finalPageBehavior()">&gg;</a></li>
+        </ul>
     </div>
 </div> 
 
@@ -168,6 +149,40 @@
                     <button class="btn btn-danger" data-dismiss="modal">ปิด</button>
                 </div>
 
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="complete-dialog-savebehaviors" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="modal-title">บันทึกสำเร็จ</h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" data-dismiss="modal">ตกลง</button> 
+            </div>
+        </div>
+    </div>
+</div>
+<div id="complete-dialog-deletebehavior" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="modal-title">ยืนยันการลบ</h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+
+                <button class="btn btn-primary" ng-click="deleteBehavior(delete)" data-toggle="modal" data-target="#complete-dialog-deletebehavior">ลบ</button>
+                <button class="btn btn-primary" data-dismiss="modal">ยกเลิก</button>
             </div>
         </div>
     </div>

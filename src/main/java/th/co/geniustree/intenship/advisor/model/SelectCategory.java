@@ -1,4 +1,3 @@
-
 package th.co.geniustree.intenship.advisor.model;
 
 import java.io.Serializable;
@@ -9,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
@@ -22,14 +22,13 @@ public class SelectCategory implements Serializable {
     @SequenceGenerator(name = "SELECTCATEGORY", sequenceName = "SELECTCATEGORY_SEQ", allocationSize = 1)
     @GeneratedValue(generator = "SELECTCATEGORY", strategy = GenerationType.SEQUENCE)
     private Integer id;
-
     private String subjectCode;
     private String subjectName;
     private String credit;
     private String categoryCourse;
     private String categoryGroupCourse;
-    
-        public Integer getId() {
+
+    public Integer getId() {
         return id;
     }
 
@@ -45,20 +44,20 @@ public class SelectCategory implements Serializable {
         this.subjectCode = subjectCode;
     }
 
-    public String getSubjectName() {
-        return subjectName;
-    }
-
-    public void setSubjectName(String subjectName) {
-        this.subjectName = subjectName;
-    }
-
     public String getCredit() {
         return credit;
     }
 
     public void setCredit(String credit) {
         this.credit = credit;
+    }
+
+    public String getSubjectName() {
+        return subjectName;
+    }
+
+    public void setSubjectName(String subjectName) {
+        this.subjectName = subjectName;
     }
 
     public String getCategoryCourse() {

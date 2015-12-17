@@ -15,8 +15,8 @@ angular.module('student').controller('studentController', function (UserService,
     
     $scope.saveStudent = function () {
             $http.post('/savestudent', $scope.student).success(function (data) {
-            getSuccess();
             checkPassword();
+            $('#complete-dialog-studentadd').modal('show');
             getStudent();
 //            location.href = '#/user_show';
             console.log(data);

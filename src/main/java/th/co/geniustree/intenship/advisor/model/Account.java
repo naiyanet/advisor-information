@@ -44,6 +44,7 @@ public class Account implements Serializable, UserDetails {
     
     @NotBlank(message = "กรุณากรอกรหัสผ่าน")
     private String password;
+    
     private String filePic;
     private String idStudent;
     private String idCard;

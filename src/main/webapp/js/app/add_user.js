@@ -34,10 +34,15 @@ angular.module('add_user').controller('add_userController', function (UserServic
     $scope.deleteUser = function (delUser) {
         $http.post('/deleteuser', delUser.id).success(function (data) {
             getUser();
-            alert("ต้องการลบ");
+//            alert("ต้องการลบ");
         });
     };
-
+    
+    $scope.delete = {};
+    $scope.clickDelete = function (u) {
+        $scope.delete = u;
+    };
+    
     getUser();
 
     $scope.usershow = {};

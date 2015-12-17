@@ -7,11 +7,13 @@ angular.module('advise').controller('adviseController', function (UserService, $
     $scope.keyword = "";
     $scope.currentPage = 0;
     $scope.studentOfTeacher = {};
+    
     $scope.page = 0;
     $scope.size = '10';
     var totalRow = 0;
     var totalPage = 0;
-
+    $scope.saveadvieserror = {};
+    
     $scope.advisorshowname = function () {
         if ($scope.account.dtype == 'Teacher') {
             return  true;
@@ -43,11 +45,11 @@ angular.module('advise').controller('adviseController', function (UserService, $
 
     $scope.saveAdvise = function () {
         $http.post('/saveadvise', $scope.advise).success(function (data) {
-            getSuccess();
+            $('#complete-dialog-saveadvise').modal('show');
             $scope.clear();
             getAdvise();
         }).error(function (data) {
-            getError();
+            $scope.saveadvieserror = data;
         });
     };
 
@@ -184,8 +186,14 @@ angular.module('advise').controller('adviseController', function (UserService, $
 
     $scope.clickUpdate = function (updateAdvise) {
         $scope.advise = updateAdvise;
+        
     };
-
+    
+    $scope.delete = {};
+    $scope.clickDelete = function (advise) {
+        $scope.delete = advise;
+    };
+    
     $scope.clear = function () {
         $scope.advise = {};
     };
@@ -301,10 +309,6 @@ angular.module('advise').controller('adviseController', function (UserService, $
         $('#complete-student-advise').modal('show');
     };
 //////////////////////////////////////////////////////////////////
-
-
-
-
 //Download files/////////////////////////////////////////////////
     $scope.dowloads = function (advises) {
         location.href = '/getfileadvise/' + advises.fileUpload.id;
@@ -325,8 +329,6 @@ angular.module('advise').controller('adviseController', function (UserService, $
 /////////////////////////////////////////////////////////////////
 
 });
-
-
 
 app.directive('fileModel', function ($parse) {
     return {

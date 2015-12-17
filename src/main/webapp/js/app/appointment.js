@@ -18,7 +18,9 @@ angular.module('appointment').controller('appointmentController', function (User
     $scope.title = '';
     $scope.start = '';
     $scope.end = '';
-
+    
+    $scope.saveappointmenterror = {};
+    
     $scope.checkTeacherLogin = function () {
         if ($scope.account.dtype === 'Teacher') {
             $scope.appointment.teacher = $scope.account;
@@ -52,11 +54,11 @@ angular.module('appointment').controller('appointmentController', function (User
         $scope.appointment.startTime = new Date(moment(new Date($scope.appointment.date + " " + $scope.startTime)).format('YYYY-MM-d HH:mm:ss'));
         $scope.appointment.endTime = new Date(moment(new Date($scope.appointment.date + " " + $scope.endTime)).format('YYYY-MM-d HH:mm:ss'));
         $http.post('/saveappointment', $scope.appointment).success(function (data) {
-            getSuccess();
+            $('#complete-dialog-saveappointment').modal('show');
             $scope.clear();
             getAppointment();
         }).error(function (data) {
-            getError();
+            $scope.saveappointmenterror = data;
         });
     };
 
@@ -78,7 +80,11 @@ angular.module('appointment').controller('appointmentController', function (User
             getError();
         });
     };
-
+$scope.delete = {};
+    $scope.clickDelete = function (advise) {
+        $scope.delete = advise;
+    };
+    
     $scope.clickUpdate = function (updateAppointment) {
         $scope.appointment = updateAppointment;
     };

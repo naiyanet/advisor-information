@@ -6,8 +6,8 @@ angular.module('teacher').controller('teacherController', function (UserService 
 
     $scope.saveTeacher = function () {
         $http.post('/saveteacher', $scope.teacher).success(function (data) {
-            getSuccess();
             checkPasswordTeacher();
+            $('#complete-dialog-saveteacher').modal('show');
             getTeacher();    
             console.log(data);
             $scope.clear();

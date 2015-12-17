@@ -8,10 +8,11 @@ var app = angular.module('admin_add_information').controller('admin_add_informat
     $scope.size = '10';
     var totalRow = 0;
     var totalPage = 0;
+    $scope.saveinformationerror = {};
     
     $http.get('/timeoutinformation');
 
-    $scope.saveInfor = function () {
+    $scope.saveInformation = function () {
         console.log($scope.information);
         $scope.information.startTime = new Date($scope.information.startTime);
         $http.post('/saveinformation', $scope.information).success(function (data) {
@@ -19,7 +20,7 @@ var app = angular.module('admin_add_information').controller('admin_add_informat
             $scope.clear();
             $('#complete-dialog-saveinformation').modal('show');
         }).error(function (data) {
-            getError();
+            $scope.saveinformationerror = data;
         });
     };
 

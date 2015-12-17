@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,6 +14,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
@@ -28,9 +31,12 @@ public class Behavior implements Serializable {
     private Integer id;
     
     @Temporal(javax.persistence.TemporalType.DATE)
+    @NotNull(message = "กรุณากรอกวันที่")
+    @Column(nullable = false)
     private Date dates;
-    
+    @NotBlank(message = "กรุณากรอกชื่อเรื่อง")
     private String title;
+    @NotBlank(message = "กรุณากรอกรายละเอียด")
     private String detail;
     private String description;
     

@@ -1,4 +1,3 @@
-
 package th.co.geniustree.intenship.advisor.model;
 
 import java.io.Serializable;
@@ -24,34 +23,36 @@ import org.hibernate.validator.constraints.NotBlank;
  */
 @Entity
 @Table(name = "ADVISE")
-public class Advise implements Serializable{
+public class Advise implements Serializable {
+
     @Id
-    @SequenceGenerator(name = "ADVISE", sequenceName = "ADVISE_SEQ",allocationSize = 1)
-    @GeneratedValue(generator = "ADVISE",strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name = "ADVISE", sequenceName = "ADVISE_SEQ", allocationSize = 1)
+    @GeneratedValue(generator = "ADVISE", strategy = GenerationType.SEQUENCE)
     private Integer id;
     private String idSubject;
-    
+
     @Temporal(javax.persistence.TemporalType.DATE)
     @NotNull(message = "กรุณากรอกวันที่")
     @Column(nullable = false)
     private Date dates;
+    @NotBlank(message = "กรุณากรอกชื่อเรื่อง")
     private String title;
+    @NotBlank(message = "กรุณากรอกรายละเอียด")
     private String detail;
     private String description;
-    
+
     @OneToOne(cascade = CascadeType.ALL)
     private FileUpload fileUpload;
-    
+
     @ManyToOne
     private CategoryAdvise categoryAdvise;
-    
+
     @ManyToOne
     private Student student;
-    
+
     @ManyToOne
     private Teacher teacher;
-    
-    
+
     public Integer getId() {
         return id;
     }
@@ -123,7 +124,6 @@ public class Advise implements Serializable{
     public void setStudent(Student student) {
         this.student = student;
     }
-    
 
     public Teacher getTeacher() {
         return teacher;
@@ -132,9 +132,7 @@ public class Advise implements Serializable{
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
     }
-    
-    
-   
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -157,5 +155,4 @@ public class Advise implements Serializable{
         return true;
     }
 
-      
 }

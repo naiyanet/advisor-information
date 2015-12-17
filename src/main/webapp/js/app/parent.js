@@ -6,8 +6,8 @@ angular.module('parent').controller('parentController', function (UserService, $
 
     $scope.saveParent = function () {
         $http.post('/saveParent', $scope.parent).success(function (data) {
-            getSuccess();
             checkPasswordParent();
+            $('#complete-dialog-saveparent').modal('show');
             getParent();
 //            location.href = '#/user_show';
             console.log(data);

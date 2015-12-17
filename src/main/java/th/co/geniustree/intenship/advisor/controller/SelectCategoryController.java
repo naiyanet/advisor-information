@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,13 +28,14 @@ public class SelectCategoryController {
         return selectCategoryRepo.findAll();
     }
     @RequestMapping(value = "/saveselectcategory",method = RequestMethod.POST)
-    public void saveSelectCategory(@RequestBody SelectCategory selectCategory){
+    public void saveSelectCategory(@Validated @RequestBody SelectCategory selectCategory){
       selectCategoryRepo.save(selectCategory);
     }
     
     @RequestMapping(value = "/deleteselectcategory",method = RequestMethod.POST)
-    public Page<SelectCategory> deleteSelectCategory(@RequestBody SelectCategory selectCategory , Pageable pageable){
+    public void deleteSelectCategory(@RequestBody Integer selectCategory){
         selectCategoryRepo.delete(selectCategory);
-        return selectCategoryRepo.findAll(pageable);
     }
+
+    
 }

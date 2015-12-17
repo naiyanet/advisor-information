@@ -67,7 +67,7 @@ angular.module('course_add').controller('course_addController', function ($scope
 
         }).error(function (data) {
 
-        getError();
+            getError();
         });
     }
     ;

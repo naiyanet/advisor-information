@@ -12,9 +12,11 @@ angular.module('behavior').controller('behaviorController', function (UserServic
     $scope.size = '10';
     var totalRow = 0;
     var totalPage = 0;
-
+    
+    $scope.savebehaviorerror = {};
+    
     $scope.behaviorshowname = function () {
-        if ($scope.account.dtype == 'Teacher') {
+        if ($scope.account.dtype == 'Teacher'||$scope.account.dtype == 'Parent') {
             return  true;
         } else {
             return false;
@@ -44,12 +46,12 @@ angular.module('behavior').controller('behaviorController', function (UserServic
     $scope.saveBehavior = function () {
         $scope.behavior.teacher = $scope.account;
         $http.post('/savebehavior', $scope.behavior).success(function (data) {
-            getSuccess();
+            $('#complete-dialog-savebehaviors').modal('show');
             getBehavior();
             console.log(data);
             $scope.clear();
         }).error(function (data) {
-            getError();
+            $scope.savebehaviorerror = data;
         });
     };
 
@@ -68,8 +70,12 @@ angular.module('behavior').controller('behaviorController', function (UserServic
     $scope.editBehavior = function (u) {
         $scope.behavior = u;
     };
-
-
+    
+    $scope.delete = {};
+    $scope.clickDelete = function (advise) {
+        $scope.delete = advise;
+    };
+    
     $scope.clear = function () {
         $scope.behavior = {};
     };
